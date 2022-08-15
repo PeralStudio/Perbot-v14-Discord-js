@@ -1,4 +1,7 @@
 // import config from "./config.js";
+// const { prefix, lolApi, youtubeKey, mongoUrl, CLIENT_ID, GUILD_ID, token } =
+//     config;
+
 import {
     REST,
     Routes,
