@@ -16,9 +16,7 @@ import fetch from "node-fetch";
 import figlet from "figlet";
 import dayjs from "dayjs";
 
-// import mongoose from "mongoose";
-// import nodeSuperFetch from "node-superfetch";
-// import twitch from "./schemas/twitchSchema.js";
+import mongoose from "mongoose";
 
 import red from "reddit-fetch";
 import Minesweeper from "discord.js-minesweeper";
@@ -66,6 +64,8 @@ import borrarCommand from "./commands/borrar.js";
 import enviarmdCommand from "./commands/enviarmd.js";
 import helpCommand from "./commands/help.js";
 
+import setIntervalTwitch from "./functions/twitch.js";
+
 const commands = [
     playCommand,
     pauseCommand,
@@ -103,16 +103,13 @@ const versionbot = "PerBot v2.0 Peralstudio.com";
 const { prefix, lolApi, youtubeKey, mongoUrl, CLIENT_ID, GUILD_ID, token } =
     process.env;
 
-// mongoose
-//     .connect(
-//         mongoUrl,
-//         {
-//             useNewUrlParser: true,
-//             useUnifiedTopology: true,
-//         }
-//     )
-//     .then(() => console.log("Conectado a MongoDB"))
-//     .catch((err) => console.log(err));
+mongoose
+    .connect(mongoUrl, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    })
+    .then(() => console.log("Conectado a MongoDB"))
+    .catch((err) => console.log(err));
 
 const rest = new REST({ version: "10" }).setToken(token);
 
@@ -143,6 +140,8 @@ const client = new Client({
     ],
 });
 
+const usersToAlert = ["illojuan", "viviendoenlacalle"];
+
 client.on("ready", async () => {
     console.log(`Bot conectado como ${client.user.tag}!`);
     client.user.setPresence({
@@ -150,80 +149,8 @@ client.on("ready", async () => {
         status: "online",
     });
 
-    // setInterval(async function () {
-    //     console.log("Comprobando Twitch Streams");
-    //     let userStrem = "illojuan";
-
-    // const uptime = await nodeSuperFetch.get(
-    //     `https://decapi.me/twitch/uptime/${userStrem}`
-    // );
-    //     const avatar = await nodeSuperFetch.get(
-    //         `https://decapi.me/twitch/avatar/${userStrem}`
-    //     );
-    //     const viewers = await nodeSuperFetch.get(
-    //         `https://decapi.me/twitch/viewercount/${userStrem}`
-    //     );
-    //     const title = await nodeSuperFetch.get(
-    //         `https://decapi.me/twitch/title/${userStrem}`
-    //     );
-    //     const game = await nodeSuperFetch.get(
-    //         `https://decapi.me/twitch/game/${userStrem}`
-    //     );
-
-    //     let data = await twitch.findOne({ user, titulo: title.body });
-
-    //     if (uptime.body !== `${userStrem} is offline`) {
-    //         const embed = new EmbedBuilder()
-    //             .setAuthor({
-    //                 name: `${userStrem}`,
-    //                 iconURL: `${avatar.body}`,
-    //             })
-    //             .setTitle(`${title.body}`)
-    //             .setThumbnail(`${avatar.body}`)
-    //             .setURL(`https://twitch.tv/${userStrem}`)
-    //             .addFields(
-    //                 {
-    //                     name: "Jugando a",
-    //                     value: `${game.body}`,
-    //                     inline: true,
-    //                 },
-    //                 {
-    //                     name: "Viewers",
-    //                     value: `${viewers.body}`,
-    //                     inline: true,
-    //                 }
-    //             )
-    //             .setImage(
-    //                 `https://static-cdn.jtvnw.net/previews-ttv/live_user_${userStrem}-320x180.jpg`
-    //             )
-    //             .setColor(0x00ff00);
-
-    //         if (!data) {
-    //             const newData = new twitch({
-    //                 user,
-    //                 titulo: `${title.body}`,
-    //             });
-
-    //             await client.channels.cache.get("1008006504244334722").send({
-    //                 content: `${userStrem} esta en directo jugando a **${game.body}** \n https://twitch.tv/${userStrem}`,
-    //                 embeds: [embed],
-    //             });
-
-    //             return await newData.save();
-    //         }
-
-    //         if (data.titulo === `${title.body}`) {
-    //             return;
-    //         }
-
-    //         await client.channels.cache.get("1008006504244334722").send({
-    //             content: `${userStrem} esta en directo jugando a **${game.body}** \n https://twitch.tv/${userStrem}`,
-    //             embeds: [embed],
-    //         });
-
-    //         await twitch.findOneAndUpdate({ user }, { titulo: title.body });
-    //     }
-    // }, 3000);
+    setIntervalTwitch(client, usersToAlert[0]);
+    setIntervalTwitch(client, usersToAlert[1]);
 });
 
 const player = new Player(client);
