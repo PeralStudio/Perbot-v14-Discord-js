@@ -79,7 +79,7 @@ const setIntervalTwitch = async (client, user) => {
                 });
 
                 await client.channels.cache.get("1008006504244334722").send({
-                    content: `🟢 ${capitalizedUserStream} esta en directo jugando a **${game.body}** \n https://twitch.tv/${userStream}`,
+                    content: `@Alfanjorfresco - ${capitalizedUserStream} esta en directo jugando a **${game.body}** \n https://twitch.tv/${userStream}`,
                     embeds: [embed],
                 });
 
@@ -91,7 +91,7 @@ const setIntervalTwitch = async (client, user) => {
             }
 
             await client.channels.cache.get("1008006504244334722").send({
-                content: `🟢 ${capitalizedUserStream} esta en directo jugando a **${game.body}** \n https://twitch.tv/${userStream}`,
+                content: `@Alfanjorfresco - ${capitalizedUserStream} esta en directo jugando a **${game.body}** \n https://twitch.tv/${userStream}`,
                 embeds: [embed],
             });
 
