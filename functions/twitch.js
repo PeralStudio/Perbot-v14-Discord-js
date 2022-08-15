@@ -78,8 +78,8 @@ const setIntervalTwitch = async (client, user) => {
                     titulo: `${title.body}`,
                 });
 
-                await client.channels.cache.get("1008006156712677433").send({
-                    content: `${capitalizedUserStream} esta en directo jugando a **${game.body}** \n https://twitch.tv/${userStream}`,
+                await client.channels.cache.get("1008006504244334722").send({
+                    content: `🟢 ${capitalizedUserStream} esta en directo jugando a **${game.body}** \n https://twitch.tv/${userStream}`,
                     embeds: [embed],
                 });
 
@@ -90,8 +90,8 @@ const setIntervalTwitch = async (client, user) => {
                 return;
             }
 
-            await client.channels.cache.get("1008006156712677433").send({
-                content: `${capitalizedUserStream} esta en directo jugando a **${game.body}** \n https://twitch.tv/${userStream}`,
+            await client.channels.cache.get("1008006504244334722").send({
+                content: `🟢 ${capitalizedUserStream} esta en directo jugando a **${game.body}** \n https://twitch.tv/${userStream}`,
                 embeds: [embed],
             });
 
