@@ -1692,8 +1692,8 @@ client.on("interactionCreate", async (interaction) => {
             interaction.channel.messages
                 .fetch({ limit: amountToDelete })
                 .then((messages) => {
-                    messages.forEach(async (message) => {
-                        await message.delete();
+                    messages.forEach((message) => {
+                        message.delete();
                     });
                 })
                 .catch((err) => {
