@@ -97,7 +97,8 @@ const commands = [
 ];
 
 const versionbot = "PerBot v2.0 Peralstudio.com";
-const { prefix, lolApi, youtubeKey, mongoUrl } = config;
+const { prefix, lolApi, youtubeKey, mongoUrl, CLIENT_ID, GUILD_ID, token } =
+    process.env;
 
 // mongoose
 //     .connect(
@@ -110,18 +111,15 @@ const { prefix, lolApi, youtubeKey, mongoUrl } = config;
 //     .then(() => console.log("Conectado a MongoDB"))
 //     .catch((err) => console.log(err));
 
-const rest = new REST({ version: "10" }).setToken(config.token);
+const rest = new REST({ version: "10" }).setToken(token);
 
 (async () => {
     try {
         console.log("Started refreshing application (.) commands.");
 
-        await rest.put(
-            Routes.applicationGuildCommands(config.CLIENT_ID, config.GUILD_ID),
-            {
-                body: commands,
-            }
-        );
+        await rest.put(Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID), {
+            body: commands,
+        });
 
         console.log("Successfully reloaded application (.) commands.");
     } catch (error) {
@@ -1900,4 +1898,4 @@ client.on("interactionCreate", async (interaction) => {
     }
 });
 
-client.login(config.token);
+client.login(token);
