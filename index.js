@@ -234,6 +234,10 @@ player.on("trackStart", async (queue, track) =>
     queue.metadata.channel.send(`▶️ Reproduciendo **${track.title}**!`)
 );
 
+player.on("queueEnd", async (queue, track) => {
+    queueToList = [];
+});
+
 client.on("interactionCreate", async (interaction) => {
     if (!interaction.isChatInputCommand()) return;
 
@@ -582,6 +586,7 @@ client.on("interactionCreate", async (interaction) => {
     //COMANDO STOP
     if (interaction.commandName === "stop") {
         const queue = player.getQueue(interaction.guild);
+
         if (!queue)
             return await interaction.reply({
                 embeds: [
@@ -596,6 +601,7 @@ client.on("interactionCreate", async (interaction) => {
                 ],
                 ephemeral: true,
             });
+
         queue.destroy();
         queueToList = [];
         return await interaction.reply({
