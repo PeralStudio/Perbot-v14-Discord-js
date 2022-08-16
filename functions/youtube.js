@@ -100,7 +100,7 @@ const setIntervalYoutube = async (client, userId) => {
                 );
             }
         }
-    }, 120000);
+    }, 240000);
 };
 
 export default setIntervalYoutube;
