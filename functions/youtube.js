@@ -2,7 +2,7 @@ import { EmbedBuilder } from "discord.js";
 import ytch from "yt-channel-info";
 import youtube from "../Schemas/youtubeSchema.js";
 
-const setIntervalYoutube = async (client, userId) => {
+const setIntervalYoutube = async (client, userId, amountToDelete) => {
     const versionbot = "PerBot v2.0 Peralstudio.com";
     const payload = {
         channelId: userId,
@@ -64,7 +64,7 @@ const setIntervalYoutube = async (client, userId) => {
             await client.channels.cache
                 .get("1009104544686407730")
                 .messages.fetch({
-                    limit: 4,
+                    limit: amountToDelete,
                 })
                 .then((messages) => {
                     messages.forEach((message) => {
