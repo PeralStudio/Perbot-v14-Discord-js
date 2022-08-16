@@ -12,11 +12,9 @@ const setIntervalTwitch = async (client, user) => {
 
         let userStream = user;
 
-        console.log("----------------------------------------------------");
         console.log(
             `Comprobando Twitch ${capitalizedUserStream} - ${new Date().toLocaleTimeString()}`
         );
-        console.log("----------------------------------------------------");
 
         const httpHeaders = {
             "User-Agent": "PerBot",
