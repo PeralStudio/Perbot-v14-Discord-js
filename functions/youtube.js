@@ -1,8 +1,8 @@
-import { EmbedBuilder } from "discord.js";
+// import { EmbedBuilder } from "discord.js";
 import ytch from "yt-channel-info";
 import youtube from "../Schemas/youtubeSchema.js";
 
-const setIntervalYoutube = async (client, userId, amountToDelete) => {
+const setIntervalYoutube = async (client, userId) => {
     const versionbot = "PerBot v2.0 Peralstudio.com";
     const payload = {
         channelId: userId,
@@ -61,17 +61,6 @@ const setIntervalYoutube = async (client, userId, amountToDelete) => {
                 }),
             });
 
-            await client.channels.cache
-                .get("1009104544686407730")
-                .messages.fetch({
-                    limit: amountToDelete,
-                })
-                .then((messages) => {
-                    messages.forEach((message) => {
-                        message.delete();
-                    });
-                });
-
             if (ultimoVideo.liveNow === true) {
                 await client.channels.cache.get("1009104544686407730").send({
                     content: `<@209338137346834433> - ¡ **${videos.items[0].author}** esta en **directo** ! \n https://www.youtube.com/watch?v=${videos.items[0].videoId} `,
@@ -89,17 +78,6 @@ const setIntervalYoutube = async (client, userId, amountToDelete) => {
             if (data.titulo === `${videos.items[0].title}`) {
                 return;
             } else {
-                await client.channels.cache
-                    .get("1009104544686407730")
-                    .messages.fetch({
-                        limit: 4,
-                    })
-                    .then((messages) => {
-                        messages.forEach((message) => {
-                            message.delete();
-                        });
-                    });
-
                 if (ultimoVideo.liveNow === true) {
                     await client.channels.cache
                         .get("1009104544686407730")
