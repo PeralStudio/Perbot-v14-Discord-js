@@ -16,7 +16,12 @@ const setIntervalYoutube = async (client, userId) => {
         const ultimoVideo = videos.items[0];
 
         console.log(
-            `Comprobando youtube ${userId} - ( ${new Date().toLocaleTimeString()} )`
+            `Comprobando youtube ${userId} - (${new Date().toLocaleTimeString(
+                "es-ES",
+                {
+                    timeZone: "Europe/Madrid",
+                }
+            )})`
         );
 
         let data = await youtube.findOne({
