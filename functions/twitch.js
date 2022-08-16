@@ -81,7 +81,9 @@ const setIntervalTwitch = async (client, user) => {
                 const newData = new twitch({
                     user: userStream,
                     titulo: `${title.body}`,
-                    date: new Date().toLocaleString(),
+                    date: new Date().toLocaleString("es-ES", {
+                        timeZone: "Europe/Madrid",
+                    }),
                 });
 
                 await client.channels.cache.get("1009104666849726625").send({
