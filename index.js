@@ -154,7 +154,9 @@ const usersToAlertYoutube = [
     "RideMeFive",
     "esttikSP",
     "JDalmau",
-    "UCEx9whgAgQPG7e4dAXIq1VQ", //ElOjoNinja - Gameplays Completos
+    "LordDraugr",
+    "UCEx9whgAgQPG7e4dAXIq1VQ", // ElOjoNinja - Gameplays Completos
+    "UCmcBZPvWyXBKw0d6XE5XDOQ", // elyoya
 ];
 
 client.on("ready", async () => {
