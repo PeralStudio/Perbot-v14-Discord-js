@@ -76,7 +76,7 @@ const setIntervalTwitch = async (client, user) => {
                     text: versionbot,
                     iconURL: client.user.displayAvatarURL(),
                 })
-                .setColor(0x00ff00);
+                .setColor("#AA70F8");
 
             if (!data) {
                 const newData = new twitch({
