@@ -2,7 +2,7 @@ import { EmbedBuilder } from "discord.js";
 import nodeSuperFetch from "node-superfetch";
 import twitch from "../Schemas/twitchSchema.js";
 
-const setIntervalTwitch = async (client, user) => {
+const setIntervalTwitch = async (client, user, amountToDelete) => {
     const versionbot = "PerBot v2.0 Peralstudio.com";
     setInterval(async () => {
         const firstLetter = user.charAt(0);
@@ -91,6 +91,17 @@ const setIntervalTwitch = async (client, user) => {
                     }),
                 });
 
+                await client.channels.cache
+                    .get("1009104544686407730")
+                    .messages.fetch({
+                        limit: amountToDelete,
+                    })
+                    .then((messages) => {
+                        messages.forEach((message) => {
+                            message.delete();
+                        });
+                    });
+
                 await client.channels.cache.get("1009104666849726625").send({
                     content: `<@209338137346834433> - ${capitalizedUserStream} esta en directo jugando a **${game.body}** \n https://twitch.tv/${userStream}`,
                     embeds: [embed],
@@ -102,6 +113,17 @@ const setIntervalTwitch = async (client, user) => {
             if (data.titulo === `${title.body}`) {
                 return;
             }
+
+            await client.channels.cache
+                .get("1009104544686407730")
+                .messages.fetch({
+                    limit: amountToDelete,
+                })
+                .then((messages) => {
+                    messages.forEach((message) => {
+                        message.delete();
+                    });
+                });
 
             await client.channels.cache.get("1009104666849726625").send({
                 content: `<@209338137346834433> - ${capitalizedUserStream} esta en directo jugando a **${game.body}** \n https://twitch.tv/${userStream}`,
