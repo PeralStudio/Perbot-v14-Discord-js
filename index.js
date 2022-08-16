@@ -155,6 +155,7 @@ const usersToAlertYoutube = [
     "esttikSP",
     "JDalmau",
     "LordDraugr",
+    "Kerios",
     "UCEx9whgAgQPG7e4dAXIq1VQ", // ElOjoNinja - Gameplays Completos
     "UCmcBZPvWyXBKw0d6XE5XDOQ", // elyoya
 ];
