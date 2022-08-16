@@ -140,7 +140,7 @@ const client = new Client({
     ],
 });
 
-const usersToAlert = ["illojuan", "viviendoenlacalle"];
+const usersToAlert = ["illojuan", "viviendoenlacalle", "knekro"];
 
 client.on("ready", async () => {
     console.log(`Bot conectado como ${client.user.tag}!`);
@@ -151,6 +151,7 @@ client.on("ready", async () => {
 
     setIntervalTwitch(client, usersToAlert[0]);
     setIntervalTwitch(client, usersToAlert[1]);
+    setIntervalTwitch(client, usersToAlert[2]);
 });
 
 const player = new Player(client);
