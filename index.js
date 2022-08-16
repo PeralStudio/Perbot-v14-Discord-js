@@ -142,7 +142,12 @@ const client = new Client({
 });
 
 const usersToAlertTwitch = ["illojuan", "viviendoenlacalle", "knekro"];
-const usersToAlertYoutube = ["Willyrex", "xFaRgAnxYTube", "RideMeFive"];
+const usersToAlertYoutube = [
+    "Willyrex",
+    "xFaRgAnxYTube",
+    "RideMeFive",
+    "UCEx9whgAgQPG7e4dAXIq1VQ", //ElOjoNinja - Gameplays Completos
+];
 
 client.on("ready", async () => {
     console.log(`Bot conectado como ${client.user.tag}!`);
@@ -158,6 +163,7 @@ client.on("ready", async () => {
     setIntervalYoutube(client, usersToAlertYoutube[0]);
     setIntervalYoutube(client, usersToAlertYoutube[1]);
     setIntervalYoutube(client, usersToAlertYoutube[2]);
+    setIntervalYoutube(client, usersToAlertYoutube[3]);
 });
 
 const player = new Player(client);
