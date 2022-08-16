@@ -43,7 +43,7 @@ const setIntervalTwitch = async (client, user) => {
             titulo: title.body,
         });
 
-        if (uptime.body !== `${userStream} is offline`) {
+        if (uptime.text !== `${userStream} is offline`) {
             const embed = new EmbedBuilder()
                 .setAuthor({
                     name: `${capitalizedUserStream}`,
