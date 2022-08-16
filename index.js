@@ -161,15 +161,31 @@ client.on("ready", async () => {
         status: "online",
     });
 
-    setIntervalTwitch(client, usersToAlertTwitch[0]);
-    setIntervalTwitch(client, usersToAlertTwitch[1]);
-    setIntervalTwitch(client, usersToAlertTwitch[2]);
-    setIntervalTwitch(client, usersToAlertTwitch[3]);
+    setIntervalTwitch(client, usersToAlertTwitch[0], usersToAlertTwitch.length);
+    setIntervalTwitch(client, usersToAlertTwitch[1], usersToAlertTwitch.length);
+    setIntervalTwitch(client, usersToAlertTwitch[2], usersToAlertTwitch.length);
+    setIntervalTwitch(client, usersToAlertTwitch[3], usersToAlertTwitch.length);
 
-    setIntervalYoutube(client, usersToAlertYoutube[0]);
-    setIntervalYoutube(client, usersToAlertYoutube[1]);
-    setIntervalYoutube(client, usersToAlertYoutube[2]);
-    setIntervalYoutube(client, usersToAlertYoutube[3]);
+    setIntervalYoutube(
+        client,
+        usersToAlertYoutube[0],
+        usersToAlertYoutube.length
+    );
+    setIntervalYoutube(
+        client,
+        usersToAlertYoutube[1],
+        usersToAlertYoutube.length
+    );
+    setIntervalYoutube(
+        client,
+        usersToAlertYoutube[2],
+        usersToAlertYoutube.length
+    );
+    setIntervalYoutube(
+        client,
+        usersToAlertYoutube[3],
+        usersToAlertYoutube.length
+    );
 });
 
 const player = new Player(client);
