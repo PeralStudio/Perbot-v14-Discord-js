@@ -51,6 +51,7 @@ const setIntervalYoutube = async (client, userId) => {
             const newData = new youtube({
                 user: videos.items[0].authorId,
                 titulo: videos.items[0].title,
+                date: new Date().toLocaleString(),
             });
 
             if (ultimoVideo.liveNow === true) {
