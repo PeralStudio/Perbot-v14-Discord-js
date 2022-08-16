@@ -103,17 +103,21 @@ const setIntervalTwitch = async (client, user) => {
                 return;
             }
 
-            await client.channels.cache.get("1009104666849726625").send({
-                content: `<@209338137346834433> - ${capitalizedUserStream} esta en directo jugando a **${game.body}** \n https://twitch.tv/${userStream}`,
-                embeds: [embed],
-            });
+            if (parseInt(uptime.text[0]) > 0) {
+                return;
+            } else {
+                await client.channels.cache.get("1009104666849726625").send({
+                    content: `<@209338137346834433> - ${capitalizedUserStream} esta en directo jugando a **${game.body}** \n https://twitch.tv/${userStream}`,
+                    embeds: [embed],
+                });
 
-            await twitch.findOneAndUpdate(
-                { user: userStream },
-                { titulo: title.body }
-            );
+                await twitch.findOneAndUpdate(
+                    { user: userStream },
+                    { titulo: title.body }
+                );
+            }
         }
-    }, 120000);
+    }, 15000);
 };
 
 export default setIntervalTwitch;
