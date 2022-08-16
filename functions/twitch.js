@@ -74,12 +74,12 @@ const setIntervalTwitch = async (client, user) => {
                     },
                     {
                         name: "Viewers",
-                        value: `⠀⠀${viewers.body}`,
+                        value: `⠀${viewers.body}`,
                         inline: true,
                     },
                     {
                         name: "Seguidores",
-                        value: `⠀⠀${followCount.body
+                        value: `⠀${followCount.body
                             .toString()
                             .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`,
                         inline: true,
