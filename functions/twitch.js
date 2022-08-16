@@ -38,12 +38,12 @@ const setIntervalTwitch = async (client, user) => {
             { headers: httpHeaders }
         );
 
-        let data = await twitch.findOne({
-            user: userStream,
-            titulo: title.body,
-        });
+        if (uptime.text === `${userStream} is offline`) {
+            let data = await twitch.findOne({
+                user: userStream,
+                titulo: title.body,
+            });
 
-        if (uptime.text !== `${userStream} is offline`) {
             const embed = new EmbedBuilder()
                 .setAuthor({
                     name: `${capitalizedUserStream}`,
