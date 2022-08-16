@@ -141,7 +141,12 @@ const client = new Client({
     ],
 });
 
-const usersToAlertTwitch = ["illojuan", "viviendoenlacalle", "knekro"];
+const usersToAlertTwitch = [
+    "illojuan",
+    "viviendoenlacalle",
+    "knekro",
+    "eldelabarrapan",
+];
 const usersToAlertYoutube = [
     "Willyrex",
     "xFaRgAnxYTube",
@@ -159,6 +164,7 @@ client.on("ready", async () => {
     setIntervalTwitch(client, usersToAlertTwitch[0]);
     setIntervalTwitch(client, usersToAlertTwitch[1]);
     setIntervalTwitch(client, usersToAlertTwitch[2]);
+    setIntervalTwitch(client, usersToAlertTwitch[3]);
 
     setIntervalYoutube(client, usersToAlertYoutube[0]);
     setIntervalYoutube(client, usersToAlertYoutube[1]);
