@@ -148,6 +148,7 @@ const usersToAlertTwitch = [
     "eldelabarrapan",
     "elojoninja",
     "elyoyalol",
+    "kxmi",
 ];
 const usersToAlertYoutube = [
     "Willyrex",
