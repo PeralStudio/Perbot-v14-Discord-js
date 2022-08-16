@@ -169,7 +169,6 @@ client.on("ready", async () => {
     for (const user of usersToAlertTwitch) {
         setIntervalTwitch(client, user);
     }
-
     for (const user of usersToAlertYoutube) {
         setIntervalYoutube(client, user);
     }
