@@ -5,11 +5,8 @@ import twitch from "../Schemas/twitchSchema.js";
 const setIntervalTwitch = async (client, user) => {
     setInterval(async () => {
         const firstLetter = user.charAt(0);
-
         const firstLetterCap = firstLetter.toUpperCase();
-
         const remainingLetters = user.slice(1);
-
         const capitalizedUserStream = firstLetterCap + remainingLetters;
 
         let userStream = user;
