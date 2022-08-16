@@ -8,12 +8,10 @@ const setIntervalTwitch = async (client, user) => {
         const firstLetter = user.charAt(0);
         const firstLetterCap = firstLetter.toUpperCase();
         const remainingLetters = user.slice(1);
-        const capitalizedUserStream = firstLetterCap + remainingLetters;
-
-        let userStream = user;
+        const capitalizedUser = firstLetterCap + remainingLetters;
 
         console.log(
-            `Comprobando Twitch ${capitalizedUserStream} - (${new Date().toLocaleTimeString(
+            `Comprobando Twitch ${capitalizedUser} - (${new Date().toLocaleTimeString(
                 "es-ES",
                 {
                     timeZone: "Europe/Madrid",
@@ -26,40 +24,40 @@ const setIntervalTwitch = async (client, user) => {
         };
 
         const uptime = await nodeSuperFetch.get(
-            `https://decapi.me/twitch/uptime/${userStream}`,
+            `https://decapi.me/twitch/uptime/${user}`,
             { headers: httpHeaders }
         );
         const avatar = await nodeSuperFetch.get(
-            `https://decapi.me/twitch/avatar/${userStream}`,
+            `https://decapi.me/twitch/avatar/${user}`,
             { headers: httpHeaders }
         );
         const viewers = await nodeSuperFetch.get(
-            `https://decapi.me/twitch/viewercount/${userStream}`,
+            `https://decapi.me/twitch/viewercount/${user}`,
             { headers: httpHeaders }
         );
         const title = await nodeSuperFetch.get(
-            `https://decapi.me/twitch/title/${userStream}`,
+            `https://decapi.me/twitch/title/${user}`,
             { headers: httpHeaders }
         );
         const game = await nodeSuperFetch.get(
-            `https://decapi.me/twitch/game/${userStream}`,
+            `https://decapi.me/twitch/game/${user}`,
             { headers: httpHeaders }
         );
 
-        if (uptime.text !== `${userStream} is offline`) {
+        if (uptime.text !== `${user} is offline`) {
             let data = await twitch.findOne({
-                user: userStream,
+                user: user,
                 titulo: title.body,
             });
 
             const embed = new EmbedBuilder()
                 .setAuthor({
-                    name: `${capitalizedUserStream}`,
+                    name: `${capitalizedUser}`,
                     iconURL: `${avatar.body}`,
                 })
                 .setTitle(`${title.body}`)
                 .setThumbnail(`${avatar.body}`)
-                .setURL(`https://twitch.tv/${userStream}`)
+                .setURL(`https://twitch.tv/${user}`)
                 .addFields(
                     {
                         name: "Jugando a",
@@ -73,7 +71,7 @@ const setIntervalTwitch = async (client, user) => {
                     }
                 )
                 .setImage(
-                    `https://static-cdn.jtvnw.net/previews-ttv/live_user_${userStream}-1920x1080.jpg`
+                    `https://static-cdn.jtvnw.net/previews-ttv/live_user_${user}-1920x1080.jpg`
                 )
                 .setTimestamp()
                 .setFooter({
@@ -84,7 +82,7 @@ const setIntervalTwitch = async (client, user) => {
 
             if (!data) {
                 const newData = new twitch({
-                    user: userStream,
+                    user: user,
                     titulo: `${title.body}`,
                     date: new Date().toLocaleString("es-ES", {
                         timeZone: "Europe/Madrid",
@@ -92,7 +90,7 @@ const setIntervalTwitch = async (client, user) => {
                 });
 
                 await client.channels.cache.get("1009104666849726625").send({
-                    content: `<@209338137346834433> - ${capitalizedUserStream} esta en directo jugando a **${game.body}** \n https://twitch.tv/${userStream}`,
+                    content: `<@209338137346834433> - ${capitalizedUser} esta en directo jugando a **${game.body}** \n https://twitch.tv/${user}`,
                     embeds: [embed],
                 });
 
@@ -107,12 +105,12 @@ const setIntervalTwitch = async (client, user) => {
                 return;
             } else {
                 await client.channels.cache.get("1009104666849726625").send({
-                    content: `<@209338137346834433> - ${capitalizedUserStream} esta en directo jugando a **${game.body}** \n https://twitch.tv/${userStream}`,
+                    content: `<@209338137346834433> - ${capitalizedUser} esta en directo jugando a **${game.body}** \n https://twitch.tv/${user}`,
                     embeds: [embed],
                 });
 
                 await twitch.findOneAndUpdate(
-                    { user: userStream },
+                    { user: user },
                     { titulo: title.body }
                 );
             }
