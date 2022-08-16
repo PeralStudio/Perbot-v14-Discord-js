@@ -25,24 +25,24 @@ const setIntervalYoutube = async (client, userId) => {
         );
 
         let data = await youtube.findOne({
-            user: videos.items[0].authorId,
-            titulo: videos.items[0].title,
+            user: ultimoVideo.authorId,
+            titulo: ultimoVideo.title,
         });
 
         // const embed = new EmbedBuilder()
         //     .setAuthor({
-        //         name: `${videos.items[0].author}`,
+        //         name: `${ultimoVideo.author}`,
         //         iconURL: channel.authorThumbnails[0].url,
         //     })
-        //     .setTitle(`${videos.items[0].title}`)
+        //     .setTitle(`${ultimoVideo.title}`)
         //     .setThumbnail(`${channel.authorThumbnails[0].url}`)
         //     .setURL(
-        //         `https://www.youtube.com/watch?v=${videos.items[0].videoId}`
+        //         `https://www.youtube.com/watch?v=${ultimoVideo.videoId}`
         //     )
         //     .setImage(
         //         `${
-        //             videos.items[0].videoThumbnails[2].url ||
-        //             videos.items[0].videoThumbnails[0].url
+        //             ultimoVideo.videoThumbnails[2].url ||
+        //             ultimoVideo.videoThumbnails[0].url
         //         }`
         //     )
         //     .setTimestamp()
@@ -54,8 +54,8 @@ const setIntervalYoutube = async (client, userId) => {
 
         if (!data) {
             const newData = new youtube({
-                user: videos.items[0].authorId,
-                titulo: videos.items[0].title,
+                user: ultimoVideo.authorId,
+                titulo: ultimoVideo.title,
                 date: new Date().toLocaleString("es-ES", {
                     timeZone: "Europe/Madrid",
                 }),
@@ -63,19 +63,19 @@ const setIntervalYoutube = async (client, userId) => {
 
             if (ultimoVideo.liveNow === true) {
                 await client.channels.cache.get("1009141517044166757").send({
-                    content: `<@209338137346834433> - ¡ **${videos.items[0].author}** esta en **directo** ! \n https://www.youtube.com/watch?v=${videos.items[0].videoId} `,
+                    content: `<@209338137346834433> - ¡ **${ultimoVideo.author}** esta en **directo** ! \n https://www.youtube.com/watch?v=${ultimoVideo.videoId} `,
                     // embeds: [embed],
                 });
             } else {
                 await client.channels.cache.get("1009141517044166757").send({
-                    content: `<@209338137346834433> - ¡ **${videos.items[0].author}** ha subido un **nuevo video** ! \n https://www.youtube.com/watch?v=${videos.items[0].videoId} `,
+                    content: `<@209338137346834433> - ¡ **${ultimoVideo.author}** ha subido un **nuevo video** ! \n https://www.youtube.com/watch?v=${ultimoVideo.videoId} `,
                     // embeds: [embed],
                 });
             }
 
             return await newData.save();
         } else {
-            if (data.titulo === `${videos.items[0].title}`) {
+            if (data.titulo === ultimoVideo.title) {
                 return;
             } else {
                 if (ultimoVideo.liveNow === true) {
