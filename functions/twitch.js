@@ -43,6 +43,14 @@ const setIntervalTwitch = async (client, user) => {
             `https://decapi.me/twitch/game/${user}`,
             { headers: httpHeaders }
         );
+        // const accountCreation = await nodeSuperFetch.get(
+        //     `https://decapi.me/twitch/creation/${user}`,
+        //     { headers: httpHeaders }
+        // );
+        const followCount = await nodeSuperFetch.get(
+            `https://decapi.me/twitch/followcount/${user}`,
+            { headers: httpHeaders }
+        );
 
         if (uptime.text !== `${user} is offline`) {
             let data = await twitch.findOne({
@@ -67,6 +75,13 @@ const setIntervalTwitch = async (client, user) => {
                     {
                         name: "Viewers",
                         value: `${viewers.body}`,
+                        inline: true,
+                    },
+                    {
+                        name: "Seguidores",
+                        value: `${followCount.body
+                            .toString()
+                            .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}`,
                         inline: true,
                     }
                 )
