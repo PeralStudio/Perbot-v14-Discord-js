@@ -45,7 +45,6 @@ const setIntervalTwitch = async (client, user) => {
             let data = await twitch.findOne({
                 user: userStream,
                 titulo: title.body,
-                date: new Date().toLocaleString(),
             });
 
             const embed = new EmbedBuilder()
@@ -82,6 +81,7 @@ const setIntervalTwitch = async (client, user) => {
                 const newData = new twitch({
                     user: userStream,
                     titulo: `${title.body}`,
+                    date: new Date().toLocaleString(),
                 });
 
                 await client.channels.cache.get("1009104666849726625").send({
