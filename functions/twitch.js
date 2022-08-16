@@ -45,6 +45,7 @@ const setIntervalTwitch = async (client, user) => {
             let data = await twitch.findOne({
                 user: userStream,
                 titulo: title.body,
+                date: new Date().toLocaleString(),
             });
 
             const embed = new EmbedBuilder()
