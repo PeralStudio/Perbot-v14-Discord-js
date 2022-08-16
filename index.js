@@ -146,6 +146,7 @@ const usersToAlertTwitch = [
     "viviendoenlacalle",
     "knekro",
     "eldelabarrapan",
+    "elojoninja",
 ];
 const usersToAlertYoutube = [
     "Willyrex",
@@ -161,15 +162,13 @@ client.on("ready", async () => {
         status: "online",
     });
 
-    setIntervalTwitch(client, usersToAlertTwitch[0]);
-    setIntervalTwitch(client, usersToAlertTwitch[1]);
-    setIntervalTwitch(client, usersToAlertTwitch[2]);
-    setIntervalTwitch(client, usersToAlertTwitch[3]);
+    for (const user of usersToAlertTwitch) {
+        setIntervalTwitch(client, user);
+    }
 
-    setIntervalYoutube(client, usersToAlertYoutube[0]);
-    setIntervalYoutube(client, usersToAlertYoutube[1]);
-    setIntervalYoutube(client, usersToAlertYoutube[2]);
-    setIntervalYoutube(client, usersToAlertYoutube[3]);
+    for (const user of usersToAlertYoutube) {
+        setIntervalYoutube(client, user);
+    }
 });
 
 const player = new Player(client);
