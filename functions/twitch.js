@@ -3,6 +3,7 @@ import nodeSuperFetch from "node-superfetch";
 import twitch from "../Schemas/twitchSchema.js";
 
 const setIntervalTwitch = async (client, user) => {
+    const versionbot = "PerBot v2.0 Peralstudio.com";
     setInterval(async () => {
         const firstLetter = user.charAt(0);
         const firstLetterCap = firstLetter.toUpperCase();
@@ -67,6 +68,11 @@ const setIntervalTwitch = async (client, user) => {
                 .setImage(
                     `https://static-cdn.jtvnw.net/previews-ttv/live_user_${userStream}-1920x1080.jpg`
                 )
+                .setTimestamp()
+                .setFooter({
+                    text: versionbot,
+                    iconURL: client.user.displayAvatarURL(),
+                })
                 .setColor(0x00ff00);
 
             if (!data) {
@@ -96,6 +102,8 @@ const setIntervalTwitch = async (client, user) => {
                 { user: userStream },
                 { titulo: title.body }
             );
+        } else {
+            console.log(`${capitalizedUserStream} no esta en directo`);
         }
     }, 120000);
 };
