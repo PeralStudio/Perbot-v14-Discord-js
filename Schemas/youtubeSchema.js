@@ -9,6 +9,10 @@ const youtube = new mongoose.Schema({
         type: String,
         required: true,
     },
+    date: {
+        type: String,
+        required: true,
+    },
 });
 
 export default mongoose.model("youtube", youtube);
