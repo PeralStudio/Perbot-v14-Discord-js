@@ -38,7 +38,7 @@ const setIntervalTwitch = async (client, user) => {
             { headers: httpHeaders }
         );
 
-        if (uptime.text === `${userStream} is offline`) {
+        if (uptime.text !== `${userStream} is offline`) {
             let data = await twitch.findOne({
                 user: userStream,
                 titulo: title.body,
