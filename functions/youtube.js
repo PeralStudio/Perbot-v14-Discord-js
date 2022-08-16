@@ -15,11 +15,9 @@ const setIntervalYoutube = async (client, userId) => {
         const channel = await getChannelInfo(payload, 0);
         const ultimoVideo = videos.items[0];
 
-        console.log("----------------------------------------------------");
         console.log(
-            `Comprobando youtube ${userId} - ${new Date().toLocaleTimeString()}`
+            `Comprobando youtube ${userId} - ( ${new Date().toLocaleTimeString()} )`
         );
-        console.log("----------------------------------------------------");
 
         let data = await youtube.findOne({
             user: videos.items[0].authorId,
