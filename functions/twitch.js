@@ -102,8 +102,6 @@ const setIntervalTwitch = async (client, user) => {
                 { user: userStream },
                 { titulo: title.body }
             );
-        } else {
-            console.log(`${capitalizedUserStream} no esta en directo`);
         }
     }, 120000);
 };
