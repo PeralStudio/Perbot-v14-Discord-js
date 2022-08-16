@@ -65,6 +65,7 @@ import enviarmdCommand from "./commands/enviarmd.js";
 import helpCommand from "./commands/help.js";
 
 import setIntervalTwitch from "./functions/twitch.js";
+import setIntervalYoutube from "./functions/youtube.js";
 
 const commands = [
     playCommand,
@@ -140,7 +141,8 @@ const client = new Client({
     ],
 });
 
-const usersToAlert = ["illojuan", "viviendoenlacalle", "knekro"];
+const usersToAlertTwitch = ["illojuan", "viviendoenlacalle", "knekro"];
+const usersToAlertYoutube = ["Willyrex", "xFaRgAnxYTube", "RideMeFive"];
 
 client.on("ready", async () => {
     console.log(`Bot conectado como ${client.user.tag}!`);
@@ -149,9 +151,13 @@ client.on("ready", async () => {
         status: "online",
     });
 
-    setIntervalTwitch(client, usersToAlert[0]);
-    setIntervalTwitch(client, usersToAlert[1]);
-    setIntervalTwitch(client, usersToAlert[2]);
+    setIntervalTwitch(client, usersToAlertTwitch[0]);
+    setIntervalTwitch(client, usersToAlertTwitch[1]);
+    setIntervalTwitch(client, usersToAlertTwitch[2]);
+
+    setIntervalYoutube(client, usersToAlertYoutube[0]);
+    setIntervalYoutube(client, usersToAlertYoutube[1]);
+    setIntervalYoutube(client, usersToAlertYoutube[2]);
 });
 
 const player = new Player(client);
