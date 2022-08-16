@@ -56,13 +56,11 @@ const setIntervalYoutube = async (client, userId) => {
                     content: `<@209338137346834433> - **${videos.items[0].author}** esta en **directo**  \n  `,
                     embeds: [embed],
                 });
-                console.log("Esta en vivo");
             } else {
                 await client.channels.cache.get("1008006504244334722").send({
                     content: `<@209338137346834433> - **${videos.items[0].author}** ha subido un **nuevo video**  \n  `,
                     embeds: [embed],
                 });
-                console.log("Subió nuevo video");
             }
 
             return await newData.save();
@@ -76,13 +74,11 @@ const setIntervalYoutube = async (client, userId) => {
                 content: `<@209338137346834433> - **${videos.items[0].author}** esta en **directo**  \n  `,
                 embeds: [embed],
             });
-            console.log("Esta en vivo");
         } else {
             await client.channels.cache.get("1008006504244334722").send({
                 content: `<@209338137346834433> - **${videos.items[0].author}** ha subido un **nuevo video**  \n  `,
                 embeds: [embed],
             });
-            console.log("Subió nuevo video");
         }
 
         await youtube.findOneAndUpdate(
