@@ -56,38 +56,40 @@ const setIntervalYoutube = async (client, userId) => {
 
             if (ultimoVideo.liveNow === true) {
                 await client.channels.cache.get("1009104544686407730").send({
-                    content: `<@209338137346834433> - **${videos.items[0].author}** esta en **directo** \n https://www.youtube.com/watch?v=${videos.items[0].videoId} `,
+                    content: `<@209338137346834433> - ¡**${videos.items[0].author}** esta en **directo**! \n https://www.youtube.com/watch?v=${videos.items[0].videoId} `,
                     // embeds: [embed],
                 });
             } else {
                 await client.channels.cache.get("1009104544686407730").send({
-                    content: `<@209338137346834433> - **${videos.items[0].author}** ha subido un **nuevo video** \n https://www.youtube.com/watch?v=${videos.items[0].videoId} `,
+                    content: `<@209338137346834433> - ¡**${videos.items[0].author}** ha subido un **nuevo video**! \n https://www.youtube.com/watch?v=${videos.items[0].videoId} `,
                     // embeds: [embed],
                 });
             }
 
             return await newData.save();
         }
+        console.log(data.titulo === `${videos.items[0].title}`);
+
         if (data.titulo === `${videos.items[0].title}`) {
             return;
-        }
-
-        if (ultimoVideo.liveNow === true) {
-            await client.channels.cache.get("1009104544686407730").send({
-                content: `<@209338137346834433> - **${videos.items[0].author}** esta en **directo**  \n  `,
-                embeds: [embed],
-            });
         } else {
-            await client.channels.cache.get("1009104544686407730").send({
-                content: `<@209338137346834433> - **${videos.items[0].author}** ha subido un **nuevo video**  \n  `,
-                embeds: [embed],
-            });
-        }
+            if (ultimoVideo.liveNow === true) {
+                await client.channels.cache.get("1009104544686407730").send({
+                    content: `<@209338137346834433> - ¡**${videos.items[0].author}** esta en **directo**!  \n https://www.youtube.com/watch?v=${videos.items[0].videoId} `,
+                    embeds: [embed],
+                });
+            } else {
+                await client.channels.cache.get("1009104544686407730").send({
+                    content: `<@209338137346834433> - '**${videos.items[0].author}** ha subido un **nuevo video**!  \n https://www.youtube.com/watch?v=${videos.items[0].videoId} `,
+                    embeds: [embed],
+                });
+            }
 
-        await youtube.findOneAndUpdate(
-            { user: videos.items[0].authorId },
-            { titulo: videos.items[0].title }
-        );
+            await youtube.findOneAndUpdate(
+                { user: videos.items[0].authorId },
+                { titulo: videos.items[0].title }
+            );
+        }
     }, 120000);
 };
 
