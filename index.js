@@ -152,6 +152,8 @@ const usersToAlertYoutube = [
     "Willyrex",
     "xFaRgAnxYTube",
     "RideMeFive",
+    "esttikSP",
+    "JDalmau",
     "UCEx9whgAgQPG7e4dAXIq1VQ", //ElOjoNinja - Gameplays Completos
 ];
 
