@@ -13,7 +13,7 @@ const setIntervalTwitch = async (client, user) => {
         let userStream = user;
 
         console.log(
-            `Comprobando Twitch ${capitalizedUserStream} - ${new Date().toLocaleTimeString()}`
+            `Comprobando Twitch ${capitalizedUserStream} - ( ${new Date().toLocaleTimeString()} )`
         );
 
         const httpHeaders = {
