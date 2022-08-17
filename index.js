@@ -176,6 +176,7 @@ const usersToAlertYoutube = [
     "esttikSP",
     "JDalmau",
     "LordDraugr",
+    "SeVenJungle",
     "UCg1c09_sFOd-TVPCNgHw8qg", // Kerios
     "UCEx9whgAgQPG7e4dAXIq1VQ", // ElOjoNinja - Gameplays Completos
     "UCmcBZPvWyXBKw0d6XE5XDOQ", // elyoya
