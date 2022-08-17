@@ -184,6 +184,7 @@ const usersToAlertYoutube = [
     "UCg1c09_sFOd-TVPCNgHw8qg", // Kerios
     "UCEx9whgAgQPG7e4dAXIq1VQ", // ElOjoNinja - Gameplays Completos
     "UCmcBZPvWyXBKw0d6XE5XDOQ", // elyoya
+    "UCwXh0iKPlI4hXNntPECFSbg", // Zazza el italiano
 ];
 
 client.on("ready", async () => {
