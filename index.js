@@ -155,6 +155,7 @@ const client = new Client({
         IntentsBitField.Flags.Guilds,
         IntentsBitField.Flags.GuildMessages,
         IntentsBitField.Flags.MessageContent,
+        IntentsBitField.Flags.GuildMembers,
         GatewayIntentBits.GuildVoiceStates,
     ],
 });
@@ -196,6 +197,40 @@ client.on("ready", async () => {
     for (const user of usersToAlertYoutube) {
         setIntervalYoutube(client, user);
     }
+});
+
+client.on("guildMemberAdd", async (member) => {
+    const embed = new EmbedBuilder()
+        .setDescription(`¡ Bienvenido <@${member.id}> !`)
+        .setThumbnail(member.user.displayAvatarURL())
+        .setImage(
+            "https://pa1.narvii.com/7134/e55a690bf6acab74324da299e923af2c30cd544br1-500-500_hq.gif"
+        )
+        .setColor("#008f39")
+        .setTimestamp()
+        .setFooter({
+            text: versionbot,
+            iconURL: client.user.displayAvatarURL(),
+        });
+
+    client.channels.cache.get("1008006156712677433").send({ embeds: [embed] });
+});
+
+client.on("guildMemberRemove", async (member) => {
+    const embed = new EmbedBuilder()
+        .setDescription(`¡ Adios <@${member.id}> !`)
+        .setThumbnail(member.user.displayAvatarURL())
+        .setImage(
+            "https://media1.tenor.com/images/59af6d17fa7477ae2379697aa8df134c/tenor.gif"
+        )
+        .setColor("#f10029")
+        .setTimestamp()
+        .setFooter({
+            text: versionbot,
+            iconURL: client.user.displayAvatarURL(),
+        });
+
+    client.channels.cache.get("1008006156712677433").send({ embeds: [embed] });
 });
 
 const player = new Player(client);
