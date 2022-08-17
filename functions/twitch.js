@@ -4,12 +4,13 @@ import twitch from "../Schemas/twitchSchema.js";
 
 const setIntervalTwitch = async (client, user) => {
     const versionbot = "PerBot v2.0 Peralstudio.com";
-    setInterval(async () => {
-        const firstLetter = user.charAt(0);
-        const firstLetterCap = firstLetter.toUpperCase();
-        const remainingLetters = user.slice(1);
-        const capitalizedUser = firstLetterCap + remainingLetters;
 
+    const firstLetter = user.charAt(0);
+    const firstLetterCap = firstLetter.toUpperCase();
+    const remainingLetters = user.slice(1);
+    const capitalizedUser = firstLetterCap + remainingLetters;
+
+    setInterval(async () => {
         console.log(
             `Comprobando Twitch ${capitalizedUser} - (${new Date().toLocaleTimeString(
                 "es-ES",
