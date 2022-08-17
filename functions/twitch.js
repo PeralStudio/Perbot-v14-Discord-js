@@ -97,20 +97,57 @@ const setIntervalTwitch = async (client, user) => {
                 .setColor("#AA70F8");
 
             if (!data) {
-                const newData = new twitch({
+                let dataDB = await twitch.findOne({
                     user: user,
-                    titulo: `${title.body}`,
-                    date: new Date().toLocaleString("es-ES", {
-                        timeZone: "Europe/Madrid",
-                    }),
                 });
 
-                await client.channels.cache.get("1009104666849726625").send({
-                    content: `<@209338137346834433> \n ¡ **${capitalizedUser}** esta en directo jugando a **${game.body}** ! \n https://twitch.tv/${user}`,
-                    embeds: [embed],
-                });
+                if (!dataDB) {
+                    const newData = new twitch({
+                        user: user,
+                        titulo: `${title.body}`,
+                        date: new Date().toLocaleString("es-ES", {
+                            timeZone: "Europe/Madrid",
+                        }),
+                    });
 
-                return await newData.save();
+                    await client.channels.cache
+                        .get("1009104666849726625")
+                        .send({
+                            content:
+                                "<@209338137346834433> \n ¡ **`" +
+                                capitalizedUser +
+                                "`** esta en directo jugando a **`" +
+                                game.body +
+                                "`** ! \n https://twitch.tv/" +
+                                user,
+                            // content: `<@209338137346834433> \n ¡ **${capitalizedUser}** esta en directo jugando a **${game.body}** ! \n https://twitch.tv/${user}`,
+                            embeds: [embed],
+                        });
+
+                    return await newData.save();
+                } else {
+                    await client.channels.cache
+                        .get("1009104666849726625")
+                        .send({
+                            content:
+                                "<@209338137346834433> \n ¡ **`" +
+                                capitalizedUser +
+                                "`** esta en directo jugando a **`" +
+                                game.body +
+                                "`** ! \n https://twitch.tv/" +
+                                user,
+                            // content: `<@209338137346834433> \n ¡ **${capitalizedUser}** esta en directo jugando a **${game.body}** ! \n https://twitch.tv/${user}`,
+                            embeds: [embed],
+                        });
+
+                    return await dataDB.updateOne({
+                        user: user,
+                        titulo: `${title.body}`,
+                        date: new Date().toLocaleString("es-ES", {
+                            timeZone: "Europe/Madrid",
+                        }),
+                    });
+                }
             }
 
             if (data.titulo === `${title.body}`) {
