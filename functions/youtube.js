@@ -62,15 +62,21 @@ const setIntervalYoutube = async (client, userId) => {
             });
 
             if (ultimoVideo.liveNow === true) {
-                await client.channels.cache.get("1009141517044166757").send({
-                    content: `<@209338137346834433> \n ¡ **${ultimoVideo.author}** esta en **directo** ! \n https://www.youtube.com/watch?v=${ultimoVideo.videoId} `,
-                    // embeds: [embed],
-                });
+                const msg = await client.channels.cache
+                    .get("1009141517044166757")
+                    .send({
+                        content: `<@209338137346834433> \n ¡ **${ultimoVideo.author}** esta en **directo** ! \n https://www.youtube.com/watch?v=${ultimoVideo.videoId} `,
+                        // embeds: [embed],
+                    });
+                await msg.react("✅");
             } else {
-                await client.channels.cache.get("1009141517044166757").send({
-                    content: `<@209338137346834433> \n ¡ **${ultimoVideo.author}** ha subido un **nuevo video** ! \n https://www.youtube.com/watch?v=${ultimoVideo.videoId} `,
-                    // embeds: [embed],
-                });
+                const msg = await client.channels.cache
+                    .get("1009141517044166757")
+                    .send({
+                        content: `<@209338137346834433> \n ¡ **${ultimoVideo.author}** ha subido un **nuevo video** ! \n https://www.youtube.com/watch?v=${ultimoVideo.videoId} `,
+                        // embeds: [embed],
+                    });
+                await msg.react("✅");
             }
 
             return await newData.save();
@@ -79,19 +85,21 @@ const setIntervalYoutube = async (client, userId) => {
                 return;
             } else {
                 if (ultimoVideo.liveNow === true) {
-                    await client.channels.cache
+                    const msg = await client.channels.cache
                         .get("1009141517044166757")
                         .send({
                             content: `<@209338137346834433> \n ¡ **${videos.items[0].author}** esta en **directo** ! \n https://www.youtube.com/watch?v=${videos.items[0].videoId} `,
                             embeds: [embed],
                         });
+                    await msg.react("✅");
                 } else {
-                    await client.channels.cache
+                    const msg = await client.channels.cache
                         .get("1009141517044166757")
                         .send({
                             content: `<@209338137346834433> \n ¡ **${videos.items[0].author}** ha subido un **nuevo video** ! \n https://www.youtube.com/watch?v=${videos.items[0].videoId} `,
                             embeds: [embed],
                         });
+                    await msg.react("✅");
                 }
 
                 await youtube.findOneAndUpdate(
