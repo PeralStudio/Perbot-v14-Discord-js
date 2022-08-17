@@ -75,6 +75,7 @@ import helpCommand from "./commands/help.js";
 
 import setIntervalTwitch from "./functions/twitch.js";
 import setIntervalYoutube from "./functions/youtube.js";
+import usersDiscord from "./Schemas/usersDiscord.js";
 
 const commands = [
     playCommand,
@@ -162,6 +163,7 @@ const client = new Client({
 
 const usersToAlertTwitch = [
     "illojuan",
+    "ibai",
     "viviendoenlacalle",
     "knekro",
     "eldelabarrapan",
@@ -214,6 +216,25 @@ client.on("guildMemberAdd", async (member) => {
         });
 
     client.channels.cache.get("1008006156712677433").send({ embeds: [embed] });
+
+    // AÑADIR USUARIO A LA BASE DE DATOS CUANDO INGRESA AL SERVIDOR
+    let dataUserDB = await usersDiscord.findOne({
+        id: member.user.id,
+        user: member.user.username,
+        discriminator: member.user.discriminator,
+    });
+
+    if (!dataUserDB) {
+        dataUserDB = new usersDiscord({
+            id: member.user.id,
+            user: member.user.username,
+            discriminator: member.user.discriminator,
+            date: new Date().toLocaleString("es-ES", {
+                timeZone: "Europe/Madrid",
+            }),
+        });
+        dataUserDB.save();
+    }
 });
 
 client.on("guildMemberRemove", async (member) => {
@@ -231,6 +252,18 @@ client.on("guildMemberRemove", async (member) => {
         });
 
     client.channels.cache.get("1008006156712677433").send({ embeds: [embed] });
+
+    // ELIMINAR USUARIO DE LA BASE DE DATOS CUANDO ABANDONA EL SERVIDOR
+
+    // let dataUserDB = await usersDiscord.findOne({
+    //     id: member.user.id,
+    //     user: member.user.username,
+    //     discriminator: member.user.discriminator,
+    // });
+
+    // if (dataUserDB) {
+    //     dataUserDB.remove();
+    // }
 });
 
 const player = new Player(client);
