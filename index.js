@@ -187,7 +187,11 @@ const usersToAlertYoutube = [
 ];
 
 client.on("ready", async () => {
-    console.log(`Bot conectado como ${client.user.tag}!`);
+    console.log(
+        `Bot conectado como ${client.user.tag}! (${moment(new Date()).format(
+            "HH:mm:ss"
+        )})`
+    );
     client.user.setPresence({
         activities: [{ name: `Achant | /help`, type: ActivityType.Playing }],
         status: "online",
