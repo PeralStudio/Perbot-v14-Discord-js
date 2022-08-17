@@ -194,7 +194,7 @@ client.on("ready", async () => {
         )})`
     );
     client.user.setPresence({
-        activities: [{ name: `Achant | /help`, type: ActivityType.Playing }],
+        activities: [{ name: `el Fary | /help`, type: ActivityType.Listening }],
         status: "online",
     });
 
