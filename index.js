@@ -176,6 +176,7 @@ const usersToAlertTwitch = [
 ];
 const usersToAlertYoutube = [
     "Willyrex",
+    "vegetta777",
     "xFaRgAnxYTube",
     "RideMeFive",
     "esttikSP",
