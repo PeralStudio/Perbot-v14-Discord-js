@@ -81,11 +81,10 @@ const setIntervalYoutube = async (client, userId) => {
                     content:
                         "<@209338137346834433> \n ¡ **`" +
                         ultimoVideo.author +
-                        "`** ha subido un `NUEVO VÍDEO` ! \n https://www.youtube.com/watch?v=" +
-                        ultimoVideo.videoId +
-                        "Duración: (" +
+                        "`** ha subido un `NUEVO VÍDEO` ! (" +
                         ultimoVideo.durationText +
-                        ") segundos",
+                        ")segundos \n https://www.youtube.com/watch?v=" +
+                        ultimoVideo.videoId,
                     // content: `<@209338137346834433> \n ¡ **${ultimoVideo.author}** ha subido un **nuevo video** ! \n https://www.youtube.com/watch?v=${ultimoVideo.videoId}`,
                     // embeds: [embed],
                 });
@@ -137,11 +136,10 @@ const setIntervalYoutube = async (client, userId) => {
                             content:
                                 "<@209338137346834433> \n ¡ **`" +
                                 ultimoVideo.author +
-                                "`** ha subido un `NUEVO VÍDEO` ! \n https://www.youtube.com/watch?v=" +
-                                ultimoVideo.videoId +
-                                "Duración: (" +
+                                "`** ha subido un `NUEVO VÍDEO` ! (" +
                                 ultimoVideo.durationText +
-                                ") segundos",
+                                ")segundos ! \n https://www.youtube.com/watch?v=" +
+                                ultimoVideo.videoId,
                             // content: `<@209338137346834433> \n ¡ **${ultimoVideo.author}** ha subido un **nuevo video** ! \n https://www.youtube.com/watch?v=${ultimoVideo.videoId} `,
                             // embeds: [embed],
                         });
