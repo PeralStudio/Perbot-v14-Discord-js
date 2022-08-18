@@ -15,8 +15,6 @@ const setIntervalYoutube = async (client, userId) => {
         const channel = await getChannelInfo(payload, 0);
         const ultimoVideo = videos.items[0];
 
-        console.log(ultimoVideo);
-
         console.log(
             `Comprobando youtube ${userId} - (${new Date().toLocaleTimeString(
                 "es-ES",
@@ -63,7 +61,10 @@ const setIntervalYoutube = async (client, userId) => {
             });
 
             // FILTRO SI ES MENOR A 60 SEGUNDOS NO NOTIFICAR
-            if (ultimoVideo.lengthSeconds < 60) {
+            if (
+                ultimoVideo.lengthSeconds < 60 &&
+                ultimoVideo.liveNow === false
+            ) {
                 return;
             }
 
@@ -87,7 +88,10 @@ const setIntervalYoutube = async (client, userId) => {
                 return;
             } else {
                 // FILTRO SI ES MENOR A 60 SEGUNDOS NO NOTIFICAR
-                if (ultimoVideo.lengthSeconds < 60) {
+                if (
+                    ultimoVideo.lengthSeconds < 60 &&
+                    ultimoVideo.liveNow === false
+                ) {
                     console.log("Video menor a 60 segundos = short");
                     return;
                 }
