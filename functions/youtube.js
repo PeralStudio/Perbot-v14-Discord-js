@@ -26,7 +26,6 @@ const setIntervalYoutube = async (client, userId) => {
 
         let data = await youtube.findOne({
             user: ultimoVideo.authorId,
-            titulo: ultimoVideo.title,
         });
 
         // const embed = new EmbedBuilder()
@@ -61,43 +60,75 @@ const setIntervalYoutube = async (client, userId) => {
                 }),
             });
 
+            // FILTRO SI ES MENOR A 60 SEGUNDOS NO NOTIFICAR
+            if (ultimoVideo.lengthSeconds < 60) {
+                return;
+            }
+
             if (ultimoVideo.liveNow === true) {
                 await client.channels.cache.get("1009141517044166757").send({
                     content: `<@209338137346834433> \n ¡ **${ultimoVideo.author}** esta en **directo** ! \n https://www.youtube.com/watch?v=${ultimoVideo.videoId} `,
                     // embeds: [embed],
                 });
+
+                await newData.save();
             } else {
                 await client.channels.cache.get("1009141517044166757").send({
                     content: `<@209338137346834433> \n ¡ **${ultimoVideo.author}** ha subido un **nuevo video** ! \n https://www.youtube.com/watch?v=${ultimoVideo.videoId} `,
                     // embeds: [embed],
                 });
-            }
 
-            return await newData.save();
+                await newData.save();
+            }
         } else {
             if (data.titulo === ultimoVideo.title) {
                 return;
             } else {
+                // FILTRO SI ES MENOR A 60 SEGUNDOS NO NOTIFICAR
+                if (ultimoVideo.lengthSeconds < 60) {
+                    console.log("Video menor a 60 segundos = short");
+                    return;
+                }
+
                 if (ultimoVideo.liveNow === true) {
                     await client.channels.cache
                         .get("1009141517044166757")
                         .send({
-                            content: `<@209338137346834433> \n ¡ **${videos.items[0].author}** esta en **directo** ! \n https://www.youtube.com/watch?v=${videos.items[0].videoId} `,
-                            embeds: [embed],
+                            content: `<@209338137346834433> \n ¡ **${ultimoVideo.author}** esta en **directo** ! \n https://www.youtube.com/watch?v=${ultimoVideo.videoId} `,
+                            // embeds: [embed],
                         });
+
+                    await youtube.findOneAndUpdate(
+                        {
+                            user: ultimoVideo.authorId,
+                        },
+                        {
+                            titulo: ultimoVideo.title,
+                            date: new Date().toLocaleString("es-ES", {
+                                timeZone: "Europe/Madrid",
+                            }),
+                        }
+                    );
                 } else {
                     await client.channels.cache
                         .get("1009141517044166757")
                         .send({
-                            content: `<@209338137346834433> \n ¡ **${videos.items[0].author}** ha subido un **nuevo video** ! \n https://www.youtube.com/watch?v=${videos.items[0].videoId} `,
-                            embeds: [embed],
+                            content: `<@209338137346834433> \n ¡ **${ultimoVideo.author}** ha subido un **nuevo video** ! \n https://www.youtube.com/watch?v=${ultimoVideo.videoId} `,
+                            // embeds: [embed],
                         });
-                }
 
-                await youtube.findOneAndUpdate(
-                    { user: videos.items[0].authorId },
-                    { titulo: videos.items[0].title }
-                );
+                    await youtube.findOneAndUpdate(
+                        {
+                            user: ultimoVideo.authorId,
+                        },
+                        {
+                            titulo: ultimoVideo.title,
+                            date: new Date().toLocaleString("es-ES", {
+                                timeZone: "Europe/Madrid",
+                            }),
+                        }
+                    );
+                }
             }
         }
     }, 240000);
