@@ -73,7 +73,7 @@ const setIntervalYoutube = async (client, userId) => {
                     content:
                         "<@209338137346834433> \n ¡ **`" +
                         ultimoVideo.author +
-                        "`** esta en **directo** ! \n https://www.youtube.com/watch?v=" +
+                        "`** esta en 🔴 `**directo**` ! \n https://www.youtube.com/watch?v=" +
                         ultimoVideo.videoId,
                     // content: `<@209338137346834433> \n ¡ **${ultimoVideo.author}** esta en **directo** ! \n https://www.youtube.com/watch?v=${ultimoVideo.videoId} `,
                     // embeds: [embed],
@@ -85,7 +85,7 @@ const setIntervalYoutube = async (client, userId) => {
                     content:
                         "<@209338137346834433> \n ¡ **`" +
                         ultimoVideo.author +
-                        "`** ha subido un **nuevo video** ! \n https://www.youtube.com/watch?v=" +
+                        "`** ha subido un `**nuevo video**` ! \n https://www.youtube.com/watch?v=" +
                         ultimoVideo.videoId,
                     // content: `<@209338137346834433> \n ¡ **${ultimoVideo.author}** ha subido un **nuevo video** ! \n https://www.youtube.com/watch?v=${ultimoVideo.videoId}`,
                     // embeds: [embed],
@@ -113,7 +113,7 @@ const setIntervalYoutube = async (client, userId) => {
                             content:
                                 "<@209338137346834433> \n ¡ **`" +
                                 ultimoVideo.author +
-                                "`** esta en **directo** ! \n https://www.youtube.com/watch?v=" +
+                                "`** esta en 🔴 `**directo**` ! \n https://www.youtube.com/watch?v=" +
                                 ultimoVideo.videoId,
                             // content: `<@209338137346834433> \n ¡ **${ultimoVideo.author}** esta en **directo** ! \n https://www.youtube.com/watch?v=${ultimoVideo.videoId} `,
                             // embeds: [embed],
@@ -137,7 +137,7 @@ const setIntervalYoutube = async (client, userId) => {
                             content:
                                 "<@209338137346834433> \n ¡ **`" +
                                 ultimoVideo.author +
-                                "`** ha subido un **nuevo video** ! \n https://www.youtube.com/watch?v=" +
+                                "`** ha subido un `**nuevo video**` ! \n https://www.youtube.com/watch?v=" +
                                 ultimoVideo.videoId,
                             // content: `<@209338137346834433> \n ¡ **${ultimoVideo.author}** ha subido un **nuevo video** ! \n https://www.youtube.com/watch?v=${ultimoVideo.videoId} `,
                             // embeds: [embed],
