@@ -81,7 +81,7 @@ const setIntervalYoutube = async (client, userId) => {
                     content:
                         "<@209338137346834433> \n ¡ **`" +
                         ultimoVideo.author +
-                        "`** ha subido un `NUEVO VÍDEO` ! (" +
+                        "`** ha subido un `NUEVO VÍDEO` ! Duración: (" +
                         ultimoVideo.durationText +
                         ") \n https://www.youtube.com/watch?v=" +
                         ultimoVideo.videoId,
@@ -136,7 +136,7 @@ const setIntervalYoutube = async (client, userId) => {
                             content:
                                 "<@209338137346834433> \n ¡ **`" +
                                 ultimoVideo.author +
-                                "`** ha subido un `NUEVO VÍDEO` ! (" +
+                                "`** ha subido un `NUEVO VÍDEO` ! Duración: (" +
                                 ultimoVideo.durationText +
                                 ") \n https://www.youtube.com/watch?v=" +
                                 ultimoVideo.videoId,
