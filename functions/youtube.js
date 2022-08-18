@@ -70,14 +70,24 @@ const setIntervalYoutube = async (client, userId) => {
 
             if (ultimoVideo.liveNow === true) {
                 await client.channels.cache.get("1009141517044166757").send({
-                    content: `<@209338137346834433> \n ¡ **${ultimoVideo.author}** esta en **directo** ! \n https://www.youtube.com/watch?v=${ultimoVideo.videoId} `,
+                    content:
+                        "<@209338137346834433> \n ¡ **`" +
+                        ultimoVideo.author +
+                        "`** esta en **directo** ! \n https://www.youtube.com/watch?v=" +
+                        ultimoVideo.videoId,
+                    // content: `<@209338137346834433> \n ¡ **${ultimoVideo.author}** esta en **directo** ! \n https://www.youtube.com/watch?v=${ultimoVideo.videoId} `,
                     // embeds: [embed],
                 });
 
                 await newData.save();
             } else {
                 await client.channels.cache.get("1009141517044166757").send({
-                    content: `<@209338137346834433> \n ¡ **${ultimoVideo.author}** ha subido un **nuevo video** ! \n https://www.youtube.com/watch?v=${ultimoVideo.videoId} `,
+                    content:
+                        "<@209338137346834433> \n ¡ **`" +
+                        ultimoVideo.author +
+                        "`** ha subido un **nuevo video** ! \n https://www.youtube.com/watch?v=" +
+                        ultimoVideo.videoId,
+                    // content: `<@209338137346834433> \n ¡ **${ultimoVideo.author}** ha subido un **nuevo video** ! \n https://www.youtube.com/watch?v=${ultimoVideo.videoId}`,
                     // embeds: [embed],
                 });
 
@@ -87,7 +97,7 @@ const setIntervalYoutube = async (client, userId) => {
             if (data.titulo === ultimoVideo.title) {
                 return;
             } else {
-                // FILTRO SI ES MENOR A 60 SEGUNDOS NO NOTIFICAR
+                // FILTRO SI ES MENOR A 60 SEGUNDOS Y NO ES ¡DIRECTO! NO NOTIFICAR
                 if (
                     ultimoVideo.lengthSeconds < 60 &&
                     ultimoVideo.liveNow === false
@@ -100,7 +110,12 @@ const setIntervalYoutube = async (client, userId) => {
                     await client.channels.cache
                         .get("1009141517044166757")
                         .send({
-                            content: `<@209338137346834433> \n ¡ **${ultimoVideo.author}** esta en **directo** ! \n https://www.youtube.com/watch?v=${ultimoVideo.videoId} `,
+                            content:
+                                "<@209338137346834433> \n ¡ **`" +
+                                ultimoVideo.author +
+                                "`** esta en **directo** ! \n https://www.youtube.com/watch?v=" +
+                                ultimoVideo.videoId,
+                            // content: `<@209338137346834433> \n ¡ **${ultimoVideo.author}** esta en **directo** ! \n https://www.youtube.com/watch?v=${ultimoVideo.videoId} `,
                             // embeds: [embed],
                         });
 
@@ -119,7 +134,12 @@ const setIntervalYoutube = async (client, userId) => {
                     await client.channels.cache
                         .get("1009141517044166757")
                         .send({
-                            content: `<@209338137346834433> \n ¡ **${ultimoVideo.author}** ha subido un **nuevo video** ! \n https://www.youtube.com/watch?v=${ultimoVideo.videoId} `,
+                            content:
+                                "<@209338137346834433> \n ¡ **`" +
+                                ultimoVideo.author +
+                                "`** ha subido un **nuevo video** ! \n https://www.youtube.com/watch?v=" +
+                                ultimoVideo.videoId,
+                            // content: `<@209338137346834433> \n ¡ **${ultimoVideo.author}** ha subido un **nuevo video** ! \n https://www.youtube.com/watch?v=${ultimoVideo.videoId} `,
                             // embeds: [embed],
                         });
 
