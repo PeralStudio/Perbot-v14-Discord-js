@@ -26,7 +26,6 @@ const setIntervalYoutube = async (client, userId) => {
 
         let data = await youtube.findOne({
             user: ultimoVideo.authorId,
-            titulo: ultimoVideo.title,
         });
 
         // const embed = new EmbedBuilder()
