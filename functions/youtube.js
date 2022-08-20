@@ -74,7 +74,7 @@ const setIntervalYoutube = async (client, userId) => {
                 await newData.save();
             } else {
                 // FILTRO SI ES MENOR A 60 SEGUNDOS NO NOTIFICAR
-                if (ultimoVideo.lengthSeconds < 60) {
+                if (ultimoVideo.lengthSeconds < 120) {
                     return;
                 }
                 await client.channels.cache.get("1009141517044166757").send({
@@ -96,7 +96,7 @@ const setIntervalYoutube = async (client, userId) => {
                 return;
             } else {
                 // FILTRO SI ES MENOR A 60 SEGUNDOS Y NO ES ¡DIRECTO! NO NOTIFICAR
-                if (ultimoVideo.lengthSeconds < 60) {
+                if (ultimoVideo.lengthSeconds < 120) {
                     console.log("Video menor a 60 segundos = short");
                     return;
                 }
@@ -127,7 +127,7 @@ const setIntervalYoutube = async (client, userId) => {
                     );
                 } else {
                     // FILTRO SI ES MENOR A 60 SEGUNDOS NO NOTIFICAR
-                    if (ultimoVideo.lengthSeconds < 60) {
+                    if (ultimoVideo.lengthSeconds < 120) {
                         return;
                     }
                     await client.channels.cache
