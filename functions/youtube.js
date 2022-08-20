@@ -74,9 +74,12 @@ const setIntervalYoutube = async (client, userId) => {
                 await newData.save();
             } else {
                 // FILTRO SI ES MENOR A 60 SEGUNDOS NO NOTIFICAR
-                // if (ultimoVideo.lengthSeconds < 120) {
-                //     return;
-                // }
+                if (
+                    ultimoVideo.lengthSeconds < 120 &&
+                    ultimoVideo.liveNow === false
+                ) {
+                    return;
+                }
                 await client.channels.cache.get("1009141517044166757").send({
                     content:
                         "<@209338137346834433> \n ¡ **`" +
@@ -96,10 +99,13 @@ const setIntervalYoutube = async (client, userId) => {
                 return;
             } else {
                 // FILTRO SI ES MENOR A 60 SEGUNDOS Y NO ES ¡DIRECTO! NO NOTIFICAR
-                // if (ultimoVideo.lengthSeconds < 120) {
-                //     console.log("Video menor a 60 segundos = short");
-                //     return;
-                // }
+                if (
+                    ultimoVideo.lengthSeconds < 120 &&
+                    ultimoVideo.liveNow === false
+                ) {
+                    console.log("Video menor a 60 segundos = short");
+                    return;
+                }
 
                 if (ultimoVideo.liveNow === true) {
                     await client.channels.cache
@@ -127,9 +133,12 @@ const setIntervalYoutube = async (client, userId) => {
                     );
                 } else {
                     // FILTRO SI ES MENOR A 60 SEGUNDOS NO NOTIFICAR
-                    // if (ultimoVideo.lengthSeconds < 120) {
-                    //     return;
-                    // }
+                    if (
+                        ultimoVideo.lengthSeconds < 120 &&
+                        ultimoVideo.liveNow === false
+                    ) {
+                        return;
+                    }
                     await client.channels.cache
                         .get("1009141517044166757")
                         .send({
