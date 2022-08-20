@@ -152,7 +152,10 @@ const setIntervalTwitch = async (client, user) => {
 
             if (
                 data.titulo === `${title.body}` &&
-                parseInt(uptime.text[0]) > 0
+                data.date ===
+                    new Date().toLocaleString("es-ES", {
+                        timeZone: "Europe/Madrid",
+                    })
             ) {
                 return;
             }
