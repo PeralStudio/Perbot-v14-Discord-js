@@ -201,12 +201,12 @@ client.on("ready", async () => {
         status: "online",
     });
 
-    // for (const user of usersToAlertTwitch) {
-    //     setIntervalTwitch(client, user);
-    // }
-    // for (const user of usersToAlertYoutube) {
-    //     setIntervalYoutube(client, user);
-    // }
+    for (const user of usersToAlertTwitch) {
+        setIntervalTwitch(client, user);
+    }
+    for (const user of usersToAlertYoutube) {
+        setIntervalYoutube(client, user);
+    }
 });
 
 client.on("guildMemberAdd", async (member) => {
