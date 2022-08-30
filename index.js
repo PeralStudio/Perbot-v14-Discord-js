@@ -1003,9 +1003,8 @@ client.on("interactionCreate", async (interaction) => {
                     .setDescription(
                         `https://www.leagueoflegends.com/es-es/news/game-updates/patch-${patchVersionWithDash}-notes/`
                     )
-                    //todo -  averiguar como poner la url de la imagen con la version correspondiente
                     .setImage(
-                        `https://images.contentstack.io/v3/assets/blt731acb42bb3d1659/bltc6c68dd58a801e92/62fd87824461916e6c501fa4/082322_LOL_12_16_PatchNotes_v01.jpg`
+                        `https://images.contentstack.io/v3/assets/blt731acb42bb3d1659/bltc8855795f63b5551/62f2332d2a66d4760f0107af/LOL_${patchVersionWithDot}-PatchNotes-Infographic_1920x1080_TTan_v01_ES.jpg`
                     )
                     .setTimestamp()
                     .setFooter({
