@@ -192,9 +192,11 @@ const usersToAlertYoutube = [
 
 client.on("ready", async () => {
     console.log(
-        `Bot conectado como ${client.user.tag}! (${moment(new Date()).format(
-            "HH:mm:ss"
-        )})`
+        `Bot conectado como ${
+            client.user.tag
+        }! (${new Date().toLocaleTimeString("es-ES", {
+            timeZone: "Europe/Madrid",
+        })})`
     );
     client.user.setPresence({
         activities: [{ name: `el Fary | /help`, type: ActivityType.Listening }],
