@@ -8,6 +8,8 @@
 //     GUILD_ID,
 //     token,
 //     tmdbApi,
+//     email,
+//     gmailToken,
 // } = config;
 
 import {
@@ -23,6 +25,7 @@ import {
 import fetch from "node-fetch";
 import figlet from "figlet";
 import dayjs from "dayjs";
+import nodemailer from "nodemailer";
 
 import mongoose from "mongoose";
 
@@ -68,10 +71,11 @@ import serverinfoCommand from "./commands/serverinfo.js";
 import coronaCommand from "./commands/corona.js";
 import traducirCommand from "./commands/traducir.js";
 import pingCommand from "./commands/ping.js";
-import borrarCommand from "./commands/borrar.js";
-import enviarmdCommand from "./commands/enviarmd.js";
-import carteleracineCommand from "./commands/carteleracine.js";
 import helpCommand from "./commands/help.js";
+import carteleracineCommand from "./commands/carteleracine.js";
+import enviarmdCommand from "./commands/adminCommands/enviarmd.js";
+import borrarCommand from "./commands/adminCommands/borrar.js";
+import emailCommand from "./commands/adminCommands/email.js";
 
 import setIntervalTwitch from "./functions/twitch.js";
 import setIntervalYoutube from "./functions/youtube.js";
@@ -109,6 +113,7 @@ const commands = [
     enviarmdCommand,
     carteleracineCommand,
     helpCommand,
+    emailCommand,
 ];
 
 const versionbot = "PerBot v2.0 Peralstudio.com";
@@ -121,6 +126,8 @@ const {
     GUILD_ID,
     token,
     tmdbApi,
+    email,
+    gmailToken,
 } = process.env;
 
 mongoose
@@ -339,6 +346,79 @@ player.on("queueEnd", async (queue, track) => {
 
 client.on("interactionCreate", async (interaction) => {
     if (!interaction.isChatInputCommand()) return;
+
+    //COMANDO EMAIL
+    if (interaction.commandName === "email") {
+        if (interaction.user.id !== "209338137346834433") {
+            interaction.reply({
+                ephemeral: true,
+                embeds: [
+                    new EmbedBuilder()
+                        .setDescription(
+                            "⛔ No tienes permisos para enviar emails."
+                        )
+                        .setColor("#EA3939"),
+                ],
+            });
+            return;
+        }
+
+        const destinatario = interaction.options.get("destinatario").value;
+        const asunto = interaction.options.get("asunto").value;
+        const contenido = interaction.options.get("contenido").value;
+
+        var transporter = nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+                user: email,
+                pass: gmailToken,
+            },
+        });
+
+        var mailOptions = {
+            from: email,
+            to: destinatario,
+            subject: asunto,
+            text: contenido,
+        };
+
+        transporter.sendMail(mailOptions, async function (error, info) {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log("Email sent: " + info.response);
+                await interaction.reply({
+                    embeds: [
+                        new EmbedBuilder()
+                            .setTitle(`✅ Email enviado`)
+                            .addFields([
+                                {
+                                    name: "Destinatario",
+                                    value: destinatario,
+                                    inline: true,
+                                },
+                                {
+                                    name: "Asunto",
+                                    value: asunto,
+                                    inline: true,
+                                },
+                                {
+                                    name: "Contenido",
+                                    value: contenido,
+                                },
+                            ])
+                            .setColor("#EA3939")
+                            .setTimestamp()
+                            .setFooter({
+                                text: versionbot,
+                                iconURL: client.user.displayAvatarURL(),
+                            }),
+                    ],
+                    ephemeral: true,
+                });
+            }
+        });
+    }
 
     //COMANDO PLAY
     if (interaction.commandName === "play") {
@@ -2366,18 +2446,23 @@ client.on("interactionCreate", async (interaction) => {
                     inline: true,
                 },
                 {
+                    name: `*${prefix}ping*`,
+                    value: "`Ping del bot.`",
+                    inline: true,
+                },
+                {
                     name: `*${prefix}enviarmd + usuario*`,
-                    value: "`Enviar mensajes privados. (Admin)`",
+                    value: "`Enviar mensajes privados. (Admin/Mods)`",
                     inline: true,
                 },
                 {
                     name: `*${prefix}borrar + nº*`,
-                    value: "`Borrar mensajes. (Admin)`",
+                    value: "`Borrar mensajes. (Admin/Mods)`",
                     inline: true,
                 },
                 {
-                    name: `*${prefix}ping*`,
-                    value: "`Ping del bot.`",
+                    name: `*${prefix}email*`,
+                    value: "`Enviar email. (Admin)`",
                     inline: true,
                 }
             )
