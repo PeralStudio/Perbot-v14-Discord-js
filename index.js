@@ -26,6 +26,7 @@ import fetch from "node-fetch";
 import figlet from "figlet";
 import dayjs from "dayjs";
 import nodemailer from "nodemailer";
+import chalk from "chalk";
 
 import mongoose from "mongoose";
 
@@ -142,13 +143,15 @@ const rest = new REST({ version: "10" }).setToken(token);
 
 (async () => {
     try {
-        console.log("Started refreshing application (.) commands.");
+        console.log(chalk.blue("Started refreshing application (.) commands."));
 
         await rest.put(Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID), {
             body: commands,
         });
 
-        console.log("Successfully reloaded application (.) commands.");
+        console.log(
+            chalk.blue("Successfully reloaded application (.) commands.")
+        );
     } catch (error) {
         console.error(error);
     }
@@ -199,11 +202,13 @@ const usersToAlertYoutube = [
 
 client.on("ready", async () => {
     console.log(
-        `Bot conectado como ${
-            client.user.tag
-        }! (${new Date().toLocaleTimeString("es-ES", {
-            timeZone: "Europe/Madrid",
-        })})`
+        chalk.green(
+            `Bot conectado como ${
+                client.user.tag
+            }! (${new Date().toLocaleTimeString("es-ES", {
+                timeZone: "Europe/Madrid",
+            })})`
+        )
     );
 
     const statusArray = [
