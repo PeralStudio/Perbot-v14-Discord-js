@@ -367,57 +367,71 @@ client.on("interactionCreate", async (interaction) => {
         const asunto = interaction.options.get("asunto").value;
         const contenido = interaction.options.get("contenido").value;
 
-        var transporter = nodemailer.createTransport({
-            service: "gmail",
-            auth: {
-                user: email,
-                pass: gmailToken,
-            },
-        });
+        const validEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
 
-        var mailOptions = {
-            from: email,
-            to: destinatario,
-            subject: asunto,
-            text: contenido,
-        };
+        if (validEmail.test(destinatario)) {
+            var transporter = nodemailer.createTransport({
+                service: "gmail",
+                auth: {
+                    user: email,
+                    pass: gmailToken,
+                },
+            });
 
-        transporter.sendMail(mailOptions, async function (error, info) {
-            if (error) {
-                console.log(error);
-            } else {
-                console.log("Email sent: " + info.response);
-                await interaction.reply({
-                    embeds: [
-                        new EmbedBuilder()
-                            .setTitle(`✅ Email enviado`)
-                            .addFields([
-                                {
-                                    name: "Destinatario",
-                                    value: destinatario,
-                                    inline: true,
-                                },
-                                {
-                                    name: "Asunto",
-                                    value: asunto,
-                                    inline: true,
-                                },
-                                {
-                                    name: "Contenido",
-                                    value: contenido,
-                                },
-                            ])
-                            .setColor("#EA3939")
-                            .setTimestamp()
-                            .setFooter({
-                                text: versionbot,
-                                iconURL: client.user.displayAvatarURL(),
-                            }),
-                    ],
-                    ephemeral: true,
-                });
-            }
-        });
+            var mailOptions = {
+                from: email,
+                to: destinatario,
+                subject: asunto,
+                text: contenido,
+            };
+
+            transporter.sendMail(mailOptions, async function (error, info) {
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log("Email sent: " + info.response);
+                    await interaction.reply({
+                        embeds: [
+                            new EmbedBuilder()
+                                .setTitle(`✅ Email enviado`)
+                                .addFields([
+                                    {
+                                        name: "Destinatario",
+                                        value: destinatario,
+                                        inline: true,
+                                    },
+                                    {
+                                        name: "Asunto",
+                                        value: asunto,
+                                        inline: true,
+                                    },
+                                    {
+                                        name: "Contenido",
+                                        value: contenido,
+                                    },
+                                ])
+                                .setColor("#EA3939")
+                                .setTimestamp()
+                                .setFooter({
+                                    text: versionbot,
+                                    iconURL: client.user.displayAvatarURL(),
+                                }),
+                        ],
+                        ephemeral: true,
+                    });
+                }
+            });
+        } else {
+            interaction.reply({
+                ephemeral: true,
+                embeds: [
+                    new EmbedBuilder()
+                        .setDescription("❌ Introduce un email valido.")
+                        .setColor("#EA3939"),
+                ],
+            });
+            return;
+        }
     }
 
     //COMANDO PLAY
