@@ -294,20 +294,10 @@ client.on("ready", async () => {
         `https://www.leagueoflegends.com/es-es/news/game-updates/patch-${currentVersionWithDash}-notes/`,
         (err, res, html) => {
             if (!err && res.statusCode == 200) {
-                console.log("request ok");
-
                 const $ = cherio.load(html);
+                console.log("request ok", $("img")[6].attribs.src);
 
                 imgPatch = $("img")[6].attribs.src;
-
-                // console.log($("img")[6].attribs.src);
-
-                // $("img").each((index, image) => {
-                //     var img = $(image).attr("src");
-
-                //     // imgPatch.push(img);
-                //     console.log(img);
-                // });
             } else {
                 console.log("request failed");
             }
@@ -1186,7 +1176,6 @@ client.on("interactionCreate", async (interaction) => {
         const patchVersionWithDash = currentVersionPatch.replace(".", "-");
         const patchVersionWithDot = currentVersionPatch;
 
-        console.log(chalk.green(imgPatch));
         return interaction.reply({
             embeds: [
                 new EmbedBuilder()
