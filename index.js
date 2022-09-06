@@ -1178,7 +1178,7 @@ client.on("interactionCreate", async (interaction) => {
         return interaction.reply({
             embeds: [
                 new EmbedBuilder()
-                    .setColor("#ffffff")
+                    .setColor("#C28F2C")
                     .setTitle(
                         `🗒️ NOTAS DE LA VERSIÓN **${patchVersionWithDot}**`
                     )
