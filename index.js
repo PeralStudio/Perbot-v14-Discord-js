@@ -295,7 +295,7 @@ client.on("ready", async () => {
         (err, res, html) => {
             if (!err && res.statusCode == 200) {
                 const $ = cherio.load(html);
-                console.log("request ok", $("img")[6].attribs.src);
+                // console.log("request ok", $("img")[6].attribs.src);
 
                 imgPatch = $("img")[6].attribs.src;
             } else {
