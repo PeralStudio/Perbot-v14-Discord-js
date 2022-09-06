@@ -121,7 +121,7 @@ const commands = [
 ];
 
 let currentVersion;
-let imgPatch = [];
+let imgPatch;
 
 const versionbot = "PerBot v2.0 Peralstudio.com";
 const {
@@ -291,13 +291,12 @@ client.on("ready", async () => {
         .replace(".", "-");
 
     await request(
-        `https://www.leagueoflegends.com/es-es/news/game-updates/patch-12-15-notes/`,
+        `https://www.leagueoflegends.com/es-es/news/game-updates/patch-${currentVersionWithDash}-notes/`,
         (err, res, html) => {
             if (!err && res.statusCode == 200) {
                 const $ = cherio.load(html);
-                // console.log("request ok", $("img")[6].attribs.src);
-
-                imgPatch = $("img")[6].attribs.src;
+                // console.log("request ok", $(".cboxElement")[0]?.attribs?.href);
+                imgPatch = $(".cboxElement")[0]?.attribs?.href;
             } else {
                 console.log("request failed");
             }
