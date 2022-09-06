@@ -1186,7 +1186,7 @@ client.on("interactionCreate", async (interaction) => {
                         `https://www.leagueoflegends.com/es-es/news/game-updates/patch-${patchVersionWithDash}-notes/`
                     )
                     .setThumbnail(imgEzreal)
-                    .setImage(require("./assets/images/ezreal-logo.jpg"))
+                    .setImage("https://peralstudio.com/images/ezreal-logo.png")
                     .setTimestamp()
                     .setFooter({
                         text: versionbot,
