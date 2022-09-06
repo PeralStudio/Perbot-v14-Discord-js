@@ -1141,18 +1141,18 @@ client.on("interactionCreate", async (interaction) => {
 
     //COMANDO VER ULTIMO PARCHE LOL
     if (interaction.commandName === "lolparche") {
-        let currentVersion;
+        let currentVersionPatch;
         await fetch(`https://ddragon.leagueoflegends.com/api/versions.json`)
             .then((res) => res.json())
             .then((version) => {
-                currentVersion = version[0].slice(0, -2);
+                currentVersionPatch = version[0].slice(0, -2);
             })
             .catch((err) => {
                 console.log(err);
             });
 
-        const patchVersionWithDash = currentVersion.replace(".", "-");
-        const patchVersionWithDot = currentVersion;
+        const patchVersionWithDash = currentVersionPatch.replace(".", "-");
+        const patchVersionWithDot = currentVersionPatch;
 
         return interaction.reply({
             embeds: [
@@ -1165,7 +1165,7 @@ client.on("interactionCreate", async (interaction) => {
                         `https://www.leagueoflegends.com/es-es/news/game-updates/patch-${patchVersionWithDash}-notes/`
                     )
                     .setImage(
-                        `https://images.contentstack.io/v3/assets/blt731acb42bb3d1659/bltc8855795f63b5551/62f2332d2a66d4760f0107af/LOL_${patchVersionWithDot}-PatchNotes-Infographic_1920x1080_TTan_v01_ES.jpg`
+                        `https://images.contentstack.io/v3/assets/blt731acb42bb3d1659/blt77cf9b2469b28021/6304ae325409c27e6b21830d/LOL_12.16-PatchNotes-Infographic_1920x1080_TTan_v01_ES.jpg`
                     )
                     .setTimestamp()
                     .setFooter({
