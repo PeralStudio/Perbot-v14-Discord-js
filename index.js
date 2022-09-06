@@ -291,7 +291,7 @@ client.on("ready", async () => {
         .replace(".", "-");
 
     await request(
-        `https://www.leagueoflegends.com/es-es/news/game-updates/patch-${currentVersionWithDash}-notes/`,
+        `https://www.leagueoflegends.com/es-es/news/game-updates/patch-12-15-notes/`,
         (err, res, html) => {
             if (!err && res.statusCode == 200) {
                 const $ = cherio.load(html);
