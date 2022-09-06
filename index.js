@@ -46,8 +46,6 @@ import moment from "moment";
 
 import { Player } from "discord-player";
 
-import imgEzreal from "./assets/images/ezreal-logo.jpg";
-
 //Commands
 import playCommand from "./commands/musicCommands/play.js";
 import pauseCommand from "./commands/musicCommands/pause.js";
@@ -124,6 +122,7 @@ const commands = [
 
 let currentVersion;
 let imgPatch;
+const imgEzreal = "./assets/images/ezreal-logo.jpg";
 
 const versionbot = "PerBot v2.0 Peralstudio.com";
 const {
