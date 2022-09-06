@@ -46,7 +46,7 @@ import moment from "moment";
 
 import { Player } from "discord-player";
 
-import imgEzreal from "./assets/images/ezreal-logo.png";
+import imgEzreal from "./assets/images/ezreal-logo.jpg";
 
 //Commands
 import playCommand from "./commands/musicCommands/play.js";
