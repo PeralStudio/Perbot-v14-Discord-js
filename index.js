@@ -37,6 +37,9 @@ import akinator from "discord.js-akinator";
 import translate from "node-google-translate-skidz";
 import YouTube from "youtube-node";
 
+// import cherio from "cherio";
+// import request from "request";
+
 import moment from "moment";
 // require("moment-duration-format")
 // require("moment/min/locales.min")
@@ -118,6 +121,7 @@ const commands = [
 ];
 
 let currentVersion;
+// let imgPatch = [];
 
 const versionbot = "PerBot v2.0 Peralstudio.com";
 const {
@@ -273,7 +277,7 @@ client.on("ready", async () => {
         setIntervalYoutube(client, user);
     }
 
-    fetch(`https://ddragon.leagueoflegends.com/api/versions.json`)
+    await fetch(`https://ddragon.leagueoflegends.com/api/versions.json`)
         .then((res) => res.json())
         .then((version) => {
             currentVersion = version[0];
@@ -281,6 +285,30 @@ client.on("ready", async () => {
         .catch((err) => {
             console.log(err);
         });
+
+    //     const currentVersionWithDash = currentVersion
+    //         .slice(0, -2)
+    //         .replace(".", "-");
+
+    //     await request(
+    //         `https://www.leagueoflegends.com/es-es/news/game-updates/patch-${currentVersionWithDash}-notes/`,
+    //         (err, res, html) => {
+    //             if (!err && res.statusCode == 200) {
+    //                 console.log("request ok");
+
+    //                 const $ = cherio.load(html);
+
+    //                 $("img").each((index, image) => {
+    //                     var img = $(image).attr("src");
+
+    //                     imgPatch.push(img);
+    //                     console.log(imgPatch[0][6]);
+    //                 });
+    //             } else {
+    //                 console.log("request failed");
+    //             }
+    //         }
+    //     );
 });
 
 client.on("guildMemberAdd", async (member) => {
