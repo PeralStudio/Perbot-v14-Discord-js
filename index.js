@@ -122,7 +122,6 @@ const commands = [
 
 let currentVersion;
 let imgPatch;
-const imgEzreal = "./assets/images/ezreal-logo.jpg";
 
 const versionbot = "PerBot v2.0 Peralstudio.com";
 const {
@@ -1187,7 +1186,7 @@ client.on("interactionCreate", async (interaction) => {
                         `https://www.leagueoflegends.com/es-es/news/game-updates/patch-${patchVersionWithDash}-notes/`
                     )
                     .setThumbnail(imgEzreal)
-                    .setImage(imgPatch)
+                    .setImage(require("./assets/images/ezreal-logo.jpg"))
                     .setTimestamp()
                     .setFooter({
                         text: versionbot,
