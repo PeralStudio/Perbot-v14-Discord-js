@@ -1186,6 +1186,7 @@ client.on("interactionCreate", async (interaction) => {
         const patchVersionWithDash = currentVersionPatch.replace(".", "-");
         const patchVersionWithDot = currentVersionPatch;
 
+        console.log(chalk.green(imgPatch));
         return interaction.reply({
             embeds: [
                 new EmbedBuilder()
