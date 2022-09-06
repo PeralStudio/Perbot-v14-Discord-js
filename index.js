@@ -1458,17 +1458,19 @@ client.on("interactionCreate", async (interaction) => {
                     //     iconURL: userAvatar,
                     // })
                     .setTitle(
-                        ` **${data.main.temp}\u00B0C** en ${data.name}, ${data.sys.country}`
+                        ` **${data.main.temp.toFixed(1)}\u00B0C** en ${
+                            data.name
+                        }, ${data.sys.country}`
                     )
                     .addFields(
                         {
                             name: "Máxima",
-                            value: `${data.main.temp_max}\u00B0C`,
+                            value: `${data.main.temp_max.toFixed(1)}\u00B0C`,
                             inline: true,
                         },
                         {
                             name: "Mínima",
-                            value: `${data.main.temp_min}\u00B0C`,
+                            value: `${data.main.temp_min.toFixed(1)}\u00B0C`,
                             inline: true,
                         },
                         {
@@ -1492,13 +1494,6 @@ client.on("interactionCreate", async (interaction) => {
                             inline: true,
                         }
                     )
-
-                    // .addField(`Máxima:`, `${data.main.temp_max}\u00B0C`, true)
-                    // .addField(`Míninima:`, `${data.main.temp_min}\u00B0C`, true)
-                    // .addField(`Humedad:`, `${data.main.humidity} %`, true)
-                    // .addField(`Viento:`, `${data.wind.speed} m/s`, true)
-                    // .addField(`Presión:`, `${data.main.pressure} hpa`, true)
-                    // .addField(`Nubes:`, `${data.weather[0].description}`, true)
                     .setThumbnail(
                         `http://openweathermap.org/img/w/${data.weather[0].icon}.png`
                     )
