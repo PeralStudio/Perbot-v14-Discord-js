@@ -37,8 +37,8 @@ import akinator from "discord.js-akinator";
 import translate from "node-google-translate-skidz";
 import YouTube from "youtube-node";
 
-// import cherio from "cherio";
-// import request from "request";
+import cherio from "cherio";
+import request from "request";
 
 import moment from "moment";
 // require("moment-duration-format")
@@ -121,7 +121,7 @@ const commands = [
 ];
 
 let currentVersion;
-// let imgPatch = [];
+let imgPatch = [];
 
 const versionbot = "PerBot v2.0 Peralstudio.com";
 const {
@@ -286,29 +286,33 @@ client.on("ready", async () => {
             console.log(err);
         });
 
-    //     const currentVersionWithDash = currentVersion
-    //         .slice(0, -2)
-    //         .replace(".", "-");
+    const currentVersionWithDash = currentVersion
+        .slice(0, -2)
+        .replace(".", "-");
 
-    //     await request(
-    //         `https://www.leagueoflegends.com/es-es/news/game-updates/patch-${currentVersionWithDash}-notes/`,
-    //         (err, res, html) => {
-    //             if (!err && res.statusCode == 200) {
-    //                 console.log("request ok");
+    await request(
+        `https://www.leagueoflegends.com/es-es/news/game-updates/patch-${currentVersionWithDash}-notes/`,
+        (err, res, html) => {
+            if (!err && res.statusCode == 200) {
+                console.log("request ok");
 
-    //                 const $ = cherio.load(html);
+                const $ = cherio.load(html);
 
-    //                 $("img").each((index, image) => {
-    //                     var img = $(image).attr("src");
+                imgPatch = $("img")[6].attribs.src;
 
-    //                     imgPatch.push(img);
-    //                     console.log(imgPatch[0][6]);
-    //                 });
-    //             } else {
-    //                 console.log("request failed");
-    //             }
-    //         }
-    //     );
+                // console.log($("img")[6].attribs.src);
+
+                // $("img").each((index, image) => {
+                //     var img = $(image).attr("src");
+
+                //     // imgPatch.push(img);
+                //     console.log(img);
+                // });
+            } else {
+                console.log("request failed");
+            }
+        }
+    );
 });
 
 client.on("guildMemberAdd", async (member) => {
@@ -1192,9 +1196,7 @@ client.on("interactionCreate", async (interaction) => {
                     .setDescription(
                         `https://www.leagueoflegends.com/es-es/news/game-updates/patch-${patchVersionWithDash}-notes/`
                     )
-                    .setImage(
-                        `https://images.contentstack.io/v3/assets/blt731acb42bb3d1659/blt77cf9b2469b28021/6304ae325409c27e6b21830d/LOL_12.16-PatchNotes-Infographic_1920x1080_TTan_v01_ES.jpg`
-                    )
+                    .setImage(imgPatch)
                     .setTimestamp()
                     .setFooter({
                         text: versionbot,
