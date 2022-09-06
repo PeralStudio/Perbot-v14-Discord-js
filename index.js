@@ -1178,7 +1178,7 @@ client.on("interactionCreate", async (interaction) => {
         return interaction.reply({
             embeds: [
                 new EmbedBuilder()
-                    .setColor("#AA70F8")
+                    .setColor("#C28F2C")
                     .setTitle(
                         `🗒️ NOTAS DE LA VERSIÓN **${patchVersionWithDot}**`
                     )
@@ -1211,7 +1211,7 @@ client.on("interactionCreate", async (interaction) => {
         })
             .then((post) => {
                 const embed = new EmbedBuilder()
-                    .setColor("#ffffff")
+                    .setColor("#AA70F8 ")
                     .setTitle(post.title)
                     .setImage(post.url)
                     .setFooter({
@@ -1222,7 +1222,7 @@ client.on("interactionCreate", async (interaction) => {
                     return interaction.reply({
                         embeds: [
                             new EmbedBuilder()
-                                .setColor("#ffffff")
+                                .setColor("#C28F2C ")
                                 .setTitle("No hay memes disponibles")
                                 .setDescription(
                                     "Por favor, intentalo de nuevo mas tarde."
@@ -1349,7 +1349,7 @@ client.on("interactionCreate", async (interaction) => {
             });
 
         const embed = new EmbedBuilder()
-            .setColor("#ffffff")
+            .setColor("#C28F2C")
             .setDescription(`<@${interaction.options.get("usuario").value}>`)
             .setImage(userAvatar)
             .setTimestamp()
@@ -1368,7 +1368,7 @@ client.on("interactionCreate", async (interaction) => {
                     interaction.options.get("usuario").user.id
                 }> esta ardiendo en pasión ! :hot_face: :fire::flame:`
             )
-            .setColor("#ffffff")
+            .setColor("#AA70F8")
             .setImage(
                 "https://pa1.narvii.com/6175/9cc89d4baca1ce2779798b5930ab3ddf832a0eee_00.gif"
             )
@@ -1429,7 +1429,7 @@ client.on("interactionCreate", async (interaction) => {
                     inline: true,
                 }
             )
-            .setColor("#ffffff")
+            .setColor("#C28F2C")
             .setTimestamp()
             .setFooter({
                 text: versionbot,
@@ -1449,7 +1449,7 @@ client.on("interactionCreate", async (interaction) => {
             .then((data) => {
                 const embedTiempo = new EmbedBuilder()
 
-                    .setColor("#ffffff")
+                    .setColor("#AA70F8")
                     // .setAuthor({
                     //     name:
                     //         interaction.options.get("ciudad").user.username +
@@ -1742,7 +1742,7 @@ client.on("interactionCreate", async (interaction) => {
                 },
                 { name: "\u200B", value: "\u200B" }
             )
-            .setColor("#ffffff")
+            .setColor("#AA70F8")
             .setTimestamp()
             .setFooter({
                 text: versionbot,
@@ -1778,7 +1778,7 @@ client.on("interactionCreate", async (interaction) => {
                         }
                     )
                     // .setFooter(`Encuesta realizada por: ${message.author.tag}`)
-                    .setColor("#ffffff");
+                    .setColor("#C28F2C");
 
                 interaction.reply({ embeds: [embedTraductor] });
             }
@@ -2391,7 +2391,7 @@ client.on("interactionCreate", async (interaction) => {
     //COMANDO HELP
     if (interaction.commandName === "help") {
         const embed = new EmbedBuilder()
-            .setColor("#ffffff")
+            .setColor("#C28F2C")
             .setThumbnail(client.user.displayAvatarURL())
             .setTitle(
                 `COMANDOS DISPONIBLES *${client.user.username.toUpperCase()}* \n`
