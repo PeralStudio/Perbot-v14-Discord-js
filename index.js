@@ -117,6 +117,8 @@ const commands = [
     emailCommand,
 ];
 
+let currentVersion;
+
 const versionbot = "PerBot v2.0 Peralstudio.com";
 const {
     prefix,
@@ -270,6 +272,15 @@ client.on("ready", async () => {
     for (const user of usersToAlertYoutube) {
         setIntervalYoutube(client, user);
     }
+
+    fetch(`https://ddragon.leagueoflegends.com/api/versions.json`)
+        .then((res) => res.json())
+        .then((version) => {
+            currentVersion = version[0];
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 });
 
 client.on("guildMemberAdd", async (member) => {
@@ -924,7 +935,7 @@ client.on("interactionCreate", async (interaction) => {
 
                                 .setAuthor({
                                     name: `${summonerName}`,
-                                    iconURL: `https://ddragon.leagueoflegends.com/cdn/12.14.1/img/profileicon/${datasumm.profileIconId}.png`,
+                                    iconURL: `https://ddragon.leagueoflegends.com/cdn/${currentVersion}/img/profileicon/${datasumm.profileIconId}.png`,
                                 })
                                 .addFields(
                                     // { name: "\u200B", value: "\u200B" },
@@ -973,7 +984,7 @@ client.on("interactionCreate", async (interaction) => {
                                     { name: "\u200B", value: "\u200B" }
                                 )
                                 .setThumbnail(
-                                    `https://ddragon.leagueoflegends.com/cdn/12.14.1/img/profileicon/${datasumm.profileIconId}.png`
+                                    `https://ddragon.leagueoflegends.com/cdn/${currentVersion}/img/profileicon/${datasumm.profileIconId}.png`
                                 )
                                 .setTimestamp()
                                 .setColor("#0099ff")
@@ -990,7 +1001,7 @@ client.on("interactionCreate", async (interaction) => {
 
                                 .setAuthor({
                                     name: `${data[0].summonerName}`,
-                                    iconURL: `https://ddragon.leagueoflegends.com/cdn/12.14.1/img/profileicon/${datasumm.profileIconId}.png`,
+                                    iconURL: `https://ddragon.leagueoflegends.com/cdn/${currentVersion}/img/profileicon/${datasumm.profileIconId}.png`,
                                 })
                                 .addFields(
                                     // { name: "\u200B", value: "\u200B" },
@@ -1041,7 +1052,7 @@ client.on("interactionCreate", async (interaction) => {
                                     { name: "\u200B", value: "\u200B" }
                                 )
                                 .setThumbnail(
-                                    `https://ddragon.leagueoflegends.com/cdn/12.14.1/img/profileicon/${datasumm.profileIconId}.png`
+                                    `https://ddragon.leagueoflegends.com/cdn/${currentVersion}/img/profileicon/${datasumm.profileIconId}.png`
                                 )
                                 .setTimestamp()
                                 .setColor("#0099ff")
@@ -1053,7 +1064,7 @@ client.on("interactionCreate", async (interaction) => {
                             embed2 = new EmbedBuilder()
                                 .setAuthor({
                                     name: `${data[1].summonerName}`,
-                                    iconURL: `https://ddragon.leagueoflegends.com/cdn/12.14.1/img/profileicon/${datasumm.profileIconId}.png`,
+                                    iconURL: `https://ddragon.leagueoflegends.com/cdn/${currentVersion}/img/profileicon/${datasumm.profileIconId}.png`,
                                 })
                                 .addFields(
                                     // { name: "\u200B", value: "\u200B" },
@@ -1107,7 +1118,7 @@ client.on("interactionCreate", async (interaction) => {
                                     { name: "\u200B", value: "\u200B" }
                                 )
                                 .setThumbnail(
-                                    `https://ddragon.leagueoflegends.com/cdn/12.14.1/img/profileicon/${datasumm.profileIconId}.png`
+                                    `https://ddragon.leagueoflegends.com/cdn/${currentVersion}/img/profileicon/${datasumm.profileIconId}.png`
                                 )
                                 .setTimestamp()
 
