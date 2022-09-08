@@ -1181,7 +1181,7 @@ client.on("interactionCreate", async (interaction) => {
                                     `https://www.leagueoflegends.com/es-es/news/game-updates/patch-${patchVersionWithDash}-notes/`
                                 )
                                 .setThumbnail(
-                                    "https://peralstudio.com/images/lol-logo.jpg"
+                                    "https://peralstudio.com/images/lol1-logo.jpg"
                                 )
                                 .setImage(imgPathForEmbed)
                                 .setTimestamp()
