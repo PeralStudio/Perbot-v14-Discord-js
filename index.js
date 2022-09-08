@@ -276,32 +276,6 @@ client.on("ready", async () => {
     for (const user of usersToAlertYoutube) {
         setIntervalYoutube(client, user);
     }
-
-    await fetch(`https://ddragon.leagueoflegends.com/api/versions.json`)
-        .then((res) => res.json())
-        .then((version) => {
-            currentVersion = version[0];
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-
-    const currentVersionWithDash = currentVersion
-        .slice(0, -2)
-        .replace(".", "-");
-
-    await request(
-        `https://www.leagueoflegends.com/es-es/news/game-updates/patch-${currentVersionWithDash}-notes/`,
-        (err, res, html) => {
-            if (!err && res.statusCode == 200) {
-                const $ = cherio.load(html);
-                // console.log("request ok", $(".cboxElement")[0]?.attribs?.href);
-                imgPatch = $(".cboxElement")[0]?.attribs?.href;
-            } else {
-                console.log("request failed");
-            }
-        }
-    );
 });
 
 client.on("guildMemberAdd", async (member) => {
@@ -1174,6 +1148,33 @@ client.on("interactionCreate", async (interaction) => {
 
         const patchVersionWithDash = currentVersionPatch.replace(".", "-");
         const patchVersionWithDot = currentVersionPatch;
+
+        //!todo PONER ESTE CODIGO EN LOLPARCHE, YA QUE AQUI SE RJECUTA AL INICIAR EL BOT, SI NO SE INICIA NO DE ACTUALIZa
+        await fetch(`https://ddragon.leagueoflegends.com/api/versions.json`)
+            .then((res) => res.json())
+            .then((version) => {
+                currentVersion = version[0];
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+
+        const currentVersionWithDash = currentVersion
+            .slice(0, -2)
+            .replace(".", "-");
+
+        await request(
+            `https://www.leagueoflegends.com/es-es/news/game-updates/patch-${currentVersionWithDash}-notes/`,
+            (err, res, html) => {
+                if (!err && res.statusCode == 200) {
+                    const $ = cherio.load(html);
+                    // console.log("request ok", $(".cboxElement")[0]?.attribs?.href);
+                    imgPatch = $(".cboxElement")[0]?.attribs?.href;
+                } else {
+                    console.log("request failed");
+                }
+            }
+        );
 
         return interaction.reply({
             embeds: [
