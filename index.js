@@ -1136,7 +1136,6 @@ client.on("interactionCreate", async (interaction) => {
     //COMANDO VER ULTIMO PARCHE LOL
     if (interaction.commandName === "lolparche") {
         let currentVersionPatch;
-        let imgPathForEmbed;
 
         await fetch(`https://ddragon.leagueoflegends.com/api/versions.json`)
             .then((res) => res.json())
@@ -1169,46 +1168,60 @@ client.on("interactionCreate", async (interaction) => {
                 if (!err && res.statusCode == 200) {
                     const $ = cherio.load(html);
                     // console.log("request ok", $(".cboxElement")[0]?.attribs?.href);
-                    imgPathForEmbed = $(".cboxElement")[0]?.attribs?.href;
+                    const imgPathForEmbed = $(".cboxElement")[0]?.attribs?.href;
+
+                    return interaction.reply({
+                        embeds: [
+                            new EmbedBuilder()
+                                .setColor("#C28F2C")
+                                .setTitle(
+                                    `🗒️ NOTAS DE LA VERSIÓN **${patchVersionWithDot}**`
+                                )
+                                .setDescription(
+                                    `https://www.leagueoflegends.com/es-es/news/game-updates/patch-${patchVersionWithDash}-notes/`
+                                )
+                                .setThumbnail(
+                                    "https://peralstudio.com/images/ezreal-logo.png"
+                                )
+                                .setImage(imgPathForEmbed)
+                                .setTimestamp()
+                                .setFooter({
+                                    text: versionbot,
+                                    iconURL: client.user.displayAvatarURL(),
+                                }),
+                        ],
+                    });
                 } else {
-                    console.log("request failed");
+                    return interaction.reply({
+                        embeds: [
+                            new EmbedBuilder()
+                                .setColor("#C28F2C ")
+                                .setTitle("Algo a salido mal")
+                                .setDescription(
+                                    "Por favor, intentalo de nuevo mas tarde."
+                                )
+                                .setTimestamp()
+                                .setFooter({
+                                    text: versionbot,
+                                    iconURL: client.user.displayAvatarURL(),
+                                }),
+                        ],
+                        ephemeral: true,
+                    });
                 }
             }
         );
-
-        return await interaction.reply({
-            embeds: [
-                new EmbedBuilder()
-                    .setColor("#C28F2C")
-                    .setTitle(
-                        `🗒️ NOTAS DE LA VERSIÓN **${patchVersionWithDot}**`
-                    )
-                    .setDescription(
-                        `https://www.leagueoflegends.com/es-es/news/game-updates/patch-${patchVersionWithDash}-notes/`
-                    )
-                    .setThumbnail(
-                        "https://peralstudio.com/images/ezreal-logo.png"
-                    )
-                    .setImage(imgPathForEmbed)
-                    .setTimestamp()
-                    .setFooter({
-                        text: versionbot,
-                        iconURL: client.user.displayAvatarURL(),
-                    }),
-            ],
-        });
     }
 
     //MEME RANDOM REDDIT
     if (interaction.commandName === "meme") {
         red({
-            //hay que pasarle unas opciones
-            subreddit: "SpanishMeme", //se puede poner cualquier subreddit, yo pongo SpanishMeme porque es el unico que conozco xd
+            subreddit: "SpanishMeme",
             sort: "hot",
-            allowNSFW: false, //por si queremos que tambien entren posts con la etiqueta de NSFW, yo le pongo false
-            allowModPost: false, // ni idea que es esto pero el comando funciona, asi que pongamoslo en false xd
-            allowCrossPost: false, //tampoco se que es
-            allowVideo: false, // si queremos que salga videos, como es un embed pues hay que ponerle que no
+            allowNSFW: false,
+            allowModPost: false,
+            allowCrossPost: false,
+            allowVideo: false,
         })
             .then((post) => {
                 const embed = new EmbedBuilder()
