@@ -121,7 +121,6 @@ const commands = [
 ];
 
 let currentVersion;
-let imgPatch;
 
 const versionbot = "PerBot v2.0 Peralstudio.com";
 const {
@@ -1137,6 +1136,8 @@ client.on("interactionCreate", async (interaction) => {
     //COMANDO VER ULTIMO PARCHE LOL
     if (interaction.commandName === "lolparche") {
         let currentVersionPatch;
+        let imgPathForEmbed;
+
         await fetch(`https://ddragon.leagueoflegends.com/api/versions.json`)
             .then((res) => res.json())
             .then((version) => {
@@ -1168,7 +1169,7 @@ client.on("interactionCreate", async (interaction) => {
                 if (!err && res.statusCode == 200) {
                     const $ = cherio.load(html);
                     // console.log("request ok", $(".cboxElement")[0]?.attribs?.href);
-                    imgPatch = $(".cboxElement")[0]?.attribs?.href;
+                    imgPathForEmbed = $(".cboxElement")[0]?.attribs?.href;
                 } else {
                     console.log("request failed");
                 }
@@ -1188,7 +1189,7 @@ client.on("interactionCreate", async (interaction) => {
                     .setThumbnail(
                         "https://peralstudio.com/images/ezreal-logo.png"
                     )
-                    .setImage(imgPatch)
+                    .setImage(imgPathForEmbed)
                     .setTimestamp()
                     .setFooter({
                         text: versionbot,
