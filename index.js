@@ -1149,7 +1149,6 @@ client.on("interactionCreate", async (interaction) => {
         const patchVersionWithDash = currentVersionPatch.replace(".", "-");
         const patchVersionWithDot = currentVersionPatch;
 
-        //!todo PONER ESTE CODIGO EN LOLPARCHE, YA QUE AQUI SE RJECUTA AL INICIAR EL BOT, SI NO SE INICIA NO DE ACTUALIZa
         await fetch(`https://ddragon.leagueoflegends.com/api/versions.json`)
             .then((res) => res.json())
             .then((version) => {
@@ -1176,7 +1175,7 @@ client.on("interactionCreate", async (interaction) => {
             }
         );
 
-        return interaction.reply({
+        return await interaction.reply({
             embeds: [
                 new EmbedBuilder()
                     .setColor("#C28F2C")
