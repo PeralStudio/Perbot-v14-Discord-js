@@ -1,16 +1,16 @@
-import config from "./config.js";
-const {
-    prefix,
-    lolApi,
-    youtubeKey,
-    mongoUrl,
-    CLIENT_ID,
-    GUILD_ID,
-    token,
-    tmdbApi,
-    email,
-    gmailToken,
-} = config;
+// import config from "./config.js";
+// const {
+//     prefix,
+//     lolApi,
+//     youtubeKey,
+//     mongoUrl,
+//     CLIENT_ID,
+//     GUILD_ID,
+//     token,
+//     tmdbApi,
+//     email,
+//     gmailToken,
+// } = config;
 
 import {
     REST,
@@ -125,18 +125,18 @@ const commands = [
 let currentVersion;
 
 const versionbot = "PerBot v2.0 Peralstudio.com";
-// const {
-//     prefix,
-//     lolApi,
-//     youtubeKey,
-//     mongoUrl,
-//     CLIENT_ID,
-//     GUILD_ID,
-//     token,
-//     tmdbApi,
-//     email,
-//     gmailToken,
-// } = process.env;
+const {
+    prefix,
+    lolApi,
+    youtubeKey,
+    mongoUrl,
+    CLIENT_ID,
+    GUILD_ID,
+    token,
+    tmdbApi,
+    email,
+    gmailToken,
+} = process.env;
 
 mongoose
     .connect(mongoUrl, {
