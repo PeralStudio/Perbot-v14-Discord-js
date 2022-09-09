@@ -75,7 +75,7 @@ import serverinfoCommand from "./commands/serverinfo.js";
 import coronaCommand from "./commands/corona.js";
 import traducirCommand from "./commands/traducir.js";
 import pingCommand from "./commands/ping.js";
-import elrellanoCommand from "./commands/elrellano.js";
+// import elrellanoCommand from "./commands/elrellano.js";
 import helpCommand from "./commands/help.js";
 import carteleracineCommand from "./commands/carteleracine.js";
 import enviarmdCommand from "./commands/adminCommands/enviarmd.js";
@@ -119,7 +119,7 @@ const commands = [
     carteleracineCommand,
     helpCommand,
     emailCommand,
-    elrellanoCommand,
+    // elrellanoCommand,
 ];
 
 let currentVersion;
@@ -2400,57 +2400,57 @@ client.on("interactionCreate", async (interaction) => {
     }
 
     //COMANDO ELRELLANO
-    if (interaction.commandName === "elrellano") {
-        let arrayVideos = [];
-        let arrayTitles = [];
-        const numberVideo = interaction.options.get("1-6").value - 1;
+    // if (interaction.commandName === "elrellano") {
+    //     let arrayVideos = [];
+    //     let arrayTitles = [];
+    //     const numberVideo = interaction.options.get("1-6").value - 1;
 
-        if (numberVideo < 0 || numberVideo > 5) {
-            interaction.reply({
-                content: "❌ Elige un video del 1 al 6.",
-                ephemeral: true,
-            });
-            return;
-        }
+    //     if (numberVideo < 0 || numberVideo > 5) {
+    //         interaction.reply({
+    //             content: "❌ Elige un video del 1 al 6.",
+    //             ephemeral: true,
+    //         });
+    //         return;
+    //     }
 
-        await request(
-            `https://elrellano.com/videos/`,
-            async (err, res, html) => {
-                if (!err && res.statusCode == 200) {
-                    const $ = cherio.load(html);
+    //     await request(
+    //         `https://elrellano.com/videos/`,
+    //         async (err, res, html) => {
+    //             if (!err && res.statusCode == 200) {
+    //                 const $ = cherio.load(html);
 
-                    $("video").map(function () {
-                        // console.log($(this).attr("src"));
-                        arrayVideos.push($(this).attr("src"));
-                    });
+    //                 $("video").map(function () {
+    //                     console.log($(this).attr("src"));
+    //                     arrayVideos.push($(this).attr("src"));
+    //                 });
 
-                    $(".entry-title").map(function () {
-                        // console.log($(this).text());
-                        arrayTitles.push($(this).text());
-                    });
+    //                 $(".entry-title").map(function () {
+    //                     // console.log($(this).text());
+    //                     arrayTitles.push($(this).text());
+    //                 });
 
-                    if (arrayVideos.length <= 0) {
-                        interaction.reply({
-                            content:
-                                "❌ No se han encontrado videos. Intentalo mas tarde!",
-                            ephemeral: true,
-                        });
-                        return;
-                    }
+    //                 if (arrayVideos.length <= 0) {
+    //                     interaction.reply({
+    //                         content:
+    //                             "❌ No se han encontrado videos. Intentalo mas tarde!",
+    //                         ephemeral: true,
+    //                     });
+    //                     return;
+    //                 }
 
-                    await interaction.reply({
-                        content: `${arrayVideos[numberVideo]}\n\n**${arrayTitles[numberVideo]}**`,
-                    });
-                } else {
-                    interaction.reply({
-                        content:
-                            "❌ Error en la petición. Intentalo mas tarde!",
-                        ephemeral: true,
-                    });
-                }
-            }
-        );
-    }
+    //                 await interaction.reply({
+    //                     content: `${arrayVideos[numberVideo]}\n\n**${arrayTitles[numberVideo]}**`,
+    //                 });
+    //             } else {
+    //                 interaction.reply({
+    //                     content:
+    //                         "❌ Error en la petición. Intentalo mas tarde!",
+    //                     ephemeral: true,
+    //                 });
+    //             }
+    //         }
+    //     );
+    // }
 
     //COMANDO HELP
     if (interaction.commandName === "help") {
@@ -2486,11 +2486,11 @@ client.on("interactionCreate", async (interaction) => {
                     value: "`Meme random reddit.`",
                     inline: true,
                 },
-                {
-                    name: `*${prefix}elrellano*`,
-                    value: "`Último video Elrellano.`",
-                    inline: true,
-                },
+                // {
+                //     name: `*${prefix}elrellano*`,
+                //     value: "`Último video Elrellano.`",
+                //     inline: true,
+                // },
                 {
                     name: `*${prefix}carteleracine*`,
                     value: "`Cartelera de cine.`",
