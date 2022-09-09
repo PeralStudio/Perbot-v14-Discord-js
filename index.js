@@ -1,16 +1,16 @@
-// import config from "./config.js";
-// const {
-//     prefix,
-//     lolApi,
-//     youtubeKey,
-//     mongoUrl,
-//     CLIENT_ID,
-//     GUILD_ID,
-//     token,
-//     tmdbApi,
-//     email,
-//     gmailToken,
-// } = config;
+import config from "./config.js";
+const {
+    prefix,
+    lolApi,
+    youtubeKey,
+    mongoUrl,
+    CLIENT_ID,
+    GUILD_ID,
+    token,
+    tmdbApi,
+    email,
+    gmailToken,
+} = config;
 
 import {
     REST,
@@ -125,18 +125,18 @@ const commands = [
 let currentVersion;
 
 const versionbot = "PerBot v2.0 Peralstudio.com";
-const {
-    prefix,
-    lolApi,
-    youtubeKey,
-    mongoUrl,
-    CLIENT_ID,
-    GUILD_ID,
-    token,
-    tmdbApi,
-    email,
-    gmailToken,
-} = process.env;
+// const {
+//     prefix,
+//     lolApi,
+//     youtubeKey,
+//     mongoUrl,
+//     CLIENT_ID,
+//     GUILD_ID,
+//     token,
+//     tmdbApi,
+//     email,
+//     gmailToken,
+// } = process.env;
 
 mongoose
     .connect(mongoUrl, {
@@ -2403,35 +2403,53 @@ client.on("interactionCreate", async (interaction) => {
     if (interaction.commandName === "elrellano") {
         let arrayVideos = [];
         let arrayTitles = [];
-        await request(`https://elrellano.com/`, async (err, res, html) => {
-            if (!err && res.statusCode == 200) {
-                const $ = cherio.load(html);
-                // console.log("request ok", $(".entry-title").text());
+        const numberVideo = interaction.options.get("1-6").value - 1;
 
-                $(".entry-title").map(function () {
-                    // console.log($(this).text());
-                    arrayTitles.push($(this).text());
-                });
+        if (numberVideo < 0 || numberVideo > 5) {
+            interaction.reply({
+                content: "❌ Elige un video del 1 al 6.",
+                ephemeral: true,
+            });
+            return;
+        }
 
-                $("video").map(function () {
-                    // console.log($(this).attr("src"));
-                    arrayVideos.push($(this).attr("src"));
-                });
+        await request(
+            `https://elrellano.com/videos/`,
+            async (err, res, html) => {
+                if (!err && res.statusCode == 200) {
+                    const $ = cherio.load(html);
 
-                if (arrayVideos.length <= 0) {
+                    $("video").map(function () {
+                        // console.log($(this).attr("src"));
+                        arrayVideos.push($(this).attr("src"));
+                    });
+
+                    $(".entry-title").map(function () {
+                        // console.log($(this).text());
+                        arrayTitles.push($(this).text());
+                    });
+
+                    if (arrayVideos.length <= 0) {
+                        interaction.reply({
+                            content:
+                                "❌ No se han encontrado videos. Intentalo mas tarde!",
+                            ephemeral: true,
+                        });
+                        return;
+                    }
+
+                    await interaction.reply({
+                        content: `${arrayVideos[numberVideo]}\n\n**${arrayTitles[numberVideo]}**`,
+                    });
+                } else {
                     interaction.reply({
                         content:
-                            "❌ No se han encontrado videos. Intentalo mas tarde!",
+                            "❌ Error en la petición. Intentalo mas tarde!",
                         ephemeral: true,
                     });
-                    return;
                 }
-                await interaction.reply({
-                    content: `${arrayVideos[0]}\n\n**${arrayTitles[0]}**`,
-                });
-            } else {
             }
-        });
+        );
     }
 
     //COMANDO HELP
