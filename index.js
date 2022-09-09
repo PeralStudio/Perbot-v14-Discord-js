@@ -75,6 +75,7 @@ import serverinfoCommand from "./commands/serverinfo.js";
 import coronaCommand from "./commands/corona.js";
 import traducirCommand from "./commands/traducir.js";
 import pingCommand from "./commands/ping.js";
+import elrellanoCommand from "./commands/elrellano.js";
 import helpCommand from "./commands/help.js";
 import carteleracineCommand from "./commands/carteleracine.js";
 import enviarmdCommand from "./commands/adminCommands/enviarmd.js";
@@ -118,6 +119,7 @@ const commands = [
     carteleracineCommand,
     helpCommand,
     emailCommand,
+    elrellanoCommand,
 ];
 
 let currentVersion;
@@ -2397,11 +2399,46 @@ client.on("interactionCreate", async (interaction) => {
             });
     }
 
+    //COMANDO ELRELLANO
+    if (interaction.commandName === "elrellano") {
+        let arrayVideos = [];
+        let arrayTitles = [];
+        await request(`https://elrellano.com/`, async (err, res, html) => {
+            if (!err && res.statusCode == 200) {
+                const $ = cherio.load(html);
+                // console.log("request ok", $(".entry-title").text());
+
+                $(".entry-title").map(function () {
+                    // console.log($(this).text());
+                    arrayTitles.push($(this).text());
+                });
+
+                $("video").map(function () {
+                    // console.log($(this).attr("src"));
+                    arrayVideos.push($(this).attr("src"));
+                });
+
+                if (arrayVideos.length <= 0) {
+                    interaction.reply({
+                        content:
+                            "❌ No se han encontrado videos. Intentalo mas tarde!",
+                        ephemeral: true,
+                    });
+                    return;
+                }
+                await interaction.reply({
+                    content: `${arrayVideos[0]}\n\n**${arrayTitles[0]}**`,
+                });
+            } else {
+            }
+        });
+    }
+
     //COMANDO HELP
     if (interaction.commandName === "help") {
         const embed = new EmbedBuilder()
             .setColor("#C28F2C")
-            .setThumbnail(client.user.displayAvatarURL())
+            // .setThumbnail(client.user.displayAvatarURL())
             .setTitle(
                 `COMANDOS DISPONIBLES *${client.user.username.toUpperCase()}* \n`
             )
@@ -2429,6 +2466,11 @@ client.on("interactionCreate", async (interaction) => {
                 {
                     name: `*${prefix}meme*`,
                     value: "`Meme random reddit.`",
+                    inline: true,
+                },
+                {
+                    name: `*${prefix}elrellano*`,
+                    value: "`Último video Elrellano.`",
                     inline: true,
                 },
                 {
