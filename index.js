@@ -2404,7 +2404,7 @@ client.on("interactionCreate", async (interaction) => {
         let arrayVideos = [];
         // let arrayTitles = [];
         // const numberVideo = interaction.options.get("1-6").value - 1;
-
+        const author = interaction.user.id;
         const page = interaction.options.get("página").value;
 
         await request(
