@@ -2512,7 +2512,13 @@ client.on("interactionCreate", async (interaction) => {
                     });
                 }
             }
-        );
+        ).finally(() => {
+            interaction.reply({
+                content:
+                    ":white_check_mark: ¡ Se han enviado los vídeos a tu DM !",
+                ephemeral: true,
+            });
+        });
     }
 
     //COMANDO HELP
