@@ -2429,7 +2429,7 @@ client.on("interactionCreate", async (interaction) => {
                     const $ = cherio.load(html);
 
                     $("video").map(function () {
-                        console.log($(this).attr("src"));
+                        // console.log($(this).attr("src"));
                         arrayVideos.push($(this).attr("src"));
                     });
 
