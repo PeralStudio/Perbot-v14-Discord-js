@@ -2464,19 +2464,45 @@ client.on("interactionCreate", async (interaction) => {
                     //     content: `${arrayVideos[numberVideo]}`,
                     // });
 
-                    await interaction.reply({
-                        content: `${
-                            arrayVideos[0] !== undefined ? arrayVideos[0] : ""
-                        }\n${
-                            arrayVideos[1] !== undefined ? arrayVideos[1] : ""
-                        }\n${
-                            arrayVideos[2] !== undefined ? arrayVideos[2] : ""
-                        }\n${
-                            arrayVideos[3] !== undefined ? arrayVideos[3] : ""
-                        }\n${
-                            arrayVideos[4] !== undefined ? arrayVideos[4] : ""
-                        }\n`,
-                        // ephemeral: true,
+                    // await interaction.reply({
+                    //     content: `${
+                    //         arrayVideos[0] !== undefined ? arrayVideos[0] : ""
+                    //     }\n${
+                    //         arrayVideos[1] !== undefined ? arrayVideos[1] : ""
+                    //     }\n${
+                    //         arrayVideos[2] !== undefined ? arrayVideos[2] : ""
+                    //     }\n${
+                    //         arrayVideos[3] !== undefined ? arrayVideos[3] : ""
+                    //     }\n${
+                    //         arrayVideos[4] !== undefined ? arrayVideos[4] : ""
+                    //     }\n`,
+                    //     // ephemeral: true,
+                    // });
+
+                    await client.users.fetch(author).then((user) => {
+                        user.send({
+                            content: `${
+                                arrayVideos[0] !== undefined
+                                    ? arrayVideos[0]
+                                    : ""
+                            }\n${
+                                arrayVideos[1] !== undefined
+                                    ? arrayVideos[1]
+                                    : ""
+                            }\n${
+                                arrayVideos[2] !== undefined
+                                    ? arrayVideos[2]
+                                    : ""
+                            }\n${
+                                arrayVideos[3] !== undefined
+                                    ? arrayVideos[3]
+                                    : ""
+                            }\n${
+                                arrayVideos[4] !== undefined
+                                    ? arrayVideos[4]
+                                    : ""
+                            }\n`,
+                        });
                     });
                 } else {
                     interaction.reply({
