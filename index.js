@@ -2402,31 +2402,53 @@ client.on("interactionCreate", async (interaction) => {
     //COMANDO ELRELLANO
     if (interaction.commandName === "elrellano") {
         let arrayVideos = [];
-        let arrayTitles = [];
-        const numberVideo = interaction.options.get("1-6").value - 1;
+        // let arrayTitles = [];
+        // const numberVideo = interaction.options.get("1-6").value - 1;
+
+        const page = interaction.options.get("página").value;
 
         await request(
-            `https://elrellano.com/videos/`,
+            `https://elrellano.com/videos/page/${page}/`,
             async (err, res, html) => {
+                if (page <= 0) {
+                    interaction.reply({
+                        content: "❌ La primera página suele ser la `1` bobo.",
+                        ephemeral: true,
+                    });
+                    return;
+                }
+                if (page > 1950) {
+                    interaction.reply({
+                        content: `❌ No hay tantas páginas.`,
+                        ephemeral: true,
+                    });
+                    return;
+                }
+
                 if (!err && res.statusCode == 200) {
                     const $ = cherio.load(html);
 
-                    // $("iframe").map(function () {
+                    $("video").map(function () {
+                        console.log($(this).attr("src"));
+                        arrayVideos.push($(this).attr("src"));
+                    });
+
+                    // // $("iframe").map(function () {
+                    // //     // console.log($(this).attr("src"));
+                    // //     arrayVideos.push($(this).attr("src"));
+                    // // });
+
+                    // $("video").map(function () {
                     //     // console.log($(this).attr("src"));
                     //     arrayVideos.push($(this).attr("src"));
                     // });
 
-                    $("video").map(function () {
-                        // console.log($(this).attr("src"));
-                        arrayVideos.push($(this).attr("src"));
-                    });
+                    // $(".entry-title").map(function () {
+                    //     // console.log($(this).text());
+                    //     arrayTitles.push($(this).text());
+                    // });
 
-                    $(".entry-title").map(function () {
-                        // console.log($(this).text());
-                        arrayTitles.push($(this).text());
-                    });
-
-                    // console.log(arrayVideos);
+                    // // console.log(arrayVideos);
 
                     if (arrayVideos.length <= 0) {
                         interaction.reply({
@@ -2436,20 +2458,25 @@ client.on("interactionCreate", async (interaction) => {
                         });
                         return;
                     }
-                    if (
-                        numberVideo < 0 ||
-                        numberVideo > arrayVideos.length - 1
-                    ) {
-                        interaction.reply({
-                            content: `❌ Solo hay vídeos del 1 al ${arrayVideos.length} esta vez.`,
-                            ephemeral: true,
-                        });
-                        return;
-                    }
+
+                    // await interaction.reply({
+                    //     // content: `${arrayVideos[numberVideo]}\n\n**${arrayTitles[numberVideo]}**`,
+                    //     content: `${arrayVideos[numberVideo]}`,
+                    // });
 
                     await interaction.reply({
-                        // content: `${arrayVideos[numberVideo]}\n\n**${arrayTitles[numberVideo]}**`,
-                        content: `${arrayVideos[numberVideo]}`,
+                        content: `${
+                            arrayVideos[0] !== undefined ? arrayVideos[0] : ""
+                        }\n${
+                            arrayVideos[1] !== undefined ? arrayVideos[1] : ""
+                        }\n${
+                            arrayVideos[2] !== undefined ? arrayVideos[2] : ""
+                        }\n${
+                            arrayVideos[3] !== undefined ? arrayVideos[3] : ""
+                        }\n${
+                            arrayVideos[4] !== undefined ? arrayVideos[4] : ""
+                        }\n`,
+                        // ephemeral: true,
                     });
                 } else {
                     interaction.reply({
@@ -2497,8 +2524,8 @@ client.on("interactionCreate", async (interaction) => {
                     inline: true,
                 },
                 {
-                    name: `*${prefix}elrellano*`,
-                    value: "`Último video Elrellano.`",
+                    name: `*${prefix}elrellano + página*`,
+                    value: "`Vídeos elrellano.`",
                     inline: true,
                 },
                 {
