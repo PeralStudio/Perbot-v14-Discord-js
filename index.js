@@ -2479,31 +2479,40 @@ client.on("interactionCreate", async (interaction) => {
                     //     // ephemeral: true,
                     // });
 
-                    await client.users.fetch(author).then((user) => {
-                        user.send({
-                            content: `${
-                                arrayVideos[0] !== undefined
-                                    ? arrayVideos[0]
-                                    : ""
-                            }\n${
-                                arrayVideos[1] !== undefined
-                                    ? arrayVideos[1]
-                                    : ""
-                            }\n${
-                                arrayVideos[2] !== undefined
-                                    ? arrayVideos[2]
-                                    : ""
-                            }\n${
-                                arrayVideos[3] !== undefined
-                                    ? arrayVideos[3]
-                                    : ""
-                            }\n${
-                                arrayVideos[4] !== undefined
-                                    ? arrayVideos[4]
-                                    : ""
-                            }\n`,
+                    await client.users
+                        .fetch(author)
+                        .then((user) => {
+                            user.send({
+                                content: `${
+                                    arrayVideos[0] !== undefined
+                                        ? arrayVideos[0]
+                                        : ""
+                                }\n${
+                                    arrayVideos[1] !== undefined
+                                        ? arrayVideos[1]
+                                        : ""
+                                }\n${
+                                    arrayVideos[2] !== undefined
+                                        ? arrayVideos[2]
+                                        : ""
+                                }\n${
+                                    arrayVideos[3] !== undefined
+                                        ? arrayVideos[3]
+                                        : ""
+                                }\n${
+                                    arrayVideos[4] !== undefined
+                                        ? arrayVideos[4]
+                                        : ""
+                                }\n`,
+                            });
+                        })
+                        .finally(() => {
+                            interaction.reply({
+                                content:
+                                    ":white_check_mark: ¡ Se han enviado los vídeos a tu DM !",
+                                ephemeral: true,
+                            });
                         });
-                    });
                 } else {
                     interaction.reply({
                         content:
@@ -2512,13 +2521,7 @@ client.on("interactionCreate", async (interaction) => {
                     });
                 }
             }
-        ).finally(() => {
-            interaction.reply({
-                content:
-                    ":white_check_mark: ¡ Se han enviado los vídeos a tu DM !",
-                ephemeral: true,
-            });
-        });
+        );
     }
 
     //COMANDO HELP
