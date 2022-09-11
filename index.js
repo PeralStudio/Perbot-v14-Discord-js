@@ -84,6 +84,7 @@ import emailCommand from "./commands/adminCommands/email.js";
 
 import setIntervalTwitch from "./functions/twitch.js";
 import setIntervalYoutube from "./functions/youtube.js";
+import epicGamesFree from "./functions/epicGamesFree.js";
 import usersDiscord from "./Schemas/usersDiscord.js";
 
 const commands = [
@@ -277,6 +278,8 @@ client.on("ready", async () => {
     for (const user of usersToAlertYoutube) {
         setIntervalYoutube(client, user);
     }
+
+    epicGamesFree(client);
 });
 
 client.on("guildMemberAdd", async (member) => {
