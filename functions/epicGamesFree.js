@@ -11,7 +11,7 @@ const epicGamesFree = async (client) => {
     ) {
         getGames("ES", true)
             .then(async (res) => {
-                console.log(res.currentGames[0]);
+                // console.log(res.nextGames[1]);
                 const formatPrice = (num) => {
                     let str = num.toString().split(".");
                     str[0] = str[0].replace(/\B(?=(\d{2})+(?!\d))/g, ",");
@@ -36,13 +36,25 @@ const epicGamesFree = async (client) => {
                                 : res.currentGames[0].offerMappings[0]?.pageSlug
                         }`
                     )
+                    .setThumbnail(
+                        "https://peralstudio.com/images/epic-games.png"
+                    )
                     .setImage(res.currentGames[0]?.keyImages[0]?.url)
-                    .addFields({
-                        name: "Precio Normal",
-                        value: `${formatPrice(
-                            res.currentGames[0].price.totalPrice.originalPrice
-                        )}€`,
-                    })
+                    .addFields(
+                        {
+                            name: "Precio Normal",
+                            value: `${formatPrice(
+                                res.currentGames[0].price.totalPrice
+                                    .originalPrice
+                            )}€`,
+                            inline: true,
+                        },
+                        {
+                            name: "Desarroladora",
+                            value: `${res.currentGames[0]?.seller?.name}`,
+                            inline: true,
+                        }
+                    )
                     .setTimestamp()
                     .setFooter({
                         text: versionbot,
@@ -61,13 +73,25 @@ const epicGamesFree = async (client) => {
                                 : res.currentGames[1].offerMappings[0]?.pageSlug
                         }`
                     )
+                    .setThumbnail(
+                        "https://peralstudio.com/images/epic-games.png"
+                    )
                     .setImage(res.currentGames[1]?.keyImages[1]?.url)
-                    .addFields({
-                        name: "Precio Normal",
-                        value: `${formatPrice(
-                            res.currentGames[1].price?.totalPrice?.originalPrice
-                        )}€`,
-                    })
+                    .addFields(
+                        {
+                            name: "Precio Normal",
+                            value: `${formatPrice(
+                                res.currentGames[1].price?.totalPrice
+                                    ?.originalPrice
+                            )}€`,
+                            inline: true,
+                        },
+                        {
+                            name: "Desarroladora",
+                            value: `${res.currentGames[1]?.seller?.name}`,
+                            inline: true,
+                        }
+                    )
                     .setTimestamp()
                     .setFooter({
                         text: versionbot,
@@ -93,13 +117,25 @@ const epicGamesFree = async (client) => {
                                 : res.nextGames[0].offerMappings[0]?.pageSlug
                         }`
                     )
+                    .setThumbnail(
+                        "https://peralstudio.com/images/epic-games.png"
+                    )
                     .setImage(res.nextGames[0]?.keyImages[0]?.url)
-                    .addFields({
-                        name: "Precio Normal",
-                        value: `${formatPrice(
-                            res.nextGames[0].price?.totalPrice?.originalPrice
-                        )}€`,
-                    })
+                    .addFields(
+                        {
+                            name: "Precio Normal",
+                            value: `${formatPrice(
+                                res.nextGames[0].price?.totalPrice
+                                    ?.originalPrice
+                            )}€`,
+                            inline: true,
+                        },
+                        {
+                            name: "Desarroladora",
+                            value: `${res.nextGames[0]?.seller?.name}`,
+                            inline: true,
+                        }
+                    )
                     .setTimestamp()
                     .setFooter({
                         text: versionbot,
@@ -118,13 +154,25 @@ const epicGamesFree = async (client) => {
                                 : res.nextGames[1].offerMappings[0]?.pageSlug
                         }`
                     )
-                    .setImage(res.nextGames[1]?.keyImages[1]?.url)
-                    .addFields({
-                        name: "Precio Normal",
-                        value: `${formatPrice(
-                            res.nextGames[1].price?.totalPrice?.originalPrice
-                        )}€`,
-                    })
+                    .setThumbnail(
+                        "https://peralstudio.com/images/epic-games.png"
+                    )
+                    .setImage(res.nextGames[1]?.keyImages[0]?.url)
+                    .addFields(
+                        {
+                            name: "Precio Normal",
+                            value: `${formatPrice(
+                                res.nextGames[1].price?.totalPrice
+                                    ?.originalPrice
+                            )}€`,
+                            inline: true,
+                        },
+                        {
+                            name: "Desarroladora",
+                            value: `${res.nextGames[1]?.seller?.name}`,
+                            inline: true,
+                        }
+                    )
                     .setTimestamp()
                     .setFooter({
                         text: versionbot,
