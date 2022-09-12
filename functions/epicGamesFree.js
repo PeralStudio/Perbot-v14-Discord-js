@@ -1,5 +1,6 @@
 import { getGames } from "epic-free-games";
 import { EmbedBuilder } from "discord.js";
+import dayjs from "dayjs";
 
 const epicGamesFree = async (client) => {
     const versionbot = "PerBot v2.0 Peralstudio.com";
@@ -11,19 +12,23 @@ const epicGamesFree = async (client) => {
     ) {
         getGames("ES", true)
             .then(async (res) => {
-                // console.log(res.nextGames[1]);
                 const formatPrice = (num) => {
                     let str = num.toString().split(".");
                     str[0] = str[0].replace(/\B(?=(\d{2})+(?!\d))/g, ",");
                     return str.join(".");
                 };
 
-                //JUEGOS GRATIS ¡AHORA!
+                //JUEGOS GRATIS ESTA SEMANA
                 const embedFree = new EmbedBuilder()
                     .setTitle(
-                        `¡Juegos Gratis Ahora!\n⬇️     ⬇️     ⬇️     ⬇️     ⬇️`
+                        `¡Juegos Gratis La Semana del **${dayjs().format(
+                            "DD/MM/YY"
+                        )}** a **${dayjs().add(7, "day").format("DD/MM/YY")}**!`
                     )
-                    .setColor("#ffffff");
+                    .setDescription(
+                        `\n ⠀⠀⠀⠀⠀ ⬇️ ⠀⠀⠀⠀ ⬇️ ⠀⠀⠀⠀ ⬇️  ⠀⠀⠀⠀ ⬇️ ⠀⠀⠀⠀ `
+                    )
+                    .setColor("#C28F2C");
 
                 const embed = new EmbedBuilder()
                     .setTitle(`${res.currentGames[0].title}`)
@@ -102,9 +107,16 @@ const epicGamesFree = async (client) => {
                 //JUEGOS GRATIS ¡SEMANA QUE VIENE!
                 const embedFree2 = new EmbedBuilder()
                     .setTitle(
-                        `¡Juegos Gratis La Semana Que Viene! \n        ⬇️     ⬇️     ⬇️     ⬇️     ⬇️     ⬇️`
+                        `¡Juegos Gratis La Semana del **${dayjs()
+                            .add(7, "day")
+                            .format("DD/MM/YY")}** a **${dayjs()
+                            .add(14, "day")
+                            .format("DD/MM/YY")}**`
                     )
-                    .setColor("#ffffff");
+                    .setDescription(
+                        `\n ⠀⠀⠀⠀⠀ ⬇️ ⠀⠀⠀⠀ ⬇️ ⠀⠀⠀⠀ ⬇️  ⠀⠀⠀⠀ ⬇️ ⠀⠀⠀⠀ `
+                    )
+                    .setColor("#C28F2C");
 
                 const embed3 = new EmbedBuilder()
                     .setTitle(`${res.nextGames[0].title}`)
