@@ -9,7 +9,7 @@ const epicGamesFree = async (client) => {
     if (
         now.getDay() == 4 &&
         now.getHours().toLocaleString() == 16 &&
-        now.getMinutes().toLocaleString().toString() === "46"
+        now.getMinutes().toLocaleString().toString() === "49"
     ) {
         getGames("ES", true)
             .then(async (res) => {
@@ -193,8 +193,8 @@ const epicGamesFree = async (client) => {
                     })
                     .setColor("#180830");
 
-                    await client.channels.fetch("1018578696627568701").then((channel) =>
-                    channel.send({
+                    await client.channel.fetch("1018578696627568701").then((chann) =>
+                    chann.send({
                         embeds: [embedFree, embed, embed2, embedFree2, embed3, embed4],
                     }));
 
