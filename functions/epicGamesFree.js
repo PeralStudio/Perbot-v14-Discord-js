@@ -5,10 +5,13 @@ import dayjs from "dayjs";
 const epicGamesFree = async (client) => {
     const versionbot = "PerBot v2.0 Peralstudio.com";
     const now = new Date();
+    console.log('getday', now.getDay());
+    console.log('getHours', now.getHours().toLocaleString());
+    console.log('getMinutes', now.getMinutes().toLocaleString().toString());
     if (
         now.getDay() == 4 &&
         now.getHours().toLocaleString() == 17 &&
-        now.getMinutes().toLocaleString().toString() === "50"
+        now.getMinutes().toLocaleString().toString() === "55"
     ) {
         console.log('entra a la funcion getGames() epic games');
         getGames("ES", true)
