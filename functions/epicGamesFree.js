@@ -1,7 +1,6 @@
 import { getGames } from "epic-free-games";
 import { EmbedBuilder } from "discord.js";
 import dayjs from "dayjs";
-import fetch from "node-fetch";
 
 //--------------solo envia embeds si no hay ya alguno anterior en el canal --------------
 const epicGamesFree = async (client) => {
@@ -9,8 +8,8 @@ const epicGamesFree = async (client) => {
     const now = new Date();
     if (
         now.getDay() == 4 &&
-        now.getHours().toLocaleString() == 16 &&
-        now.getMinutes().toLocaleString().toString() === "58"
+        now.getHours().toLocaleString() == 17 &&
+        now.getMinutes().toLocaleString().toString() === "1"
     ) {
         getGames("ES", true)
             .then(async (res) => {
@@ -194,7 +193,7 @@ const epicGamesFree = async (client) => {
                     })
                     .setColor("#180830");
 
-                    let Channel = client.channels.find(channel => channel.name == "🎮-free-games-epic");
+                    let Channel = client.channels.cache.find(channel => channel.name == "🎮-free-games-epic");
                     Channel.send({ embeds: [embedFree, embed, embed2, embedFree2, embed3, embed4] });
 
 
