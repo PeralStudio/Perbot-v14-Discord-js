@@ -11,12 +11,10 @@ const epicGamesFree = async (client) => {
     if (
         now.getDay() == 4 &&
         now.getHours().toLocaleString() == 16 &&
-        now.getMinutes().toLocaleString().toString() === "29"
+        now.getMinutes().toLocaleString().toString() === "34"
     ) {
-        console.log('entra a la funcion getGames() epic games');
         getGames("ES", true)
             .then(async (res) => {
-                console.log(res);
                 const formatPrice = (num) => {
                     let str = num.toString().split(".");
                     str[0] = str[0].replace(/\B(?=(\d{2})+(?!\d))/g, ",");
