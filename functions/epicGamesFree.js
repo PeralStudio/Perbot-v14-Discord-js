@@ -11,7 +11,7 @@ const epicGamesFree = async (client) => {
     if (
         now.getDay() == 4 &&
         now.getHours().toLocaleString() == 16 &&
-        now.getMinutes().toLocaleString().toString() === "19"
+        now.getMinutes().toLocaleString().toString() === "22"
     ) {
         console.log('entra a la funcion getGames() epic games');
         getGames("ES", true)
