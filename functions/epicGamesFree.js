@@ -10,6 +10,7 @@ const epicGamesFree = async (client) => {
         now.getHours().toLocaleString() == 17 &&
         now.getMinutes().toLocaleString().toString() === "30"
     ) {
+        console.log('entra a la funcion getGames() epic games');
         getGames("ES", true)
             .then(async (res) => {
                 const formatPrice = (num) => {
