@@ -6,7 +6,9 @@ const epicGamesFree = async (client) => {
     const versionbot = "PerBot v2.0 Peralstudio.com";
     const now = new Date();
     console.log('getday', now.getDay());
-    console.log('getHours', now.getHours().toLocaleString());
+    console.log('getHours', new Date().toLocaleTimeString("es-ES", {
+        timeZone: "Europe/Madrid",
+    }));
     console.log('getMinutes', now.getMinutes().toLocaleString().toString());
     if (
         now.getDay() == 4 &&
