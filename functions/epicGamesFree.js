@@ -9,7 +9,7 @@ const epicGamesFree = async (client) => {
     if (
         now.getDay() == 4 &&
         now.getHours().toLocaleString() == 17 &&
-        now.getMinutes().toLocaleString().toString() === "7"
+        now.getMinutes().toLocaleString().toString() === "11"
     ) {
         getGames("ES", true)
             .then(async (res) => {
@@ -193,20 +193,16 @@ const epicGamesFree = async (client) => {
                     })
                     .setColor("#180830");
 
-                    let Channel = await client?.channels.cache.find(channel => channel.name == "🎮-free-games-epic");
-                    Channel.send({ embeds: [embedFree, embed, embed2, embedFree2, embed3, embed4] });
-
-
-                //  client?.channels.cache.get("1018578696627568701").send({
-                //     embeds: [
-                //         embedFree,
-                //         embed,
-                //         embed2,
-                //         embedFree2,
-                //         embed3,
-                //         embed4,
-                //     ],
-                // });
+                 await client?.channels.cache.get("1018578696627568701").send({
+                    embeds: [
+                        embedFree,
+                        embed,
+                        embed2,
+                        embedFree2,
+                        embed3,
+                        embed4,
+                    ],
+                });
             })
             .catch((err) => {
                 console.log(err);
