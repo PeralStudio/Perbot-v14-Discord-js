@@ -11,7 +11,7 @@ const epicGamesFree = async (client) => {
     if (
         now.getDay() == 4 &&
         now.getHours().toLocaleString() == 16 &&
-        now.getMinutes().toLocaleString().toString() === "13"
+        now.getMinutes().toLocaleString().toString() === "19"
     ) {
         console.log('entra a la funcion getGames() epic games');
         getGames("ES", true)
@@ -36,32 +36,32 @@ const epicGamesFree = async (client) => {
                     .setColor("#C28F2C");
 
                 const embed = new EmbedBuilder()
-                    .setTitle(`${res.currentGames[0].title}`)
+                    .setTitle(`${res?.currentGames[0]?.title}`)
                     .setDescription(
                         `${
-                            res.currentGames[0].description
+                            res?.currentGames[0]?.description
                         }\n\nhttps://store.epicgames.com/es-ES/p/${
                             res.currentGames[0].urlSlug.includes("-")
-                                ? res.currentGames[0].urlSlug
-                                : res.currentGames[0].offerMappings[0]?.pageSlug
+                                ? res?.currentGames[0]?.urlSlug
+                                : res?.currentGames[0]?.offerMappings[0]?.pageSlug
                         }`
                     )
                     .setThumbnail(
                         "https://peralstudio.com/images/epic-games.png"
                     )
-                    .setImage(res.currentGames[0]?.keyImages[0]?.url)
+                    .setImage(res?.currentGames[0]?.keyImages[0]?.url)
                     .addFields(
                         {
                             name: "Precio Normal",
                             value: `${formatPrice(
-                                res.currentGames[0].price.totalPrice
-                                    .originalPrice
+                                res?.currentGames[0]?.price?.totalPrice
+                                ?.originalPrice
                             )}€`,
                             inline: true,
                         },
                         {
                             name: "Desarroladora",
-                            value: `${res.currentGames[0]?.seller?.name}`,
+                            value: `${res?.currentGames[0]?.seller?.name}`,
                             inline: true,
                         }
                     )
@@ -73,32 +73,32 @@ const epicGamesFree = async (client) => {
                     .setColor("#180830");
 
                 const embed2 = new EmbedBuilder()
-                    .setTitle(`${res.currentGames[1].title}`)
+                    .setTitle(`${res?.currentGames[1]?.title}`)
                     .setDescription(
                         `${
-                            res.currentGames[1].description
+                            res?.currentGames[1]?.description
                         }\n\nhttps://store.epicgames.com/es-ES/p/${
                             res.currentGames[1].urlSlug.includes("-")
-                                ? res.currentGames[1].urlSlug
-                                : res.currentGames[1].offerMappings[0]?.pageSlug
+                                ? res?.currentGames[1]?.urlSlug
+                                : res?.currentGames[1]?.offerMappings[0]?.pageSlug
                         }`
                     )
                     .setThumbnail(
                         "https://peralstudio.com/images/epic-games.png"
                     )
-                    .setImage(res.currentGames[1]?.keyImages[1]?.url)
+                    .setImage(res?.currentGames[1]?.keyImages[1]?.url)
                     .addFields(
                         {
                             name: "Precio Normal",
                             value: `${formatPrice(
-                                res.currentGames[1].price?.totalPrice
+                                res?.currentGames[1]?.price?.totalPrice
                                     ?.originalPrice
                             )}€`,
                             inline: true,
                         },
                         {
                             name: "Desarroladora",
-                            value: `${res.currentGames[1]?.seller?.name}`,
+                            value: `${res?.currentGames[1]?.seller?.name}`,
                             inline: true,
                         }
                     )
@@ -124,32 +124,32 @@ const epicGamesFree = async (client) => {
                     .setColor("#C28F2C");
 
                 const embed3 = new EmbedBuilder()
-                    .setTitle(`${res.nextGames[0].title}`)
+                    .setTitle(`${res?.nextGames[0]?.title}`)
                     .setDescription(
                         `${
                             res.nextGames[0].description
                         }\n\nhttps://store.epicgames.com/es-ES/p/${
-                            res.nextGames[0].urlSlug.includes("-")
-                                ? res.nextGames[0].urlSlug
-                                : res.nextGames[0].offerMappings[0]?.pageSlug
+                            res?.nextGames[0]?.urlSlug.includes("-")
+                                ? res?.nextGames[0]?.urlSlug
+                                : res?.nextGames[0]?.offerMappings[0]?.pageSlug
                         }`
                     )
                     .setThumbnail(
                         "https://peralstudio.com/images/epic-games.png"
                     )
-                    .setImage(res.nextGames[0]?.keyImages[0]?.url)
+                    .setImage(res?.nextGames[0]?.keyImages[0]?.url)
                     .addFields(
                         {
                             name: "Precio Normal",
                             value: `${formatPrice(
-                                res.nextGames[0].price?.totalPrice
+                                res?.nextGames[0].price?.totalPrice
                                     ?.originalPrice
                             )}€`,
                             inline: true,
                         },
                         {
                             name: "Desarroladora",
-                            value: `${res.nextGames[0]?.seller?.name}`,
+                            value: `${res?.nextGames[0]?.seller?.name}`,
                             inline: true,
                         }
                     )
@@ -161,32 +161,32 @@ const epicGamesFree = async (client) => {
                     .setColor("#180830");
 
                 const embed4 = new EmbedBuilder()
-                    .setTitle(`${res.nextGames[1].title}`)
+                    .setTitle(`${res?.nextGames[1]?.title}`)
                     .setDescription(
                         `${
-                            res.nextGames[1].description
+                            res?.nextGames[1]?.description
                         }\n\nhttps://store.epicgames.com/es-ES/p/${
-                            res.nextGames[1].urlSlug.includes("-")
-                                ? res.nextGames[1].urlSlug
-                                : res.nextGames[1].offerMappings[0]?.pageSlug
+                            res?.nextGames[1]?.urlSlug.includes("-")
+                                ? res?.nextGames[1]?.urlSlug
+                                : res?.nextGames[1]?.offerMappings[0]?.pageSlug
                         }`
                     )
                     .setThumbnail(
                         "https://peralstudio.com/images/epic-games.png"
                     )
-                    .setImage(res.nextGames[1]?.keyImages[0]?.url)
+                    .setImage(res?.nextGames[1]?.keyImages[0]?.url)
                     .addFields(
                         {
                             name: "Precio Normal",
                             value: `${formatPrice(
-                                res.nextGames[1].price?.totalPrice
+                                res?.nextGames[1]?.price?.totalPrice
                                     ?.originalPrice
                             )}€`,
                             inline: true,
                         },
                         {
                             name: "Desarroladora",
-                            value: `${res.nextGames[1]?.seller?.name}`,
+                            value: `${res?.nextGames[1]?.seller?.name}`,
                             inline: true,
                         }
                     )
