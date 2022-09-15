@@ -2,16 +2,14 @@ import { getGames } from "epic-free-games";
 import { EmbedBuilder } from "discord.js";
 import dayjs from "dayjs";
 
+//--------------solo envia embeds si no hay ya alguno anterior en el canal --------------
 const epicGamesFree = async (client) => {
     const versionbot = "PerBot v2.0 Peralstudio.com";
     const now = new Date();
-    console.log('getday', now.getDay());
-    console.log('getHours', now.getHours().toLocaleString());
-    console.log('getMinutes', now.getMinutes().toLocaleString().toString());
     if (
         now.getDay() == 4 &&
         now.getHours().toLocaleString() == 16 &&
-        now.getMinutes().toLocaleString().toString() === "34"
+        now.getMinutes().toLocaleString().toString() === "41"
     ) {
         getGames("ES", true)
             .then(async (res) => {
