@@ -20,6 +20,9 @@ import {
     IntentsBitField,
     Client,
     GatewayIntentBits,
+    ModalBuilder,
+    ActionRowBuilder,
+    ButtonBuilder,
 } from "discord.js";
 
 import fetch from "node-fetch";
@@ -382,6 +385,10 @@ player.on("queueEnd", async (queue, track) => {
 client.on("interactionCreate", async (interaction) => {
     if (!interaction.isChatInputCommand()) return;
 
+    if(interaction.isButton()) {
+        console.log(interaction);
+    }
+
     //COMANDO EMAIL
     if (interaction.commandName === "email") {
         if (interaction.user.id !== "209338137346834433") {
@@ -586,29 +593,30 @@ client.on("interactionCreate", async (interaction) => {
             embeds: [
               new EmbedBuilder()
                 .setTitle(`⏱️ ¡Cargando canción **${track.title}**!`)
+                .setDescription('**Comandos**')
                 .addFields([
                   {
-                    name: "Comando: `/cola`",
+                    name: "`/cola`",
                     value: "Ver la cola de reproducción.",
                   },
                   {
-                    name: "Comando: `/anterior`",
+                    name: "`/anterior`",
                     value: "Reproducir la canción anterior.",
                   },
                   {
-                    name: "Comando: `/siguiente`",
+                    name: "`/siguiente`",
                     value: "Reproducir la canción siguiente.",
                   },
                   {
-                    name: "Comando: `/pause`",
+                    name: "`/pause`",
                     value: "Pausar la reproducción.",
                   },
                   {
-                    name: "Comando: `/reanudar`",
+                    name: "`/reanudar`",
                     value: "Reanudar la canción actual.",
                   },
                   {
-                    name: "Comando: `/stop` ",
+                    name: "`/stop` ",
                     value: "Detener la reproducción.",
                   },
                 ])
@@ -1959,6 +1967,26 @@ client.on("interactionCreate", async (interaction) => {
             });
             return;
         } else {
+            if(amountToDelete > 20) {
+                const modal = new ModalBuilder()
+                  .setTitle(
+                    `Estas seguro que quieres eliminar ${amountToDelete} mensajes?`
+                  )
+                  .setCustomId("deleteMore20Msg")
+                  .setComponents(
+                    new ActionRowBuilder().setComponents(
+                      new ButtonBuilder()
+                        .setCustomId("si")
+                        .setLabel("Si!")
+                        .setStyle(ButtonStyle.Primary),
+                      new ButtonBuilder()
+                        .setCustomId("no")
+                        .setLabel("No")
+                        .setStyle(ButtonStyle.Primary)
+                    )
+                  );
+                return;
+            }
             interaction.channel.messages
                 .fetch({ limit: amountToDelete })
                 .then((messages) => {
