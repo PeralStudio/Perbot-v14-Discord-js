@@ -558,7 +558,7 @@ client.on("interactionCreate", async (interaction) => {
                 embeds: [
                     new EmbedBuilder()
                         .setTitle(
-                            `✔ ¡Canción añadida a la cola: **${track.title}**!\nAutor: ${track.author}\nDuración: ${track.duration}`
+                            `✅ ¡Canción añadida a la cola: **${track.title}**!\nAutor: ${track.author}\nDuración: ${track.duration}`
                         )
                         .setDescription(
                             "**" +
