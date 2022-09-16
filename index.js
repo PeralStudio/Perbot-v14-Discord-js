@@ -552,6 +552,7 @@ client.on("interactionCreate", async (interaction) => {
                         }),
                 ],
             });
+        console.log(track);
         queue.play(track);
         queueToList.push(track.title);
 
@@ -703,7 +704,11 @@ client.on("interactionCreate", async (interaction) => {
                 ],
                 ephemeral: true,
             });
-        if (queueToList.length > 1) {
+
+            if(queueToList.length)
+
+
+        if (queueToList.length <= 1) {
             queue.skip();
             return await interaction.reply({
                 embeds: [
