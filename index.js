@@ -355,7 +355,7 @@ player.on("trackStart", async (queue, track) =>
     queue.metadata.channel.send({embeds: [
         new EmbedBuilder()
             .setTitle(
-                `⏱️ ¡Canción añadida a la cola: **${track.title}**!`
+                `▶ ¡Reproduciendo **${track.title}**! \nAutor: ${track.author}\nDuración: ${track.duration}`
             )
             .setDescription(
                 "**" +
@@ -558,12 +558,12 @@ client.on("interactionCreate", async (interaction) => {
                 embeds: [
                     new EmbedBuilder()
                         .setTitle(
-                            `⏱️ ¡Canción añadida a la cola: **${track.title}**!`
+                            `✔ ¡Canción añadida a la cola: **${track.title}**!\nAutor: ${track.author}\nDuración: ${track.duration}`
                         )
                         .setDescription(
                             "**" +
                                 queueToList.length +
-                                "** canciones en la cola. \nComando: `/cola` para ver la cola de reproducción."
+                                "**" +queueToList.length <= 1 ? 'canción' : 'canciones' + "en la cola. \nComando: `/cola` para ver la cola de reproducción."
                         )
                         .setImage(track?.thumbnail)
                         .setColor("#EA3939")
