@@ -552,8 +552,6 @@ client.on("interactionCreate", async (interaction) => {
                         }),
                 ],
             });
-        console.log(queue.getTrackPosition());
-        // console.log(track);
         queue.play(track);
         queueToList.push(track.title);
 
@@ -691,6 +689,7 @@ client.on("interactionCreate", async (interaction) => {
     //COMANDO SIGUIENTE
     if (interaction.commandName === "siguiente") {
         const queue = player.getQueue(interaction.guild);
+        console.log(queue.getTrackPosition());
         if (!queue)
             return await interaction.reply({
                 embeds: [
