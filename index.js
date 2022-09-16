@@ -689,7 +689,7 @@ client.on("interactionCreate", async (interaction) => {
     //COMANDO SIGUIENTE
     if (interaction.commandName === "siguiente") {
         const queue = player.getQueue(interaction.guild);
-        console.log(queue.current);
+        console.log(queue);
         if (!queue)
             return await interaction.reply({
                 embeds: [
