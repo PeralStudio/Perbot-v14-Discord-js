@@ -693,7 +693,7 @@ client.on("interactionCreate", async (interaction) => {
     //COMANDO SIGUIENTE
     if (interaction.commandName === "siguiente") {
         const queue = player.getQueue(interaction.guild);
-        console.log(queue);
+        console.log('track position', queue.getTrackPosition());
         if (!queue)
             return await interaction.reply({
                 embeds: [
