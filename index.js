@@ -548,6 +548,7 @@ client.on("interactionCreate", async (interaction) => {
                                 queueToList.length +
                                 "** canciones en la cola. \nComando: `/cola` para ver la cola de reproducción."
                         )
+                        .setImage(track?.thumbnail)
                         .setColor("#EA3939")
                         .setTimestamp()
                         .setFooter({
