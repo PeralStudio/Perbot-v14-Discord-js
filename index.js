@@ -644,7 +644,6 @@ client.on("interactionCreate", async (interaction) => {
             embeds: [
                 new EmbedBuilder()
                     .setTitle(`⏸️ ¡Canción pausada!`)
-                    .setThumbnail('https://drive.google.com/file/d/1X2uRYZN1wrDb5CSN2E8cmKLUUxef0WtP/view?usp=sharing')
                     .setColor("#EA3939")
                     .setTimestamp()
                     .setFooter({
