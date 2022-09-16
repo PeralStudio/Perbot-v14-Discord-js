@@ -554,7 +554,7 @@ client.on("interactionCreate", async (interaction) => {
                             iconURL: client.user.displayAvatarURL(),
                         }),
                 ],
-            });
+            }); 
         queue.play(track);
         queue.addTrack(track)
         queueToList.push(track.title);
