@@ -555,24 +555,23 @@ client.on("interactionCreate", async (interaction) => {
 
         if (queueToList.length > 1) {
             return await interaction.followUp({
-                embeds: [
-                    new EmbedBuilder()
-                        .setTitle(
-                            `✅ ¡Canción añadida a la cola: **${track.title}**!\nAutor: ${track.author}\nDuración: ${track.duration}`
-                        )
-                        .setDescription(
-                            "**" +
-                                queueToList.length +
-                                "**" +queueToList.length <= 1 ? 'canción' : 'canciones' + "en la cola. \nComando: `/cola` para ver la cola de reproducción."
-                        )
-                        .setImage(track?.thumbnail)
-                        .setColor("#EA3939")
-                        .setTimestamp()
-                        .setFooter({
-                            text: versionbot,
-                            iconURL: client.user.displayAvatarURL(),
-                        }),
-                ],
+              embeds: [
+                new EmbedBuilder()
+                  .setTitle(
+                    `✅ ¡Canción añadida a la cola\n**${track.title}**!\nAutor: ${track.author}\nDuración: ${track.duration}`
+                  )
+                  .setDescription(
+                    "**" +
+                      queueToList.length +
+                      "** canciones en la cola. \nComando: `/cola` para ver la cola de reproducción."
+                  )
+                  .setColor("#EA3939")
+                  .setTimestamp()
+                  .setFooter({
+                    text: versionbot,
+                    iconURL: client.user.displayAvatarURL(),
+                  }),
+              ],
             });
         } else {
             return await interaction.followUp({
