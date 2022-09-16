@@ -693,7 +693,7 @@ client.on("interactionCreate", async (interaction) => {
     //COMANDO SIGUIENTE
     if (interaction.commandName === "siguiente") {
         const queue = player.getQueue(interaction.guild);
-        console.log('track position', queue.getTrackPosition());
+        console.log('queue.tracks.length', queue.tracks.length);
         if (!queue)
             return await interaction.reply({
                 embeds: [
@@ -707,11 +707,9 @@ client.on("interactionCreate", async (interaction) => {
                         }),
                 ],
                 ephemeral: true,
-            });
+            }); 
 
-            if(queueToList.length)
-
-
+        // if(queueToList.length >  queue.tracks.length -1)
         if (queueToList.length > 1) {
             queue.skip();
             return await interaction.reply({
