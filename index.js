@@ -556,65 +556,69 @@ client.on("interactionCreate", async (interaction) => {
         queueToList.push(track.title);
 
         if (queueToList.length > 1) {
-            return await interaction.followUp({
-              embeds: [
-                new EmbedBuilder()
-                  .setTitle(
-                    `✅ ¡Canción añadida a la cola! \n**${track.title}**\n\nAutor: ${track.author}\nDuración: ${track.duration}`
-                  )
-                  .setDescription(
+          const cancionesSingOrPlur =
+            queueToList.length <= 1 ? "canción" : "canciones";
+          return await interaction.followUp({
+            embeds: [
+              new EmbedBuilder()
+                .setTitle(
+                  `✅ ¡Canción añadida a la cola! \n**${track.title}**\n\nAutor: ${track.author}\nDuración: ${track.duration}`
+                )
+                .setDescription(
+                  "**" +
+                    queueToList.length +
                     "**" +
-                      queueToList.length +
-                      "** canciones en la cola. \nComando: `/cola` para ver la cola de reproducción."
-                  )
-                  .setThumbnail(track.thumbnail)
-                  .setColor("#EA3939")
-                  .setTimestamp()
-                  .setFooter({
-                    text: versionbot,
-                    iconURL: client.user.displayAvatarURL(),
-                  }),
-              ],
-            });
+                    cancionesSingOrPlur +
+                    "en la cola. \nComando: `/cola` para ver la cola de reproducción."
+                )
+                .setThumbnail(track.thumbnail)
+                .setColor("#EA3939")
+                .setTimestamp()
+                .setFooter({
+                  text: versionbot,
+                  iconURL: client.user.displayAvatarURL(),
+                }),
+            ],
+          });
         } else {
-            return await interaction.followUp({
-                embeds: [
-                    new EmbedBuilder()
-                        .setTitle(`⏱️ ¡Cargando canción **${track.title}**!`)
-                        .addFields([
-                            {
-                                name: "Comando: `/cola`",
-                                value: "Ver la cola de reproducción.",
-                            },
-                            {
-                                name: "Comando: `/anterior`",
-                                value: "Reproducir la canción anterior.",
-                            },
-                            {
-                                name: "Comando: `/siguiente`",
-                                value: "Reproducir la canción siguiente.",
-                            },
-                            {
-                                name: "Comando: `/pause`",
-                                value: "Pausar la reproducción.",
-                            },
-                            {
-                                name: "Comando: `/reanudar`",
-                                value: "Reanudar la canción actual.",
-                            },
-                            {
-                                name: "Comando: `/stop` ",
-                                value: "Detener la reproducción.",
-                            },
-                        ])
-                        .setColor("#EA3939")
-                        .setTimestamp()
-                        .setFooter({
-                            text: versionbot,
-                            iconURL: client.user.displayAvatarURL(),
-                        }),
-                ],
-            });
+          return await interaction.followUp({
+            embeds: [
+              new EmbedBuilder()
+                .setTitle(`⏱️ ¡Cargando canción **${track.title}**!`)
+                .addFields([
+                  {
+                    name: "Comando: `/cola`",
+                    value: "Ver la cola de reproducción.",
+                  },
+                  {
+                    name: "Comando: `/anterior`",
+                    value: "Reproducir la canción anterior.",
+                  },
+                  {
+                    name: "Comando: `/siguiente`",
+                    value: "Reproducir la canción siguiente.",
+                  },
+                  {
+                    name: "Comando: `/pause`",
+                    value: "Pausar la reproducción.",
+                  },
+                  {
+                    name: "Comando: `/reanudar`",
+                    value: "Reanudar la canción actual.",
+                  },
+                  {
+                    name: "Comando: `/stop` ",
+                    value: "Detener la reproducción.",
+                  },
+                ])
+                .setColor("#EA3939")
+                .setTimestamp()
+                .setFooter({
+                  text: versionbot,
+                  iconURL: client.user.displayAvatarURL(),
+                }),
+            ],
+          });
         }
     }
 
