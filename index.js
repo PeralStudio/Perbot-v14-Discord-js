@@ -510,6 +510,9 @@ client.on("interactionCreate", async (interaction) => {
                 channel: interaction.channel,
             },
             leaveOnEmptyCooldown: 60000,
+            leaveOnStop: false,
+            leaveOnEmpty: false,
+            
         });
 
         // verify vc connection
@@ -553,6 +556,7 @@ client.on("interactionCreate", async (interaction) => {
                 ],
             });
         queue.play(track);
+        queue.addTrack(track)
         queueToList.push(track.title);
 
         if (queueToList.length > 1) {
