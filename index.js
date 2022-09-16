@@ -556,6 +556,8 @@ client.on("interactionCreate", async (interaction) => {
         queue.play(track);
         queueToList.push(track.title);
 
+        console.log(queue.getTrackPosition())
+
         if (queueToList.length > 1) {
           const cancionesSingOrPlur =
             queueToList.length <= 1 ? "canción" : "canciones";
