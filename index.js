@@ -552,6 +552,7 @@ client.on("interactionCreate", async (interaction) => {
                         }),
                 ],
             });
+        console.log(queue);
         queue.play(track);
         queueToList.push(track.title);
 
@@ -689,7 +690,6 @@ client.on("interactionCreate", async (interaction) => {
     //COMANDO SIGUIENTE
     if (interaction.commandName === "siguiente") {
         const queue = player.getQueue(interaction.guild);
-        console.log(queue.getTrackPosition());
         if (!queue)
             return await interaction.reply({
                 embeds: [
@@ -708,7 +708,7 @@ client.on("interactionCreate", async (interaction) => {
             if(queueToList.length)
 
 
-        // if (queueToList.length > 1) {
+        if (queueToList.length > 1) {
             queue.skip();
             return await interaction.reply({
                 embeds: [
@@ -722,21 +722,21 @@ client.on("interactionCreate", async (interaction) => {
                         }),
                 ],
             });
-        // } else {
-        //     return await interaction.reply({
-        //         embeds: [
-        //             new EmbedBuilder()
-        //                 .setTitle(`¡No hay mas canciones!`)
-        //                 .setColor("#EA3939")
-        //                 .setTimestamp()
-        //                 .setFooter({
-        //                     text: versionbot,
-        //                     iconURL: client.user.displayAvatarURL(),
-        //                 }),
-        //         ],
-        //         ephemeral: true,
-        //     });
-        // }
+        } else {
+            return await interaction.reply({
+                embeds: [
+                    new EmbedBuilder()
+                        .setTitle(`¡No hay mas canciones!`)
+                        .setColor("#EA3939")
+                        .setTimestamp()
+                        .setFooter({
+                            text: versionbot,
+                            iconURL: client.user.displayAvatarURL(),
+                        }),
+                ],
+                ephemeral: true,
+            });
+        }
     }
 
     //COMANDO ANTERIOR
