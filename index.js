@@ -558,10 +558,10 @@ client.on("interactionCreate", async (interaction) => {
               embeds: [
                 new EmbedBuilder()
                   .setTitle(
-                    `✅ ¡Canción añadida a la cola\n**${track.title}**!\nAutor: ${track.author}\nDuración: ${track.duration}`
+                    `✅ ¡Canción añadida a la cola!\n**${track.title}**\nAutor: ${track.author}\nDuración: ${track.duration}`
                   )
                   .setDescription(
-                    "**" +
+                    `Autor: ${track.author}\nDuración: ${track.duration}\n**` +
                       queueToList.length +
                       "** canciones en la cola. \nComando: `/cola` para ver la cola de reproducción."
                   )
