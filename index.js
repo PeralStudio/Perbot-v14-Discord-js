@@ -694,6 +694,7 @@ client.on("interactionCreate", async (interaction) => {
     if (interaction.commandName === "siguiente") {
         const queue = player.getQueue(interaction.guild);
         console.log('queue.tracks.length', queue.tracks.length);
+        console.log('queue tracks', queue.tracks);
         if (!queue)
             return await interaction.reply({
                 embeds: [
