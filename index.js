@@ -362,7 +362,7 @@ const cancionesSingOrPlur = queueToList.length <= 1 ? 'canción' : 'canciones';
           .setDescription(
             "**" +
               queueToList.length +
-              "** canciones en la cola. \nComando: `/cola` para ver la cola de reproducción."
+              "**" + cancionesSingOrPlur + "en la cola. \nComando: `/cola` para ver la cola de reproducción."
           )
           .setImage(track?.thumbnail)
           .setColor("#EA3939")
