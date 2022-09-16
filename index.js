@@ -355,7 +355,7 @@ player.on("trackStart", async (queue, track) =>
     queue.metadata.channel.send({embeds: [
         new EmbedBuilder()
             .setTitle(
-                `▶ ¡Reproduciendo **${track.title}**! \n\nAutor: ${track.author}\nDuración: ${track.duration}`
+                `▶ ¡Reproduciendo!\n**${track.title}** \n\nAutor: ${track.author}\nDuración: ${track.duration}`
             )
             .setDescription(
                 "**" +
