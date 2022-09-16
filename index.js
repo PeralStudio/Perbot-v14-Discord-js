@@ -552,7 +552,8 @@ client.on("interactionCreate", async (interaction) => {
                         }),
                 ],
             });
-        console.log(queue);
+        console.log(queue.getTrackPosition());
+        // console.log(track);
         queue.play(track);
         queueToList.push(track.title);
 
