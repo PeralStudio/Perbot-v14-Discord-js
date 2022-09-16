@@ -552,7 +552,7 @@ client.on("interactionCreate", async (interaction) => {
                         }),
                 ],
             });
-        console.log(queue.current);
+        console.log(queue);
         queue.play(track);
         queueToList.push(track.title);
 
