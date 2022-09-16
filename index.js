@@ -362,7 +362,7 @@ const cancionesSingOrPlur = queueToList.length <= 1 ? 'canción' : 'canciones';
           .setDescription(
             "**" +
               queueToList.length +
-              "**" + cancionesSingOrPlur + "en la cola. \nComando: `/cola` para ver la cola de reproducción."
+              "** " + cancionesSingOrPlur + " en la cola. \nComando: `/cola` para ver la cola de reproducción."
           )
           .setImage(track?.thumbnail)
           .setColor("#EA3939")
@@ -567,9 +567,9 @@ client.on("interactionCreate", async (interaction) => {
                 .setDescription(
                   "**" +
                     queueToList.length +
-                    "**" +
+                    "** " +
                     cancionesSingOrPlur +
-                    "en la cola. \nComando: `/cola` para ver la cola de reproducción."
+                    " en la cola. \nComando: `/cola` para ver la cola de reproducción."
                 )
                 .setThumbnail(track.thumbnail)
                 .setColor("#EA3939")
