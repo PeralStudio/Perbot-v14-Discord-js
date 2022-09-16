@@ -511,7 +511,6 @@ client.on("interactionCreate", async (interaction) => {
             },
             leaveOnEmptyCooldown: 60000,
             leaveOnEmpty: false,
-            
         });
 
         // verify vc connection
@@ -553,9 +552,8 @@ client.on("interactionCreate", async (interaction) => {
                             iconURL: client.user.displayAvatarURL(),
                         }),
                 ],
-            }); 
+            });
         queue.play(track);
-        queue.addTrack(track)
         queueToList.push(track.title);
 
         if (queueToList.length > 1) {
@@ -692,8 +690,6 @@ client.on("interactionCreate", async (interaction) => {
     //COMANDO SIGUIENTE
     if (interaction.commandName === "siguiente") {
         const queue = player.getQueue(interaction.guild);
-        console.log('queue.tracks.length', queue.tracks.length);
-        console.log('queue tracks', queue.tracks);
         if (!queue)
             return await interaction.reply({
                 embeds: [
@@ -707,9 +703,7 @@ client.on("interactionCreate", async (interaction) => {
                         }),
                 ],
                 ephemeral: true,
-            }); 
-
-        // if(queueToList.length >  queue.tracks.length -1)
+            });
         if (queueToList.length > 1) {
             queue.skip();
             return await interaction.reply({
