@@ -351,26 +351,29 @@ const player = new Player(client);
 
 let queueToList = [];
 // add the trackStart event so when a song will be played this message will be sent
-player.on("trackStart", async (queue, track) =>
-    queue.metadata.channel.send({embeds: [
+player.on("trackStart", async (queue, track) =>{
+const cancionesSingOrPlur = queueToList.length <= 1 ? 'canción' : 'canciones'; 
+    queue.metadata.channel.send({
+      embeds: [
         new EmbedBuilder()
-            .setTitle(
-                `▶ ¡Reproduciendo!\n**${track.title}** \n\nAutor: ${track.author}\nDuración: ${track.duration}`
-            )
-            .setDescription(
-                "**" +
-                    queueToList.length +
-                    "** canciones en la cola. \nComando: `/cola` para ver la cola de reproducción."
-            )
-            .setImage(track?.thumbnail)
-            .setColor("#EA3939")
-            .setTimestamp()
-            .setFooter({
-                text: versionbot,
-                iconURL: client.user.displayAvatarURL(),
-            }),
-    ],})
-);
+          .setTitle(
+            `▶ ¡Reproduciendo!\n**${track.title}** \n\nAutor: ${track.author}\nDuración: ${track.duration}`
+          )
+          .setDescription(
+            "**" +
+              queueToList.length +
+              "** canciones en la cola. \nComando: `/cola` para ver la cola de reproducción."
+          )
+          .setImage(track?.thumbnail)
+          .setColor("#EA3939")
+          .setTimestamp()
+          .setFooter({
+            text: versionbot,
+            iconURL: client.user.displayAvatarURL(),
+          }),
+      ],
+    });
+});
 
 player.on("queueEnd", async (queue, track) => {
     queueToList = [];
@@ -549,7 +552,6 @@ client.on("interactionCreate", async (interaction) => {
                         }),
                 ],
             });
-            console.log(track);
         queue.play(track);
         queueToList.push(track.title);
 
