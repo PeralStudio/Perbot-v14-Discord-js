@@ -20,6 +20,9 @@ import {
     IntentsBitField,
     Client,
     GatewayIntentBits,
+    ActionRowBuilder,
+    ButtonBuilder,
+    ButtonStyle,
 } from "discord.js";
 
 import fetch from "node-fetch";
@@ -1961,6 +1964,25 @@ client.on("interactionCreate", async (interaction) => {
             });
             return;
         } else {
+            if (amountToDelete > 20) {
+                interaction.reply({
+                    components: [
+                        new ActionRowBuilder().setComponents(
+                            new ButtonBuilder()
+                            .setCustomId('si')
+                            .setLabel('Claro')
+                            .setStyle(ButtonStyle.Success)
+                        ),
+                        new ActionRowBuilder().setComponents(
+                            new ButtonBuilder()
+                            .setCustomId('no')
+                            .setLabel('Nop')
+                            .setStyle(ButtonStyle.Success)
+                        ),
+                    ]
+                });
+                return;
+            }
             interaction.channel.messages
                 .fetch({ limit: amountToDelete })
                 .then((messages) => {
@@ -2696,6 +2718,10 @@ client.on("interactionCreate", async (interaction) => {
             });
 
         await interaction.reply({ embeds: [embed] });
+    }
+
+    if(interaction.isButton()) {
+        console.log(interaction);
     }
 });
 
