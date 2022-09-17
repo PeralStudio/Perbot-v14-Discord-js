@@ -384,6 +384,7 @@ player.on("queueEnd", async (queue, track) => {
 
 client.on("interactionCreate", async (interaction) => {
     if (!interaction.isChatInputCommand()) return;
+    if (interaction.isButton()) {console.log('pepe')}
 
     //COMANDO EMAIL
     if (interaction.commandName === "email") {
