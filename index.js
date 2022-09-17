@@ -1968,23 +1968,20 @@ client.on("interactionCreate", async (interaction) => {
             return;
         } else {
             if(amountToDelete > 20) {
-                const modal = new ModalBuilder()
-                  .setTitle(
-                    `Estas seguro que quieres eliminar ${amountToDelete} mensajes?`
-                  )
-                  .setCustomId("deleteMore20Msg")
-                  .setComponents(
-                    new ActionRowBuilder().setComponents(
-                      new ButtonBuilder()
-                        .setCustomId("si")
-                        .setLabel("Si!")
-                        .setStyle(ButtonStyle.Primary),
-                      new ButtonBuilder()
-                        .setCustomId("no")
-                        .setLabel("No")
-                        .setStyle(ButtonStyle.Primary)
-                    )
-                  );
+                interaction.reply({
+                    components: [
+                        new ActionRowBuilder().setComponents(
+                            new ButtonBuilder()
+                              .setCustomId("si")
+                              .setLabel("Si!")
+                              .setStyle(ButtonStyle.Primary),
+                            new ButtonBuilder()
+                              .setCustomId("no")
+                              .setLabel("No")
+                              .setStyle(ButtonStyle.Primary)
+                          )
+                    ]
+                })
                 return;
             }
             interaction.channel.messages
