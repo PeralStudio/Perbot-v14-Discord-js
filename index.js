@@ -586,7 +586,7 @@ client.on("interactionCreate", async (interaction) => {
             embeds: [
               new EmbedBuilder()
                 .setTitle(`⏱️ ¡Cargando canción **${track.title}**!`)
-                .setDescription(`Comandos Disponibles`)
+                .setDescription(`**Comandos Disponibles**`)
                 .addFields([
                   {
                     name: "`/cola`",
