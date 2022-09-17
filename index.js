@@ -351,27 +351,30 @@ const player = new Player(client);
 
 let queueToList = [];
 // add the trackStart event so when a song will be played this message will be sent
-player.on("trackStart", async (queue, track) =>{
-const cancionesSingOrPlur = queueToList.length <= 1 ? 'canción' : 'canciones'; 
+player.on("trackStart", async (queue, track) => {
+    const cancionesSingOrPlur =
+        queueToList.length <= 1 ? "canción" : "canciones";
     queue.metadata.channel.send({
-      embeds: [
-        new EmbedBuilder()
-          .setTitle(
-            `▶ ¡Reproduciendo!\n**${track.title}** \n\nAutor: ${track.author}\nDuración: ${track.duration}`
-          )
-          .setDescription(
-            "**" +
-              queueToList.length +
-              "** " + cancionesSingOrPlur + " en la cola. \nComando: `/cola` para ver la cola de reproducción."
-          )
-          .setImage(track?.thumbnail)
-          .setColor("#EA3939")
-          .setTimestamp()
-          .setFooter({
-            text: versionbot,
-            iconURL: client.user.displayAvatarURL(),
-          }),
-      ],
+        embeds: [
+            new EmbedBuilder()
+                .setTitle(
+                    `▶ ¡Reproduciendo!\n**${track.title}** \n\nAutor: ${track.author}\nDuración: ${track.duration}`
+                )
+                .setDescription(
+                    "**" +
+                        queueToList.length +
+                        "** " +
+                        cancionesSingOrPlur +
+                        " en la cola. \nComando: `/cola` para ver la cola de reproducción."
+                )
+                .setImage(track?.thumbnail)
+                .setColor("#EA3939")
+                .setTimestamp()
+                .setFooter({
+                    text: versionbot,
+                    iconURL: client.user.displayAvatarURL(),
+                }),
+        ],
     });
 });
 
@@ -557,71 +560,71 @@ client.on("interactionCreate", async (interaction) => {
         queueToList.push(track.title);
 
         if (queueToList.length > 1) {
-          const cancionesSingOrPlur =
-            queueToList.length <= 1 ? "canción" : "canciones";
-          return await interaction.followUp({
-            embeds: [
-              new EmbedBuilder()
-                .setTitle(
-                  `✅ ¡Canción añadida a la cola! \n**${track.title}**\n\nAutor: ${track.author}\nDuración: ${track.duration}`
-                )
-                .setDescription(
-                  "**" +
-                    queueToList.length +
-                    "** " +
-                    cancionesSingOrPlur +
-                    " en la cola. \nComando: `/cola` para ver la cola de reproducción."
-                )
-                .setThumbnail(track.thumbnail)
-                .setColor("#EA3939")
-                .setTimestamp()
-                .setFooter({
-                  text: versionbot,
-                  iconURL: client.user.displayAvatarURL(),
-                }),
-            ],
-          });
+            const cancionesSingOrPlur =
+                queueToList.length <= 1 ? "canción" : "canciones";
+            return await interaction.followUp({
+                embeds: [
+                    new EmbedBuilder()
+                        .setTitle(
+                            `✅ ¡Canción añadida a la cola! \n**${track.title}**\n\nAutor: ${track.author}\nDuración: ${track.duration}`
+                        )
+                        .setDescription(
+                            "**" +
+                                queueToList.length +
+                                "** " +
+                                cancionesSingOrPlur +
+                                " en la cola. \nComando: `/cola` para ver la cola de reproducción."
+                        )
+                        .setThumbnail(track.thumbnail)
+                        .setColor("#EA3939")
+                        .setTimestamp()
+                        .setFooter({
+                            text: versionbot,
+                            iconURL: client.user.displayAvatarURL(),
+                        }),
+                ],
+            });
         } else {
-          return await interaction.followUp({
-            embeds: [
-              new EmbedBuilder()
-                .setTitle(`⏱️ ¡Cargando canción **${track.title}**!`)
-                .setDescription(`**Comandos Disponibles**`)
-                .setThumbnail(track?.thumbnail)
-                .addFields([
-                  {
-                    name: "`/cola`",
-                    value: "Ver la cola de reproducción.",
-                  },
-                  {
-                    name: "`/anterior`",
-                    value: "Reproducir la canción anterior.",
-                  },
-                  {
-                    name: "`/siguiente`",
-                    value: "Reproducir la canción siguiente.",
-                  },
-                  {
-                    name: "`/pause`",
-                    value: "Pausar la reproducción.",
-                  },
-                  {
-                    name: "`/reanudar`",
-                    value: "Reanudar la canción actual.",
-                  },
-                  {
-                    name: "`/stop` ",
-                    value: "Detener la reproducción.",
-                  },
-                ])
-                .setColor("#EA3939")
-                .setTimestamp()
-                .setFooter({
-                  text: versionbot,
-                  iconURL: client.user.displayAvatarURL(),
-                }),
-            ],
-          });
+            return await interaction.followUp({
+                embeds: [
+                    new EmbedBuilder()
+                        .setTitle(`⏱️ ¡Cargando canción **${track.title}**!`)
+                        .setDescription(`**Comandos Disponibles**`)
+                        .setThumbnail(track?.thumbnail)
+                        .addFields([
+                            {
+                                name: "`/cola`",
+                                value: "Ver la cola de reproducción.",
+                            },
+                            {
+                                name: "`/anterior`",
+                                value: "Reproducir la canción anterior.",
+                            },
+                            {
+                                name: "`/siguiente`",
+                                value: "Reproducir la canción siguiente.",
+                            },
+                            {
+                                name: "`/pause`",
+                                value: "Pausar la reproducción.",
+                            },
+                            {
+                                name: "`/reanudar`",
+                                value: "Reanudar la canción actual.",
+                            },
+                            {
+                                name: "`/stop` ",
+                                value: "Detener la reproducción.",
+                            },
+                        ])
+                        .setColor("#EA3939")
+                        .setTimestamp()
+                        .setFooter({
+                            text: versionbot,
+                            iconURL: client.user.displayAvatarURL(),
+                        }),
+                ],
+            });
         }
     }
 
