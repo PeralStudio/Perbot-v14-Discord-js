@@ -23,6 +23,7 @@ import {
     ModalBuilder,
     ActionRowBuilder,
     ButtonBuilder,
+    ButtonStyle,
 } from "discord.js";
 
 import fetch from "node-fetch";
