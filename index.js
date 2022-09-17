@@ -20,10 +20,6 @@ import {
     IntentsBitField,
     Client,
     GatewayIntentBits,
-    ModalBuilder,
-    ActionRowBuilder,
-    ButtonBuilder,
-    ButtonStyle,
 } from "discord.js";
 
 import fetch from "node-fetch";
@@ -386,9 +382,6 @@ player.on("queueEnd", async (queue, track) => {
 client.on("interactionCreate", async (interaction) => {
     if (!interaction.isChatInputCommand()) return;
 
-    if (!interaction.isButton()) return;
-	console.log(interaction);
-
     //COMANDO EMAIL
     if (interaction.commandName === "email") {
         if (interaction.user.id !== "209338137346834433") {
@@ -593,7 +586,7 @@ client.on("interactionCreate", async (interaction) => {
             embeds: [
               new EmbedBuilder()
                 .setTitle(`⏱️ ¡Cargando canción **${track.title}**!`)
-                .setDescription('**Comandos**')
+                .setDescription(`Comandos Disponibles`)
                 .addFields([
                   {
                     name: "`/cola`",
@@ -1967,23 +1960,6 @@ client.on("interactionCreate", async (interaction) => {
             });
             return;
         } else {
-            if(amountToDelete > 20) {
-                interaction.reply({
-                    components: [
-                        new ActionRowBuilder().setComponents(
-                            new ButtonBuilder()
-                              .setCustomId("si")
-                              .setLabel("Si!")
-                              .setStyle(ButtonStyle.Primary),
-                            new ButtonBuilder()
-                              .setCustomId("no")
-                              .setLabel("No")
-                              .setStyle(ButtonStyle.Primary)
-                          )
-                    ]
-                })
-                return;
-            }
             interaction.channel.messages
                 .fetch({ limit: amountToDelete })
                 .then((messages) => {
