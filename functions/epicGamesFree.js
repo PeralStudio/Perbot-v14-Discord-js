@@ -2,13 +2,13 @@ import { getGames } from "epic-free-games";
 import { EmbedBuilder } from "discord.js";
 import dayjs from "dayjs";
 
-//--------------solo envia embeds si no hay ya alguno anterior en el canal --------------
 const epicGamesFree = async (client) => {
     const versionbot = "PerBot v2.0 Peralstudio.com";
     const now = new Date();
+
     if (
         now.getDay() == 4 &&
-        now.getHours().toLocaleString() == 15 &&
+        now.getHours() == 15 &&
         now.getMinutes().toLocaleString().toString() === "30"
     ) {
         getGames("ES", true)
@@ -19,15 +19,32 @@ const epicGamesFree = async (client) => {
                     return str.join(".");
                 };
 
+                if (!res) {
+                    const embedError = new EmbedBuilder()
+                        .setTitle(`Ha ocurrido un error.`)
+                        .setTimestamp()
+                        .setFooter({
+                            text: versionbot,
+                            iconURL: client?.user.displayAvatarURL(),
+                        })
+                        .setColor("#ff0000");
+
+                    client?.channels.cache.get("1018578696627568701").send({
+                        embeds: [embedError],
+                    });
+                }
+
                 //JUEGOS GRATIS ESTA SEMANA
                 const embedFree = new EmbedBuilder()
                     .setTitle(
-                        `¡Juegos Gratis La Semana del **${dayjs().format(
+                        `¡ Juegos Gratis La Semana del (**${dayjs().format(
                             "DD/MM/YY"
-                        )}** a **${dayjs().add(7, "day").format("DD/MM/YY")}**!`
+                        )}**) a (**${dayjs()
+                            .add(7, "day")
+                            .format("DD/MM/YY")}**) !`
                     )
                     .setDescription(
-                        `\n ⠀⠀⠀⠀⠀ ⬇️ ⠀⠀⠀⠀ ⬇️ ⠀⠀⠀⠀ ⬇️  ⠀⠀⠀⠀ ⬇️ ⠀⠀⠀⠀ `
+                        `\n ⠀⠀⠀⠀⠀ ⬇️ ⠀⠀⠀⠀ ⬇️ ⠀⠀⠀⠀ ⬇️  ⠀⠀⠀⠀ ⬇️ ⠀⠀⠀⠀ ⬇️ ⠀⠀⠀⠀ `
                     )
                     .setColor("#C28F2C");
 
@@ -39,7 +56,8 @@ const epicGamesFree = async (client) => {
                         }\n\nhttps://store.epicgames.com/es-ES/p/${
                             res.currentGames[0].urlSlug.includes("-")
                                 ? res?.currentGames[0]?.urlSlug
-                                : res?.currentGames[0]?.offerMappings[0]?.pageSlug
+                                : res?.currentGames[0]?.offerMappings[0]
+                                      ?.pageSlug
                         }`
                     )
                     .setThumbnail(
@@ -51,7 +69,7 @@ const epicGamesFree = async (client) => {
                             name: "Precio Normal",
                             value: `${formatPrice(
                                 res?.currentGames[0]?.price?.totalPrice
-                                ?.originalPrice
+                                    ?.originalPrice
                             )}€`,
                             inline: true,
                         },
@@ -66,7 +84,7 @@ const epicGamesFree = async (client) => {
                         text: versionbot,
                         iconURL: client?.user.displayAvatarURL(),
                     })
-                    .setColor("#180830");
+                    .setColor("#27963f");
 
                 const embed2 = new EmbedBuilder()
                     .setTitle(`${res?.currentGames[1]?.title}`)
@@ -76,13 +94,14 @@ const epicGamesFree = async (client) => {
                         }\n\nhttps://store.epicgames.com/es-ES/p/${
                             res.currentGames[1].urlSlug.includes("-")
                                 ? res?.currentGames[1]?.urlSlug
-                                : res?.currentGames[1]?.offerMappings[0]?.pageSlug
+                                : res?.currentGames[1]?.offerMappings[0]
+                                      ?.pageSlug
                         }`
                     )
                     .setThumbnail(
                         "https://peralstudio.com/images/epic-games.png"
                     )
-                    .setImage(res?.currentGames[1]?.keyImages[1]?.url)
+                    .setImage(res?.currentGames[1]?.keyImages[0]?.url)
                     .addFields(
                         {
                             name: "Precio Normal",
@@ -103,19 +122,19 @@ const epicGamesFree = async (client) => {
                         text: versionbot,
                         iconURL: client?.user.displayAvatarURL(),
                     })
-                    .setColor("#180830");
+                    .setColor("#27963f");
 
                 //JUEGOS GRATIS ¡SEMANA QUE VIENE!
                 const embedFree2 = new EmbedBuilder()
                     .setTitle(
-                        `¡Juegos Gratis La Semana del **${dayjs()
+                        `¡ Juegos Gratis La Semana del (**${dayjs()
                             .add(7, "day")
-                            .format("DD/MM/YY")}** a **${dayjs()
+                            .format("DD/MM/YY")}**) a (**${dayjs()
                             .add(14, "day")
-                            .format("DD/MM/YY")}**`
+                            .format("DD/MM/YY")}**) !`
                     )
                     .setDescription(
-                        `\n ⠀⠀⠀⠀⠀ ⬇️ ⠀⠀⠀⠀ ⬇️ ⠀⠀⠀⠀ ⬇️  ⠀⠀⠀⠀ ⬇️ ⠀⠀⠀⠀ `
+                        `\n ⠀⠀⠀⠀⠀ ⬇️ ⠀⠀⠀⠀ ⬇️ ⠀⠀⠀⠀ ⬇️  ⠀⠀⠀⠀ ⬇️ ⠀⠀⠀⠀ ⬇️ ⠀⠀⠀⠀`
                     )
                     .setColor("#C28F2C");
 
@@ -154,7 +173,7 @@ const epicGamesFree = async (client) => {
                         text: versionbot,
                         iconURL: client?.user.displayAvatarURL(),
                     })
-                    .setColor("#180830");
+                    .setColor("#ba3f3f");
 
                 const embed4 = new EmbedBuilder()
                     .setTitle(`${res?.nextGames[1]?.title}`)
@@ -191,9 +210,9 @@ const epicGamesFree = async (client) => {
                         text: versionbot,
                         iconURL: client?.user.displayAvatarURL(),
                     })
-                    .setColor("#180830");
+                    .setColor("#ba3f3f");
 
-                 await client?.channels.cache.get("1018578696627568701").send({
+                await client?.channels.cache.get("1018578696627568701").send({
                     embeds: [
                         embedFree,
                         embed,
