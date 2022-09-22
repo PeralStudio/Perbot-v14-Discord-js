@@ -11,11 +11,19 @@ const epicGamesFree = async (client) => {
     );
     const versionbot = "PerBot v2.0 Peralstudio.com";
     const now = new Date();
-    console.log("dia:", now.getDay());
-    console.log("hora:", now.getHours());
-    console.log("minutos: ", now.getMinutes());
+    const hour = new Date().toLocaleTimeString("es-ES", {
+        timeZone: "Europe/Madrid",
+    });
+    // console.log(hour[0] + hour[1] == "21" && hour[3] + hour[4] == "40");
+    // console.log("dia:", now.getDay());
+    // console.log("hora:", now.getHours());
+    // console.log("minutos: ", now.getMinutes());
 
-    if (now.getDay() == 4 && now.getHours() == 19 && now.getMinutes() == 31) {
+    if (
+        now.getDay() == 4 &&
+        hour[0] + hour[1] == "21" &&
+        hour[3] + hour[4] == "43"
+    ) {
         console.log(
             "entra a la condicion y envia embeds",
             new Date().toLocaleTimeString("es-ES", {
