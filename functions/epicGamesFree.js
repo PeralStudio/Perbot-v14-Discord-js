@@ -3,14 +3,15 @@ import { EmbedBuilder } from "discord.js";
 import dayjs from "dayjs";
 
 const epicGamesFree = async (client) => {
+    console.log("epicGamesFree() se ejecuta");
     const versionbot = "PerBot v2.0 Peralstudio.com";
     const now = new Date();
+    console.log("dia:", now.getDay());
+    console.log("hora:", now.getHours());
+    console.log("minutos: ", now.getMinutes());
 
-    if (
-        now.getDay() == 4 &&
-        now.getHours() == 15 &&
-        now.getMinutes().toLocaleString().toString() === "30"
-    ) {
+    if (now.getDay() == 4 && now.getHours() == 21 && now.getMinutes() == 21) {
+        console.log("entra a la condicion y envia embeds");
         getGames("ES", true)
             .then(async (res) => {
                 const formatPrice = (num) => {
