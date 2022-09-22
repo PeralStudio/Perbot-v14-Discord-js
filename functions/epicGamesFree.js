@@ -15,7 +15,7 @@ const epicGamesFree = async (client) => {
     console.log("hora:", now.getHours());
     console.log("minutos: ", now.getMinutes());
 
-    if (now.getDay() == 4 && now.getHours() == 19 && now.getMinutes() == 29) {
+    if (now.getDay() == 4 && now.getHours() == 19 && now.getMinutes() == 31) {
         console.log(
             "entra a la condicion y envia embeds",
             new Date().toLocaleTimeString("es-ES", {
