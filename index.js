@@ -278,7 +278,7 @@ client.on("ready", async () => {
         setIntervalYoutube(client, user);
     }
 
-    epicGamesFree(client);
+    // epicGamesFree(client);
 });
 
 client.on("guildMemberAdd", async (member) => {
