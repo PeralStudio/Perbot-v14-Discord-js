@@ -167,7 +167,7 @@ const setIntervalTwitch = async (client, user) => {
                 { titulo: title.body }
             );
         }
-    }, 120000);
+    }, 240000);
 };
 
 export default setIntervalTwitch;
