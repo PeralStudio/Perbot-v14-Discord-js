@@ -9,6 +9,10 @@ const youtube = new mongoose.Schema({
         type: String,
         required: true,
     },
+    video_ID: {
+        type: String,
+        required: true,
+    },
     date: {
         type: String,
         required: true,

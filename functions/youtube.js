@@ -55,6 +55,7 @@ const setIntervalYoutube = async (client, userId) => {
             const newData = new youtube({
                 user: ultimoVideo.authorId,
                 titulo: ultimoVideo.title,
+                video_ID: ultimoVideo.videoId,
                 date: new Date().toLocaleString("es-ES", {
                     timeZone: "Europe/Madrid",
                 }),
@@ -126,6 +127,7 @@ const setIntervalYoutube = async (client, userId) => {
                         },
                         {
                             titulo: ultimoVideo.title,
+                            video_ID: ultimoVideo.videoId,
                             date: new Date().toLocaleString("es-ES", {
                                 timeZone: "Europe/Madrid",
                             }),
@@ -159,6 +161,7 @@ const setIntervalYoutube = async (client, userId) => {
                         },
                         {
                             titulo: ultimoVideo.title,
+                            video_ID: ultimoVideo.videoId,
                             date: new Date().toLocaleString("es-ES", {
                                 timeZone: "Europe/Madrid",
                             }),
