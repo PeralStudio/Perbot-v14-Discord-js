@@ -1212,7 +1212,7 @@ client.on("interactionCreate", async (interaction) => {
                                     `🗒️ NOTAS DE LA VERSIÓN **${patchVersionWithDot}**`
                                 )
                                 .setDescription(
-                                    `https://www.leagueoflegends.com/es-es/news/game-updates/patch-${patchVersionWithDash}-notes/`
+                                    `https://www.leagueoflegends.com/es-es/news/game-updates/notas-de-la-version-${patchVersionWithDash}/`
                                 )
                                 .setThumbnail(
                                     "https://peralstudio.com/images/lol2-logo.png"
