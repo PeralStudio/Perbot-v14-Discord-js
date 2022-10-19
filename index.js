@@ -1197,7 +1197,7 @@ client.on("interactionCreate", async (interaction) => {
             .replace(".", "-");
 
         await request(
-            `https://www.leagueoflegends.com/es-es/news/game-updates/patch-${currentVersionWithDash}-notes/`,
+            `https://www.leagueoflegends.com/es-es/news/game-updates/notas-de-la-version-${currentVersionWithDash}`,
             (err, res, html) => {
                 if (!err && res.statusCode == 200) {
                     const $ = cherio.load(html);
