@@ -8,12 +8,18 @@ const setIntervalYoutube = async (client, userId) => {
         channelId: userId,
     };
 
-    const { getChannelVideos, getChannelInfo } = ytch;
+    const { getChannelVideos /* , getChannelInfo */ } = ytch;
 
     setInterval(async () => {
-        const videos = await getChannelVideos(payload, 0);
-        const channel = await getChannelInfo(payload, 0);
-        const ultimoVideo = videos.items[0];
+        const ultimoVideo = await getChannelVideos(payload, 0)
+            .then((response) => {
+                return response.items[0];
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+
+        // const channel = getChannelInfo(payload, 0);
 
         console.log(
             `Comprobando youtube ${userId} - (${new Date().toLocaleTimeString(
@@ -24,36 +30,15 @@ const setIntervalYoutube = async (client, userId) => {
             )})`
         );
 
-        let data = await youtube.findOne({
-            user: ultimoVideo?.authorId,
-        });
+        if (ultimoVideo === undefined) return;
 
-        // const embed = new EmbedBuilder()
-        //     .setAuthor({
-        //         name: `${ultimoVideo.author}`,
-        //         iconURL: channel.authorThumbnails[0].url,
-        //     })
-        //     .setTitle(`${ultimoVideo.title}`)
-        //     .setThumbnail(`${channel.authorThumbnails[0].url}`)
-        //     .setURL(
-        //         `https://www.youtube.com/watch?v=${ultimoVideo.videoId}`
-        //     )
-        //     .setImage(
-        //         `${
-        //             ultimoVideo.videoThumbnails[2].url ||
-        //             ultimoVideo.videoThumbnails[0].url
-        //         }`
-        //     )
-        //     .setTimestamp()
-        //     .setFooter({
-        //         text: versionbot,
-        //         iconURL: client.user.displayAvatarURL(),
-        //     })
-        //     .setColor(0x00ff00);
+        let data = await youtube.findOne({
+            user: ultimoVideo.authorId,
+        });
 
         if (!data) {
             const newData = new youtube({
-                user: ultimoVideo?.authorId,
+                user: ultimoVideo.authorId,
                 titulo: ultimoVideo.title,
                 video_ID: ultimoVideo.videoId,
                 date: new Date().toLocaleString("es-ES", {
