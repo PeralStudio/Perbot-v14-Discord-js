@@ -53,7 +53,7 @@ const setIntervalYoutube = async (client, userId) => {
 
         if (!data) {
             const newData = new youtube({
-                user: ultimoVideo.authorId,
+                user: ultimoVideo?.authorId,
                 titulo: ultimoVideo.title,
                 video_ID: ultimoVideo.videoId,
                 date: new Date().toLocaleString("es-ES", {
