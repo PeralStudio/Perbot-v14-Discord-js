@@ -81,11 +81,13 @@ import carteleracineCommand from "./commands/carteleracine.js";
 import enviarmdCommand from "./commands/adminCommands/enviarmd.js";
 import borrarCommand from "./commands/adminCommands/borrar.js";
 import emailCommand from "./commands/adminCommands/email.js";
+import playListYTCommand from "./commands/playListYT.js";
 
 import setIntervalTwitch from "./functions/twitch.js";
 import setIntervalYoutube from "./functions/youtube.js";
-import setIntervalYoutubePlayList from "./functions/playListYoutube.js";
-import epicGamesFree from "./functions/epicGamesFree.js";
+import youtubePlayList from "./functions/playListYoutube.js";
+// import setIntervalYoutubePlayList from "./functions/playListYoutube.js";
+// import epicGamesFree from "./functions/epicGamesFree.js";
 import usersDiscordSchema from "./Schemas/usersDiscordSchema.js";
 
 const commands = [
@@ -122,6 +124,7 @@ const commands = [
     helpCommand,
     emailCommand,
     elrellanoCommand,
+    playListYTCommand,
 ];
 
 let currentVersion;
@@ -283,8 +286,10 @@ client.on("ready", async () => {
         setIntervalYoutube(client, user);
     }
 
-    setIntervalYoutubePlayList(client);
+    //FunctionYoutube push notifications when add or remove videos on playlist
+    // setIntervalYoutubePlayList(client);
 
+    //FunctionepicGamesFree push notifications when new free games
     // epicGamesFree(client);
 });
 
@@ -2572,6 +2577,12 @@ client.on("interactionCreate", async (interaction) => {
         );
     }
 
+    //PLAYLIST YOUTUBE
+    if (interaction.commandName === "playlistyt") {
+        const idChannel = interaction.options.get("id").value;
+        youtubePlayList(client, idChannel, interaction);
+    }
+
     //COMANDO HELP
     if (interaction.commandName === "help") {
         const embed = new EmbedBuilder()
@@ -2624,6 +2635,11 @@ client.on("interactionCreate", async (interaction) => {
                 {
                     name: `*${prefix}yt + texto*`,
                     value: "`Buscar video youtube.`",
+                    inline: true,
+                },
+                {
+                    name: `*${prefix}playlistyt + ID Canal*`,
+                    value: "`Playlist de youtube.`",
                     inline: true,
                 },
                 {
@@ -2681,11 +2697,11 @@ client.on("interactionCreate", async (interaction) => {
                     value: "`Traducir texto a Ingles.`",
                     inline: true,
                 },
-                {
-                    name: `*${prefix}corona + país*`,
-                    value: "`Información sobre el coronavirus.`",
-                    inline: true,
-                },
+                // {
+                //     name: `*${prefix}corona + país*`,
+                //     value: "`Información sobre el coronavirus.`",
+                //     inline: true,
+                // },
                 {
                     name: `*${prefix}ping*`,
                     value: "`Ping del bot.`",
