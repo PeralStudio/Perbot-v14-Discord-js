@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const userDiscord = new mongoose.Schema({
+const usersDiscordSchema = new mongoose.Schema({
     id: {
         type: String,
         required: true,
@@ -19,4 +19,4 @@ const userDiscord = new mongoose.Schema({
     },
 });
 
-export default mongoose.model("user", userDiscord);
+export default mongoose.model("user", usersDiscordSchema);

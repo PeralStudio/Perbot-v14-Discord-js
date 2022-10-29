@@ -84,8 +84,9 @@ import emailCommand from "./commands/adminCommands/email.js";
 
 import setIntervalTwitch from "./functions/twitch.js";
 import setIntervalYoutube from "./functions/youtube.js";
+import setIntervalYoutubePlayList from "./functions/playListYoutube.js";
 import epicGamesFree from "./functions/epicGamesFree.js";
-import usersDiscord from "./Schemas/usersDiscord.js";
+import usersDiscordSchema from "./Schemas/usersDiscordSchema.js";
 
 const commands = [
     playCommand,
@@ -282,6 +283,8 @@ client.on("ready", async () => {
         setIntervalYoutube(client, user);
     }
 
+    setIntervalYoutubePlayList(client);
+
     // epicGamesFree(client);
 });
 
@@ -302,14 +305,14 @@ client.on("guildMemberAdd", async (member) => {
     client.channels.cache.get("1008006156712677433").send({ embeds: [embed] });
 
     // AÑADIR USUARIO A LA BASE DE DATOS CUANDO INGRESA AL SERVIDOR
-    let dataUserDB = await usersDiscord.findOne({
+    let dataUserDB = await usersDiscordSchema.findOne({
         id: member.user.id,
         user: member.user.username,
         discriminator: member.user.discriminator,
     });
 
     if (!dataUserDB) {
-        dataUserDB = new usersDiscord({
+        dataUserDB = new usersDiscordSchema({
             id: member.user.id,
             user: member.user.username,
             discriminator: member.user.discriminator,
@@ -339,7 +342,7 @@ client.on("guildMemberRemove", async (member) => {
 
     // ELIMINAR USUARIO DE LA BASE DE DATOS CUANDO ABANDONA EL SERVIDOR
 
-    // let dataUserDB = await usersDiscord.findOne({
+    // let dataUserDB = await usersDiscordSchema.findOne({
     //     id: member.user.id,
     //     user: member.user.username,
     //     discriminator: member.user.discriminator,

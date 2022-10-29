@@ -17,6 +17,15 @@ const youtube = new mongoose.Schema({
         type: String,
         required: true,
     },
+    playListAuthorID: {
+        type: String,
+    },
+    playListCount: {
+        type: Number,
+    },
+    playlistUrl: {
+        type: String,
+    },
 });
 
 export default mongoose.model("youtube", youtube);
