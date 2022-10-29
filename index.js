@@ -201,6 +201,10 @@ const usersToAlertYoutube = [
     "JDalmau",
     "LordDraugr",
     "SeVenJungle",
+    "WerlybGameplays",
+    "TuberViejuner",
+    "Farolino77",
+    "LaResistenciaCero",
     "UCg1c09_sFOd-TVPCNgHw8qg", // Kerios
     "UCEx9whgAgQPG7e4dAXIq1VQ", // ElOjoNinja - Gameplays Completos
     "UCmcBZPvWyXBKw0d6XE5XDOQ", // elyoya
