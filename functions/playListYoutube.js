@@ -33,8 +33,6 @@ const setIntervalYoutubePlayList = async (client) => {
             playListAuthorID: playList.authorId,
         });
 
-        console.log(playList);
-
         if (data === null) {
             const newData = new playListYoutubeSchema({
                 playListAuthorID: playList.authorId,
