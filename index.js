@@ -910,6 +910,16 @@ client.on("interactionCreate", async (interaction) => {
     if (interaction.commandName === "lol") {
         let embed1;
         let embed2;
+
+        await fetch(`https://ddragon.leagueoflegends.com/api/versions.json`)
+            .then((res) => res.json())
+            .then((version) => {
+                currentVersion = version[0];
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+
         fetch(
             `https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${
                 interaction.options.get("invocador").value
@@ -967,7 +977,6 @@ client.on("interactionCreate", async (interaction) => {
                             } = data[0];
 
                             embed1 = new EmbedBuilder()
-
                                 .setAuthor({
                                     name: `${summonerName}`,
                                     iconURL: `https://ddragon.leagueoflegends.com/cdn/${currentVersion}/img/profileicon/${datasumm.profileIconId}.png`,
