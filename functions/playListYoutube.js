@@ -16,7 +16,6 @@ const youtubePlayList = async (client, idChannel, interaction) => {
 
     const playList = await getChannelPlaylistInfo(payload, 0)
         .then((response) => {
-            console.log("res", response);
             return response.items[0];
         })
         .catch((err) => {
