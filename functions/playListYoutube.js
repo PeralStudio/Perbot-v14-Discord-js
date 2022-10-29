@@ -43,10 +43,38 @@ const setIntervalYoutubePlayList = async (client) => {
             });
 
             await newData.save();
+            const embed = new EmbedBuilder()
+                .setAuthor({
+                    name: `¡Playlist Actualizada!`,
+                    iconURL: `${client.user.displayAvatarURL()}`,
+                })
+                .setTitle(`:link: Ver Playlist: ${playList.title}`)
+                .setThumbnail(
+                    "https://www.thesun.co.uk/wp-content/uploads/2017/10/nc-logo-youtube-mobile.jpg?strip=all&w=750&h=352&crop=1"
+                )
+                .setURL(playList.playlistUrl)
+                .addFields(
+                    {
+                        name: "Autor",
+                        value: `${playList.author}`,
+                        inline: true,
+                    },
+                    {
+                        name: "Videos",
+                        value: `${playList.videoCount}`,
+                        inline: true,
+                    }
+                )
+                .setImage(playList.playlistThumbnail)
+                .setTimestamp()
+                .setFooter({
+                    text: versionbot,
+                    iconURL: client.user.displayAvatarURL(),
+                })
+                .setColor("#AA70F8");
+
             await client.channels.cache.get("1009141517044166757").send({
-                content:
-                    `¡Playlist Actualizada! **(Total Videos: ${playList.videoCount})** \n` +
-                    playList.playlistUrl,
+                embeds: [embed],
             });
             return;
         } else if (data.playListCount !== playList.videoCount) {
