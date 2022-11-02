@@ -19,8 +19,6 @@ const setIntervalYoutube = async (client, userId) => {
                 console.log(err);
             });
 
-        // const channel = getChannelInfo(payload, 0);
-
         console.log(
             `Comprobando youtube ${userId} - (${new Date().toLocaleTimeString(
                 "es-ES",
