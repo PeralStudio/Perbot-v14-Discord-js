@@ -1218,7 +1218,7 @@ client.on("interactionCreate", async (interaction) => {
             .replace(".", "-");
 
         await request(
-            `https://www.leagueoflegends.com/es-es/news/game-updates/notas-de-la-version-${currentVersionWithDash}`,
+            `https://www.leagueoflegends.com/es-es/news/game-updates/patch-${patchVersionWithDash}-notes/`,
             (err, res, html) => {
                 if (!err && res.statusCode == 200) {
                     const $ = cherio.load(html);
@@ -1233,7 +1233,7 @@ client.on("interactionCreate", async (interaction) => {
                                     `🗒️ NOTAS DE LA VERSIÓN **${patchVersionWithDot}**`
                                 )
                                 .setDescription(
-                                    `https://www.leagueoflegends.com/es-es/news/game-updates/notas-de-la-version-${patchVersionWithDash}/`
+                                    `https://www.leagueoflegends.com/es-es/news/game-updates/patch-${patchVersionWithDash}-notes/`
                                 )
                                 .setThumbnail(
                                     "https://peralstudio.com/images/lol2-logo.png"
