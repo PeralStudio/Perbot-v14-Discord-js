@@ -1,6 +1,9 @@
 {
   "name": "perbotvs16",
   "version": "1.0.0",
+  "engines": {
+    "node": "18.x"
+  },
   "description": "perbot v2",
   "main": "index.js",
   "type": "module",
