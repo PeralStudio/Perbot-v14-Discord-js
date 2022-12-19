@@ -1361,6 +1361,7 @@ client.on("interactionCreate", async (interaction) => {
         youTube.setKey(youtubeKey);
 
         youTube.search(search, 2, function (err, result) {
+            console.log(result.items[1]);
             if (err) {
                 return console.log(err);
             }
