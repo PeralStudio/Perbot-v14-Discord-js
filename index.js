@@ -1365,7 +1365,7 @@ client.on("interactionCreate", async (interaction) => {
             if (err) {
                 return console.log(err);
             }
-            if (result.items[1]["id"].videoId == undefined) {
+            if (result.items[1]["id"]?.videoId == undefined) {
                 return interaction.reply({
                     ephemeral: true,
                     embeds: [
