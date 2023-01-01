@@ -2,6 +2,8 @@ import { getGames } from "epic-free-games";
 import { EmbedBuilder } from "discord.js";
 import dayjs from "dayjs";
 
+const { nameBot } = process.env;
+
 const epicGamesFree = async (client) => {
     console.log(
         "epicGamesFree() se ejecuta",
@@ -9,7 +11,6 @@ const epicGamesFree = async (client) => {
             timeZone: "Europe/Madrid",
         })
     );
-    const versionbot = "PerBot v2.0 Peralstudio.com";
     const now = new Date();
     const hour = new Date().toLocaleTimeString("es-ES", {
         timeZone: "Europe/Madrid",
@@ -43,7 +44,7 @@ const epicGamesFree = async (client) => {
                         .setTitle(`Ha ocurrido un error.`)
                         .setTimestamp()
                         .setFooter({
-                            text: versionbot,
+                            text: nameBot,
                             iconURL: client?.user.displayAvatarURL(),
                         })
                         .setColor("#ff0000");
@@ -100,7 +101,7 @@ const epicGamesFree = async (client) => {
                     )
                     .setTimestamp()
                     .setFooter({
-                        text: versionbot,
+                        text: nameBot,
                         iconURL: client?.user.displayAvatarURL(),
                     })
                     .setColor("#27963f");
@@ -138,7 +139,7 @@ const epicGamesFree = async (client) => {
                     )
                     .setTimestamp()
                     .setFooter({
-                        text: versionbot,
+                        text: nameBot,
                         iconURL: client?.user.displayAvatarURL(),
                     })
                     .setColor("#27963f");
@@ -189,7 +190,7 @@ const epicGamesFree = async (client) => {
                     )
                     .setTimestamp()
                     .setFooter({
-                        text: versionbot,
+                        text: nameBot,
                         iconURL: client?.user.displayAvatarURL(),
                     })
                     .setColor("#ba3f3f");
@@ -226,7 +227,7 @@ const epicGamesFree = async (client) => {
                     )
                     .setTimestamp()
                     .setFooter({
-                        text: versionbot,
+                        text: nameBot,
                         iconURL: client?.user.displayAvatarURL(),
                     })
                     .setColor("#ba3f3f");

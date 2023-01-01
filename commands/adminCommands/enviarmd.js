@@ -2,7 +2,7 @@ import { SlashCommandBuilder } from "discord.js";
 
 const enviarmdCommand = new SlashCommandBuilder()
     .setName("enviarmd")
-    .setDescription("Enviar un mensaje privado a un usuario como PerBot")
+    .setDescription("Enviar un mensaje privado a un usuario como AlfanjorBot")
     .addUserOption((option) =>
         option
             .setName("usuario")

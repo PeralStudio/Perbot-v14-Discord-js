@@ -3,7 +3,6 @@ import ytch from "yt-channel-info";
 import youtube from "../Schemas/youtubeSchema.js";
 
 const setIntervalYoutube = async (client, userId) => {
-    const versionbot = "PerBot v2.0 Peralstudio.com";
     const payload = {
         channelId: userId,
     };

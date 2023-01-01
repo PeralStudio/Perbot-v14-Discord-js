@@ -129,7 +129,6 @@ const commands = [
 
 let currentVersion;
 
-const versionbot = "PerBot v2.0 Peralstudio.com";
 const {
     prefix,
     lolApi,
@@ -141,6 +140,7 @@ const {
     tmdbApi,
     email,
     gmailToken,
+    nameBot,
 } = process.env;
 
 mongoose
@@ -303,7 +303,7 @@ client.on("guildMemberAdd", async (member) => {
         .setColor("#008f39")
         .setTimestamp()
         .setFooter({
-            text: versionbot,
+            text: nameBot,
             iconURL: client.user.displayAvatarURL(),
         });
 
@@ -339,7 +339,7 @@ client.on("guildMemberRemove", async (member) => {
         .setColor("#f10029")
         .setTimestamp()
         .setFooter({
-            text: versionbot,
+            text: nameBot,
             iconURL: client.user.displayAvatarURL(),
         });
 
@@ -382,7 +382,7 @@ player.on("trackStart", async (queue, track) => {
                 .setColor("#EA3939")
                 .setTimestamp()
                 .setFooter({
-                    text: versionbot,
+                    text: nameBot,
                     iconURL: client.user.displayAvatarURL(),
                 }),
         ],
@@ -462,7 +462,7 @@ client.on("interactionCreate", async (interaction) => {
                                 .setColor("#EA3939")
                                 .setTimestamp()
                                 .setFooter({
-                                    text: versionbot,
+                                    text: nameBot,
                                     iconURL: client.user.displayAvatarURL(),
                                 }),
                         ],
@@ -493,7 +493,7 @@ client.on("interactionCreate", async (interaction) => {
                         .setColor("#EA3939")
                         .setTimestamp()
                         .setFooter({
-                            text: versionbot,
+                            text: nameBot,
                             iconURL: client.user.displayAvatarURL(),
                         }),
                 ],
@@ -511,7 +511,7 @@ client.on("interactionCreate", async (interaction) => {
                         .setColor("#EA3939")
                         .setTimestamp()
                         .setFooter({
-                            text: versionbot,
+                            text: nameBot,
                             iconURL: client.user.displayAvatarURL(),
                         }),
                 ],
@@ -540,7 +540,7 @@ client.on("interactionCreate", async (interaction) => {
                         .setColor("#EA3939")
                         .setTimestamp()
                         .setFooter({
-                            text: versionbot,
+                            text: nameBot,
                             iconURL: client.user.displayAvatarURL(),
                         }),
                 ],
@@ -562,7 +562,7 @@ client.on("interactionCreate", async (interaction) => {
                         .setColor("#EA3939")
                         .setTimestamp()
                         .setFooter({
-                            text: versionbot,
+                            text: nameBot,
                             iconURL: client.user.displayAvatarURL(),
                         }),
                 ],
@@ -590,7 +590,7 @@ client.on("interactionCreate", async (interaction) => {
                         .setColor("#EA3939")
                         .setTimestamp()
                         .setFooter({
-                            text: versionbot,
+                            text: nameBot,
                             iconURL: client.user.displayAvatarURL(),
                         }),
                 ],
@@ -631,7 +631,7 @@ client.on("interactionCreate", async (interaction) => {
                         .setColor("#EA3939")
                         .setTimestamp()
                         .setFooter({
-                            text: versionbot,
+                            text: nameBot,
                             iconURL: client.user.displayAvatarURL(),
                         }),
                 ],
@@ -650,7 +650,7 @@ client.on("interactionCreate", async (interaction) => {
                         .setColor("#EA3939")
                         .setTimestamp()
                         .setFooter({
-                            text: versionbot,
+                            text: nameBot,
                             iconURL: client.user.displayAvatarURL(),
                         }),
                 ],
@@ -664,7 +664,7 @@ client.on("interactionCreate", async (interaction) => {
                     .setColor("#EA3939")
                     .setTimestamp()
                     .setFooter({
-                        text: versionbot,
+                        text: nameBot,
                         iconURL: client.user.displayAvatarURL(),
                     }),
             ],
@@ -682,7 +682,7 @@ client.on("interactionCreate", async (interaction) => {
                         .setColor("#EA3939")
                         .setTimestamp()
                         .setFooter({
-                            text: versionbot,
+                            text: nameBot,
                             iconURL: client.user.displayAvatarURL(),
                         }),
                 ],
@@ -696,7 +696,7 @@ client.on("interactionCreate", async (interaction) => {
                     .setColor("#EA3939")
                     .setTimestamp()
                     .setFooter({
-                        text: versionbot,
+                        text: nameBot,
                         iconURL: client.user.displayAvatarURL(),
                     }),
             ],
@@ -714,7 +714,7 @@ client.on("interactionCreate", async (interaction) => {
                         .setColor("#EA3939")
                         .setTimestamp()
                         .setFooter({
-                            text: versionbot,
+                            text: nameBot,
                             iconURL: client.user.displayAvatarURL(),
                         }),
                 ],
@@ -729,7 +729,7 @@ client.on("interactionCreate", async (interaction) => {
                         .setColor("#EA3939")
                         .setTimestamp()
                         .setFooter({
-                            text: versionbot,
+                            text: nameBot,
                             iconURL: client.user.displayAvatarURL(),
                         }),
                 ],
@@ -742,7 +742,7 @@ client.on("interactionCreate", async (interaction) => {
                         .setColor("#EA3939")
                         .setTimestamp()
                         .setFooter({
-                            text: versionbot,
+                            text: nameBot,
                             iconURL: client.user.displayAvatarURL(),
                         }),
                 ],
@@ -762,7 +762,7 @@ client.on("interactionCreate", async (interaction) => {
                         .setColor("#EA3939")
                         .setTimestamp()
                         .setFooter({
-                            text: versionbot,
+                            text: nameBot,
                             iconURL: client.user.displayAvatarURL(),
                         }),
                 ],
@@ -777,7 +777,7 @@ client.on("interactionCreate", async (interaction) => {
                         .setColor("#EA3939")
                         .setTimestamp()
                         .setFooter({
-                            text: versionbot,
+                            text: nameBot,
                             iconURL: client.user.displayAvatarURL(),
                         }),
                 ],
@@ -790,7 +790,7 @@ client.on("interactionCreate", async (interaction) => {
                         .setColor("#EA3939")
                         .setTimestamp()
                         .setFooter({
-                            text: versionbot,
+                            text: nameBot,
                             iconURL: client.user.displayAvatarURL(),
                         }),
                 ],
@@ -810,7 +810,7 @@ client.on("interactionCreate", async (interaction) => {
                         .setColor("#EA3939")
                         .setTimestamp()
                         .setFooter({
-                            text: versionbot,
+                            text: nameBot,
                             iconURL: client.user.displayAvatarURL(),
                         }),
                 ],
@@ -826,7 +826,7 @@ client.on("interactionCreate", async (interaction) => {
             .setColor("#0099ff")
             .setTimestamp()
             .setFooter({
-                text: versionbot,
+                text: nameBot,
                 iconURL: client.user.displayAvatarURL(),
             });
         return await interaction.reply({ embeds: [embed] });
@@ -844,7 +844,7 @@ client.on("interactionCreate", async (interaction) => {
                         .setColor("#EA3939")
                         .setTimestamp()
                         .setFooter({
-                            text: versionbot,
+                            text: nameBot,
                             iconURL: client.user.displayAvatarURL(),
                         }),
                 ],
@@ -860,7 +860,7 @@ client.on("interactionCreate", async (interaction) => {
                     .setColor("#EA3939")
                     .setTimestamp()
                     .setFooter({
-                        text: versionbot,
+                        text: nameBot,
                         iconURL: client.user.displayAvatarURL(),
                     }),
             ],
@@ -878,7 +878,7 @@ client.on("interactionCreate", async (interaction) => {
                         .setColor("#EA3939")
                         .setTimestamp()
                         .setFooter({
-                            text: versionbot,
+                            text: nameBot,
                             iconURL: client.user.displayAvatarURL(),
                         }),
                 ],
@@ -893,7 +893,7 @@ client.on("interactionCreate", async (interaction) => {
                     .setColor("#EA3939")
                     .setTimestamp()
                     .setFooter({
-                        text: versionbot,
+                        text: nameBot,
                         iconURL: client.user.displayAvatarURL(),
                     }),
             ],
@@ -1038,7 +1038,7 @@ client.on("interactionCreate", async (interaction) => {
                                 .setTimestamp()
                                 .setColor("#0099ff")
                                 .setFooter({
-                                    text: versionbot,
+                                    text: nameBot,
                                     iconURL: client.user.displayAvatarURL(),
                                 });
 
@@ -1106,7 +1106,7 @@ client.on("interactionCreate", async (interaction) => {
                                 .setTimestamp()
                                 .setColor("#0099ff")
                                 .setFooter({
-                                    text: versionbot,
+                                    text: nameBot,
                                     iconURL: client.user.displayAvatarURL(),
                                 });
 
@@ -1173,7 +1173,7 @@ client.on("interactionCreate", async (interaction) => {
 
                                 .setColor("#0099ff")
                                 .setFooter({
-                                    text: versionbot,
+                                    text: nameBot,
                                     iconURL: client.user.displayAvatarURL(),
                                 });
 
@@ -1241,7 +1241,7 @@ client.on("interactionCreate", async (interaction) => {
                                 .setImage(imgPathForEmbed)
                                 .setTimestamp()
                                 .setFooter({
-                                    text: versionbot,
+                                    text: nameBot,
                                     iconURL: client.user.displayAvatarURL(),
                                 }),
                         ],
@@ -1257,7 +1257,7 @@ client.on("interactionCreate", async (interaction) => {
                                 )
                                 .setTimestamp()
                                 .setFooter({
-                                    text: versionbot,
+                                    text: nameBot,
                                     iconURL: client.user.displayAvatarURL(),
                                 }),
                         ],
@@ -1284,7 +1284,7 @@ client.on("interactionCreate", async (interaction) => {
                     .setTitle(post.title)
                     .setImage(post.url)
                     .setFooter({
-                        text: versionbot,
+                        text: nameBot,
                         iconURL: client.user.displayAvatarURL(),
                     });
                 if (!post.url) {
@@ -1298,7 +1298,7 @@ client.on("interactionCreate", async (interaction) => {
                                 )
                                 .setTimestamp()
                                 .setFooter({
-                                    text: versionbot,
+                                    text: nameBot,
                                     iconURL: client.user.displayAvatarURL(),
                                 }),
                         ],
@@ -1424,7 +1424,7 @@ client.on("interactionCreate", async (interaction) => {
             .setImage(userAvatar)
             .setTimestamp()
             .setFooter({
-                text: versionbot,
+                text: nameBot,
                 iconURL: client.user.displayAvatarURL(),
             });
         await interaction.reply({ embeds: [embed] });
@@ -1444,7 +1444,7 @@ client.on("interactionCreate", async (interaction) => {
             )
             .setTimestamp()
             .setFooter({
-                text: versionbot,
+                text: nameBot,
                 iconURL: client.user.displayAvatarURL(),
             });
         await interaction.reply({ embeds: [arderEmbed] });
@@ -1502,7 +1502,7 @@ client.on("interactionCreate", async (interaction) => {
             .setColor("#C28F2C")
             .setTimestamp()
             .setFooter({
-                text: versionbot,
+                text: nameBot,
                 iconURL: client.user.displayAvatarURL(),
             });
         await interaction.reply({ embeds: [userInfoEmbed] });
@@ -1569,7 +1569,7 @@ client.on("interactionCreate", async (interaction) => {
                     )
                     .setTimestamp()
                     .setFooter({
-                        text: versionbot,
+                        text: nameBot,
                         iconURL: client.user.displayAvatarURL(),
                     });
 
@@ -1810,7 +1810,7 @@ client.on("interactionCreate", async (interaction) => {
             .setColor("#AA70F8")
             .setTimestamp()
             .setFooter({
-                text: versionbot,
+                text: nameBot,
                 iconURL: client.user.displayAvatarURL(),
             });
         await interaction.reply({ embeds: [serverInfoEmbed] });
@@ -1906,7 +1906,7 @@ client.on("interactionCreate", async (interaction) => {
                     )
                     .setTimestamp()
                     .setFooter({
-                        text: versionbot,
+                        text: nameBot,
                         iconURL: client.user.displayAvatarURL(),
                     });
 
@@ -1936,10 +1936,10 @@ client.on("interactionCreate", async (interaction) => {
             .setThumbnail(
                 "https://cdn-icons-png.flaticon.com/512/3883/3883802.png"
             )
-            .setDescription(`Ping PerBot: ${client.ws.ping}ms`)
+            .setDescription(`Ping AlfanjorBot: ${client.ws.ping}ms`)
             .setTimestamp()
             .setFooter({
-                text: versionbot,
+                text: nameBot,
                 iconURL: client.user.displayAvatarURL(),
             });
 
@@ -2114,7 +2114,7 @@ client.on("interactionCreate", async (interaction) => {
                     )
                     .setTimestamp()
                     .setFooter({
-                        text: versionbot,
+                        text: nameBot,
                         iconURL: client.user.displayAvatarURL(),
                     });
 
@@ -2148,7 +2148,7 @@ client.on("interactionCreate", async (interaction) => {
                     )
                     .setTimestamp()
                     .setFooter({
-                        text: versionbot,
+                        text: nameBot,
                         iconURL: client.user.displayAvatarURL(),
                     });
 
@@ -2182,7 +2182,7 @@ client.on("interactionCreate", async (interaction) => {
                     )
                     .setTimestamp()
                     .setFooter({
-                        text: versionbot,
+                        text: nameBot,
                         iconURL: client.user.displayAvatarURL(),
                     });
 
@@ -2216,7 +2216,7 @@ client.on("interactionCreate", async (interaction) => {
                     )
                     .setTimestamp()
                     .setFooter({
-                        text: versionbot,
+                        text: nameBot,
                         iconURL: client.user.displayAvatarURL(),
                     });
 
@@ -2250,7 +2250,7 @@ client.on("interactionCreate", async (interaction) => {
                     )
                     .setTimestamp()
                     .setFooter({
-                        text: versionbot,
+                        text: nameBot,
                         iconURL: client.user.displayAvatarURL(),
                     });
 
@@ -2284,7 +2284,7 @@ client.on("interactionCreate", async (interaction) => {
                     )
                     .setTimestamp()
                     .setFooter({
-                        text: versionbot,
+                        text: nameBot,
                         iconURL: client.user.displayAvatarURL(),
                     });
 
@@ -2318,7 +2318,7 @@ client.on("interactionCreate", async (interaction) => {
                     )
                     .setTimestamp()
                     .setFooter({
-                        text: versionbot,
+                        text: nameBot,
                         iconURL: client.user.displayAvatarURL(),
                     });
 
@@ -2352,7 +2352,7 @@ client.on("interactionCreate", async (interaction) => {
                     )
                     .setTimestamp()
                     .setFooter({
-                        text: versionbot,
+                        text: nameBot,
                         iconURL: client.user.displayAvatarURL(),
                     });
 
@@ -2386,7 +2386,7 @@ client.on("interactionCreate", async (interaction) => {
                     )
                     .setTimestamp()
                     .setFooter({
-                        text: versionbot,
+                        text: nameBot,
                         iconURL: client.user.displayAvatarURL(),
                     });
 
@@ -2420,7 +2420,7 @@ client.on("interactionCreate", async (interaction) => {
                     )
                     .setTimestamp()
                     .setFooter({
-                        text: versionbot,
+                        text: nameBot,
                         iconURL: client.user.displayAvatarURL(),
                     });
 
@@ -2726,7 +2726,7 @@ client.on("interactionCreate", async (interaction) => {
             )
             .setTimestamp()
             .setFooter({
-                text: versionbot,
+                text: nameBot,
                 iconURL: client.user.displayAvatarURL(),
             });
 

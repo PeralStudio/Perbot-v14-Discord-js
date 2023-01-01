@@ -3,7 +3,7 @@ import nodeSuperFetch from "node-superfetch";
 import twitch from "../Schemas/twitchSchema.js";
 
 const setIntervalTwitch = async (client, user) => {
-    const versionbot = "PerBot v2.0 Peralstudio.com";
+    const versionbot = "AlfanjorBot v2.0 Peralstudio.com";
 
     const firstLetter = user.charAt(0);
     const firstLetterCap = firstLetter.toUpperCase();

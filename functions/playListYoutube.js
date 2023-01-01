@@ -2,8 +2,9 @@ import { EmbedBuilder } from "discord.js";
 import ytch from "yt-channel-info";
 import playListYoutubeSchema from "../Schemas/playListYoutubeSchema.js";
 
+const { nameBot } = process.env;
+
 const youtubePlayList = async (client, idChannel, interaction) => {
-    const versionbot = "PerBot v2.0 Peralstudio.com";
     const idChannelLower = idChannel.toLowerCase();
     let error = false;
 
@@ -71,7 +72,7 @@ const youtubePlayList = async (client, idChannel, interaction) => {
             .setImage(playList.playlistThumbnail)
             .setTimestamp()
             .setFooter({
-                text: versionbot,
+                text: nameBot,
                 iconURL: client.user.displayAvatarURL(),
             })
             .setColor("#AA70F8");
@@ -107,7 +108,7 @@ const youtubePlayList = async (client, idChannel, interaction) => {
             .setImage(playList.playlistThumbnail)
             .setTimestamp()
             .setFooter({
-                text: versionbot,
+                text: nameBot,
                 iconURL: client.user.displayAvatarURL(),
             })
             .setColor("#AA70F8");

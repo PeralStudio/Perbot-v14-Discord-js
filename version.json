@@ -1,6 +1,6 @@
 {
     "version": 2,
-    "name": "PerBot",
+    "name": "AlfanjorBot",
     "builds": [
         {
             "src": "index.js",
