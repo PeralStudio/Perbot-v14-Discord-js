@@ -10,6 +10,7 @@
 //     tmdbApi,
 //     email,
 //     gmailToken,
+//     nameBot,
 // } = config;
 
 import {
