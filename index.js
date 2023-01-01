@@ -2588,7 +2588,6 @@ client.on("interactionCreate", async (interaction) => {
     if (interaction.commandName === "help") {
         const embed = new EmbedBuilder()
             .setColor("#C28F2C")
-            // .setThumbnail(client.user.displayAvatarURL())
             .setTitle(
                 `COMANDOS DISPONIBLES *${client.user.username.toUpperCase()}* \n`
             )
