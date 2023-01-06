@@ -1,17 +1,17 @@
-// import config from "./config.js";
-// const {
-//     prefix,
-//     lolApi,
-//     youtubeKey,
-//     mongoUrl,
-//     CLIENT_ID,
-//     GUILD_ID,
-//     token,
-//     tmdbApi,
-//     email,
-//     gmailToken,
-//     nameBot,
-// } = config;
+import config from "./config.js";
+const {
+    prefix,
+    lolApi,
+    youtubeKey,
+    mongoUrl,
+    CLIENT_ID,
+    GUILD_ID,
+    token,
+    tmdbApi,
+    email,
+    gmailToken,
+    nameBot,
+} = config;
 
 import {
     REST,
@@ -40,6 +40,7 @@ import YouTube from "youtube-node";
 
 import cherio from "cherio";
 import request from "request";
+import google from "googlethis";
 
 import moment from "moment";
 // require("moment-duration-format")
@@ -56,7 +57,6 @@ import anteriorCommand from "./commands/musicCommands/anterior.js";
 import colaCommand from "./commands/musicCommands/cola.js";
 import stopCommand from "./commands/musicCommands/stop.js";
 import volumeCommand from "./commands/musicCommands/volumen.js";
-
 import akinatorCommand from "./commands/akinator.js";
 import lolCommand from "./commands/lol.js";
 import lolparcheCommand from "./commands/lolparche.js";
@@ -83,6 +83,7 @@ import enviarmdCommand from "./commands/adminCommands/enviarmd.js";
 import borrarCommand from "./commands/adminCommands/borrar.js";
 import emailCommand from "./commands/adminCommands/email.js";
 import playListYTCommand from "./commands/playListYT.js";
+import buscarGoogleCommand from "./commands/buscarGoogle.js";
 
 import setIntervalTwitch from "./functions/twitch.js";
 import setIntervalYoutube from "./functions/youtube.js";
@@ -126,23 +127,24 @@ const commands = [
     emailCommand,
     elrellanoCommand,
     playListYTCommand,
+    buscarGoogleCommand,
 ];
 
 let currentVersion;
 
-const {
-    prefix,
-    lolApi,
-    youtubeKey,
-    mongoUrl,
-    CLIENT_ID,
-    GUILD_ID,
-    token,
-    tmdbApi,
-    email,
-    gmailToken,
-    nameBot,
-} = process.env;
+// const {
+//     prefix,
+//     lolApi,
+//     youtubeKey,
+//     mongoUrl,
+//     CLIENT_ID,
+//     GUILD_ID,
+//     token,
+//     tmdbApi,
+//     email,
+//     gmailToken,
+//     nameBot,
+// } = process.env;
 
 mongoose
     .connect(mongoUrl, {
@@ -2585,6 +2587,38 @@ client.on("interactionCreate", async (interaction) => {
         youtubePlayList(client, idChannel, interaction);
     }
 
+    //COMANDO PARA REALIZAR UNA BUSQUEDA EN GOOGLE
+    if (interaction.commandName === "google") {
+        const searchTerm = interaction.options
+            .get("búsqueda")
+            .value.slice(prefix.length - 1)
+            .split(" ")
+            .join(" ");
+
+        const options = {
+            page: 0,
+            safe: false,
+            parse_ads: false,
+            additional_params: {
+                hl: "es",
+            },
+        };
+
+        const response = await google.search(searchTerm, options);
+
+        let output = "";
+        for (let i = 0; i < 3; i++) {
+            console.log(response.results[i].url);
+            const result = response.results[i];
+            output += `${result.url}\n`;
+        }
+
+        interaction.reply({
+            content: output,
+            ephemeral: true,
+        });
+    }
+
     //COMANDO HELP
     if (interaction.commandName === "help") {
         const embed = new EmbedBuilder()
@@ -2629,9 +2663,14 @@ client.on("interactionCreate", async (interaction) => {
                     value: "`Cartelera de cine.`",
                     inline: true,
                 },
+                // {
+                //     name: `*${prefix}encuesta*`
+                //     value: "`Crear una encuesta.`",
+                //     inline: true,
+                // },
                 {
-                    name: `*${prefix}encuesta*`,
-                    value: "`Crear una encuesta.`",
+                    name: `*${prefix}google*`,
+                    value: "`Búsqueda google`",
                     inline: true,
                 },
                 {
