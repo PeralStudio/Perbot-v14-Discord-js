@@ -2,14 +2,15 @@ import { getGames } from "epic-free-games";
 import { EmbedBuilder } from "discord.js";
 import dayjs from "dayjs";
 
-const { nameBot } = process.env;
+import config from "../config.js";
+const { nameBot } = config;
 
 const epicGamesFree = async (client) => {
     console.log(
-        "epicGamesFree() se ejecuta",
-        new Date().toLocaleTimeString("es-ES", {
+        `epicGamesFree() se ejecuta
+        (${new Date().toLocaleTimeString("es-ES", {
             timeZone: "Europe/Madrid",
-        })
+        })})`
     );
     const now = new Date();
     const hour = new Date().toLocaleTimeString("es-ES", {
@@ -21,19 +22,21 @@ const epicGamesFree = async (client) => {
     // console.log("minutos: ", now.getMinutes());
 
     if (
-        now.getDay() == 4 &&
-        hour[0] + hour[1] == "21" &&
-        hour[3] + hour[4] == "43"
+        now.getDay() == 4
+        // &&
+        // hour[0] + hour[1] == "14" &&
+        // hour[3] + hour[4] == "02"
     ) {
         console.log(
-            "entra a la condicion y envia embeds",
-            new Date().toLocaleTimeString("es-ES", {
+            `entra a la condicion y envia embeds
+            (${new Date().toLocaleTimeString("es-ES", {
                 timeZone: "Europe/Madrid",
-            })
+            })})`
         );
         getGames("ES", true)
             .then(async (res) => {
                 const formatPrice = (num) => {
+                    if (!num) return;
                     let str = num.toString().split(".");
                     str[0] = str[0].replace(/\B(?=(\d{2})+(?!\d))/g, ",");
                     return str.join(".");
@@ -112,7 +115,7 @@ const epicGamesFree = async (client) => {
                         `${
                             res?.currentGames[1]?.description
                         }\n\nhttps://store.epicgames.com/es-ES/p/${
-                            res.currentGames[1].urlSlug.includes("-")
+                            res.currentGames[1]?.urlSlug.includes("-")
                                 ? res?.currentGames[1]?.urlSlug
                                 : res?.currentGames[1]?.offerMappings[0]
                                       ?.pageSlug
@@ -232,15 +235,14 @@ const epicGamesFree = async (client) => {
                     })
                     .setColor("#ba3f3f");
 
+                const embeds = [];
+                res.currentGames[0] && (await embeds.push(embedFree, embed));
+                res.currentGames[1] && (await embeds.push(embed2));
+                res.nextGames[0] && (await embeds.push(embedFree2, embed3));
+                res.nextGames[2] && (await embeds.push(embed4));
+
                 await client?.channels.cache.get("1018578696627568701").send({
-                    embeds: [
-                        embedFree,
-                        embed,
-                        embed2,
-                        embedFree2,
-                        embed3,
-                        embed4,
-                    ],
+                    embeds,
                 });
             })
             .catch((err) => {
@@ -248,7 +250,7 @@ const epicGamesFree = async (client) => {
             });
     }
 
-    setTimeout(epicGamesFree, 60000);
+    setTimeout(epicGamesFree, 43200000); //43200000 12Hours
 };
 
 export default epicGamesFree;
