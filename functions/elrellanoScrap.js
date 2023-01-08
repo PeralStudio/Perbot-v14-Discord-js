@@ -122,7 +122,7 @@ const elrellanoScrap = async (client) => {
         } catch (error) {
             console.error(error);
         }
-    }, 30000); //2Hours 7200000
+    }, 1800000); //2Hours 7200000 //30Minutes 1800000
 };
 
 export default elrellanoScrap;
