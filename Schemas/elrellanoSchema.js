@@ -10,9 +10,6 @@ const elrellanoSchema = new mongoose.Schema({
     videoUrl: {
         type: String,
     },
-    imageUrl: {
-        type: String,
-    },
     date: {
         type: String,
     },
