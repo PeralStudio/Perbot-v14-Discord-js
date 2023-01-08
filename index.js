@@ -88,6 +88,7 @@ import buscarGoogleCommand from "./commands/buscarGoogle.js";
 import setIntervalTwitch from "./functions/twitch.js";
 import setIntervalYoutube from "./functions/youtube.js";
 import youtubePlayList from "./functions/playListYoutube.js";
+import elrellanoScrap from "./functions/elrellanoScrap.js";
 // import setIntervalYoutubePlayList from "./functions/playListYoutube.js";
 // import epicGamesFree from "./functions/epicGamesFree.js";
 import usersDiscordSchema from "./Schemas/usersDiscordSchema.js";
@@ -288,6 +289,9 @@ client.on("ready", async () => {
     for (const user of usersToAlertYoutube) {
         setIntervalYoutube(client, user);
     }
+
+    //function Scrap Elreelano to show latest videos
+    elrellanoScrap(client);
 
     //FunctionYoutube push notifications when add or remove videos on playlist
     // setIntervalYoutubePlayList(client);
