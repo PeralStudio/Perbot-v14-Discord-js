@@ -9,8 +9,7 @@ const { nameBot } = process.env;
 
 const epicGamesFree = async (client) => {
     console.log(
-        `epicGamesFree() se ejecuta
-        (${new Date().toLocaleTimeString("es-ES", {
+        `epicGamesFree() se ejecuta (${new Date().toLocaleTimeString("es-ES", {
             timeZone: "Europe/Madrid",
         })})`
     );
@@ -30,10 +29,12 @@ const epicGamesFree = async (client) => {
         // hour[3] + hour[4] == "02"
     ) {
         console.log(
-            `entra a la condicion y envia embeds
-            (${new Date().toLocaleTimeString("es-ES", {
-                timeZone: "Europe/Madrid",
-            })})`
+            `entra a la condicion y envia embeds (${new Date().toLocaleTimeString(
+                "es-ES",
+                {
+                    timeZone: "Europe/Madrid",
+                }
+            )})`
         );
         getGames("ES", true)
             .then(async (res) => {
