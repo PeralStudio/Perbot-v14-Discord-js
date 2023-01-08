@@ -64,7 +64,7 @@ const elrellanoScrap = async (client) => {
                     // channel?.send(`${video.title}\n${video.url}`);
 
                     await client.channels.cache
-                        .get("1008006504244334722")
+                        .get("1061440737843105803")
                         .send({
                             content: `${video.title}\n${video.url}`,
                         });
@@ -98,7 +98,7 @@ const elrellanoScrap = async (client) => {
         } catch (error) {
             console.error(error);
         }
-    }, 7200000);
+    }, 7200000); //2H
 };
 
 export default elrellanoScrap;
