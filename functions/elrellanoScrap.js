@@ -17,18 +17,14 @@ const elrellanoScrap = async (client) => {
             const $ = cheerio.load(response.data);
             const videos = [];
             let data;
-            let imageUrl;
-            let index;
 
+            // Push to videos(array) the videos non Youtube
             $(".inside-article").each(async (i, element) => {
                 const title = $(element).find(".entry-header h2 > a").text();
                 const summary = $(element).find(".entry-content p").text();
                 const videoUrl = $(element)
                     .find(".wp-block-video video")
                     .attr("src");
-                imageUrl = $(element)
-                    .find(".wp-block-video video")
-                    .attr("poster");
 
                 if (!videoUrl) {
                     return;
@@ -37,13 +33,36 @@ const elrellanoScrap = async (client) => {
                         title,
                         summary: summary ? summary : "",
                         url: videoUrl,
-                        imageUrl,
+                        date: new Date().toLocaleString("es-ES", {
+                            timeZone: "Europe/Madrid",
+                        }),
+                    });
+                }
+            });
+
+            // Push to videos(array) the videos of Youtube
+            $(".inside-article").each(async (i, element) => {
+                const title = $(element).find(".entry-header h2 > a").text();
+                const summary = $(element).find(".entry-content p").text();
+                const videoUrlYT = $(element)
+                    .find(".entry-content .wp-block-embed iframe")
+                    .attr("src");
+
+                if (!videoUrlYT) {
+                    return;
+                } else {
+                    videos.push({
+                        title,
+                        summary: summary ? summary : "",
+                        url: videoUrlYT,
+                        date: new Date().toLocaleString("es-ES", {
+                            timeZone: "Europe/Madrid",
+                        }),
                     });
                 }
             });
 
             videos.forEach(async (video, i) => {
-                index = i;
                 data = await elrellano.findOne({
                     title: video?.title,
                 });
@@ -53,20 +72,25 @@ const elrellanoScrap = async (client) => {
                         title: video.title,
                         summary: video.summary,
                         videoUrl: video.url,
-                        imageUrl,
                         date: new Date().toLocaleString("es-ES", {
                             timeZone: "Europe/Madrid",
                         }),
                     });
-                    // const channel = client?.channels.cache.get(
-                    //     "1008006504244334722"
-                    // );
-                    // channel?.send(`${video.title}\n${video.url}`);
 
                     await client.channels.cache
                         .get("1061440737843105803")
                         .send({
-                            content: `${video.title}\n${video.url}`,
+                            content:
+                                "<<--------------------------------------->> \n" +
+                                "`Título:` " +
+                                video.title +
+                                (video.summary &&
+                                    "\n" + "`Descripción:`" + video.summary) +
+                                "\n" +
+                                "`Fecha:`" +
+                                video.date +
+                                "\n" +
+                                video.url,
                         });
 
                     await newData.save();
@@ -98,7 +122,7 @@ const elrellanoScrap = async (client) => {
         } catch (error) {
             console.error(error);
         }
-    }, 7200000); //2H
+    }, 10000); //2H 7200000
 };
 
 export default elrellanoScrap;
