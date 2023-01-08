@@ -2,8 +2,10 @@ import { getGames } from "epic-free-games";
 import { EmbedBuilder } from "discord.js";
 import dayjs from "dayjs";
 
-import config from "../config.js";
-const { nameBot } = config;
+// Descomment for test in local
+// import config from "../config.js";
+// const { nameBot } = config;
+const { nameBot } = process.env;
 
 const epicGamesFree = async (client) => {
     console.log(
