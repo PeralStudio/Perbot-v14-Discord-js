@@ -90,7 +90,7 @@ import setIntervalYoutube from "./functions/youtube.js";
 import youtubePlayList from "./functions/playListYoutube.js";
 import elrellanoScrap from "./functions/elrellanoScrap.js";
 // import setIntervalYoutubePlayList from "./functions/playListYoutube.js";
-// import epicGamesFree from "./functions/epicGamesFree.js";
+import epicGamesFree from "./functions/epicGamesFree.js";
 import usersDiscordSchema from "./Schemas/usersDiscordSchema.js";
 
 const commands = [
@@ -290,14 +290,14 @@ client.on("ready", async () => {
         setIntervalYoutube(client, user);
     }
 
-    //function Scrap Elreelano to show latest videos
+    //function Scrap Elrellano to show latest videos
     elrellanoScrap(client);
 
     //FunctionYoutube push notifications when add or remove videos on playlist
     // setIntervalYoutubePlayList(client);
 
     //FunctionepicGamesFree push notifications when new free games
-    // epicGamesFree(client);
+    epicGamesFree(client);
 });
 
 client.on("guildMemberAdd", async (member) => {
