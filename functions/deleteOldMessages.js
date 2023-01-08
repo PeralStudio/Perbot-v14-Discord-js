@@ -16,7 +16,7 @@ export const deleteOldMessages = (client, channelID) => {
                         console.log(
                             `${
                                 oldMessages.size
-                            } Mensajes antiguos borrados de el canal: 🎮-free-epic-games (${new Date().toLocaleTimeString(
+                            } Mensajes antiguos borrados de el canal: 🎦-elrellano (${new Date().toLocaleTimeString(
                                 "es-ES",
                                 {
                                     timeZone: "Europe/Madrid",
@@ -29,7 +29,7 @@ export const deleteOldMessages = (client, channelID) => {
                         console.log(
                             `${
                                 oldMessages.size
-                            } Mensajes antiguos borrados de el canal: 🎮-free-epic-games (${new Date().toLocaleTimeString(
+                            } Mensajes antiguos borrados de el canal: 🎦-elrellano (${new Date().toLocaleTimeString(
                                 "es-ES",
                                 {
                                     timeZone: "Europe/Madrid",
