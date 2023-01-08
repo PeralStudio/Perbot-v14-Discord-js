@@ -4,7 +4,7 @@ import elrellano from "../Schemas/elrellanoSchema.js";
 import { deleteOldMessages } from "./deleteOldMessages.js";
 
 const elrellanoScrap = async (client) => {
-    const channelID = "1008006504244334722";
+    const channelID = "1061440737843105803";
 
     setInterval(async () => {
         deleteOldMessages(client, channelID);
