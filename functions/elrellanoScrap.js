@@ -104,18 +104,20 @@ const elrellanoScrap = async (client) => {
                     let textVideo;
                     let textFound;
 
-                    if (data?.length > 1) {
-                        textNew = "Nuevos";
-                        textVideo = "videos";
-                        textFound = "encontrados";
-                    } else {
+                    if (data?.length === 1) {
                         textNew = "Nuevo";
                         textVideo = "video";
                         textFound = "encontrado";
+                    } else {
+                        textNew = "Nuevos";
+                        textVideo = "videos";
+                        textFound = "encontrados";
                     }
 
                     console.log(
-                        `¡${textNew} ${textVideo} ${textFound}! ${new Date().toLocaleTimeString(
+                        `¡ (${
+                            data?.length
+                        }) ${textNew} ${textVideo} ${textFound}! ${new Date().toLocaleTimeString(
                             "es-ES",
                             {
                                 timeZone: "Europe/Madrid",
