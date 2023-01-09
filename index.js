@@ -2612,7 +2612,6 @@ client.on("interactionCreate", async (interaction) => {
 
         let output = "";
         for (let i = 0; i < 3; i++) {
-            console.log(response.results[i].url);
             const result = response.results[i];
             output += `${result.url}\n`;
         }
