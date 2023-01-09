@@ -1,4 +1,4 @@
-export const deleteOldMessages = (client, channelID) => {
+export const deleteOldMessages = (client, channelID, elrellano) => {
     client.channels
         .fetch(channelID)
         .then((channel) => {
@@ -7,8 +7,7 @@ export const deleteOldMessages = (client, channelID) => {
                 .then(async (messages) => {
                     const oldMessages = messages.filter((m) => {
                         return (
-                            m.createdTimestamp <
-                            Date.now() - 2 * 1440 * 60 * 1000 //24Horas - 1440 * 60 * 1000 //48Horas - 2 * 1440 * 60 * 1000
+                            m.createdTimestamp < Date.now() - 1440 * 60 * 1000 //24Horas - 1440 * 60 * 1000 //48Horas - 2 * 1440 * 60 * 1000
                         );
                     });
 
@@ -25,7 +24,19 @@ export const deleteOldMessages = (client, channelID) => {
                         );
                         return;
                     } else {
+                        //Delete messages channel Discord
                         await channel.bulkDelete(oldMessages);
+
+                        //Delete document MongoDB
+                        const oldestDocuments = await elrellano
+                            .find({})
+                            .sort({ _id: 1 })
+                            .limit(oldMessages.size);
+
+                        for (let oldest of oldestDocuments) {
+                            await elrellano.deleteOne({ _id: oldest._id });
+                        }
+
                         console.log(
                             `${
                                 oldMessages.size
