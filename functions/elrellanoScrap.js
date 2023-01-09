@@ -7,10 +7,10 @@ const elrellanoScrap = async (client) => {
     const channelID = "1061440737843105803";
 
     setInterval(async () => {
-        deleteOldMessages(client, channelID);
+        deleteOldMessages(client, channelID, elrellano);
 
         console.log(
-            `Comprobando si hay videos nuevos de Elrellano.com ${new Date().toLocaleTimeString(
+            `Comprobando si hay videos nuevos de 🎦 Elrellano.com ${new Date().toLocaleTimeString(
                 "es-ES",
                 {
                     timeZone: "Europe/Madrid",
@@ -100,24 +100,8 @@ const elrellanoScrap = async (client) => {
 
                     await newData.save();
 
-                    let textNew;
-                    let textVideo;
-                    let textFound;
-
-                    if (data?.length === 1) {
-                        textNew = "Nuevo";
-                        textVideo = "video";
-                        textFound = "encontrado";
-                    } else {
-                        textNew = "Nuevos";
-                        textVideo = "videos";
-                        textFound = "encontrados";
-                    }
-
                     console.log(
-                        `¡ (${
-                            data?.length
-                        }) ${textNew} ${textVideo} ${textFound}! ${new Date().toLocaleTimeString(
+                        `¡Nuevos videos encontrados! 🎦-elrellano ${new Date().toLocaleTimeString(
                             "es-ES",
                             {
                                 timeZone: "Europe/Madrid",
