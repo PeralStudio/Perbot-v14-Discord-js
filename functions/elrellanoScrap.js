@@ -86,7 +86,6 @@ const elrellanoScrap = async (client) => {
                         .get("1061440737843105803")
                         .send({
                             content:
-                                "<<--------------------------------------->> \n" +
                                 "`Título:` " +
                                 video.title +
                                 (video.summary &&
