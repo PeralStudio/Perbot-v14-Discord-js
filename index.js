@@ -2610,8 +2610,10 @@ client.on("interactionCreate", async (interaction) => {
 
         const response = await google.search(searchTerm, options);
 
+        if (response.results.length > 3) response.results.length = 3;
+
         let output = "";
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < response.results.length; i++) {
             const result = response.results[i];
             output += `${result.url}\n`;
         }
