@@ -13,9 +13,7 @@ export const deleteOldMessages = (client, channelID, elrellano) => {
 
                     if (oldMessages.size <= 0) {
                         console.log(
-                            `${
-                                oldMessages.size
-                            } Mensajes antiguos borrados de el canal: 🎦-elrellano (${new Date().toLocaleTimeString(
+                            `No hay mensajes para borrar de el canal: 🎦-elrellano (${new Date().toLocaleTimeString(
                                 "es-ES",
                                 {
                                     timeZone: "Europe/Madrid",
