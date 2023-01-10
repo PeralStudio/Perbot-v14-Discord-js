@@ -1,17 +1,17 @@
-// import config from "./config.js";
-// const {
-//     prefix,
-//     lolApi,
-//     youtubeKey,
-//     mongoUrl,
-//     CLIENT_ID,
-//     GUILD_ID,
-//     token,
-//     tmdbApi,
-//     email,
-//     gmailToken,
-//     nameBot,
-// } = config;
+import config from "./config.js";
+const {
+    prefix,
+    lolApi,
+    youtubeKey,
+    mongoUrl,
+    CLIENT_ID,
+    GUILD_ID,
+    token,
+    tmdbApi,
+    email,
+    gmailToken,
+    nameBot,
+} = config;
 
 import {
     REST,
@@ -133,19 +133,19 @@ const commands = [
 
 let currentVersion;
 
-const {
-    prefix,
-    lolApi,
-    youtubeKey,
-    mongoUrl,
-    CLIENT_ID,
-    GUILD_ID,
-    token,
-    tmdbApi,
-    email,
-    gmailToken,
-    nameBot,
-} = process.env;
+// const {
+//     prefix,
+//     lolApi,
+//     youtubeKey,
+//     mongoUrl,
+//     CLIENT_ID,
+//     GUILD_ID,
+//     token,
+//     tmdbApi,
+//     email,
+//     gmailToken,
+//     nameBot,
+// } = process.env;
 
 mongoose
     .connect(mongoUrl, {
