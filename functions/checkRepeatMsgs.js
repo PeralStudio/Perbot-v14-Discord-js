@@ -12,19 +12,21 @@ const checkRepeatMsgs = async (client, channelID) => {
                     return true;
                 });
 
-                uniqueMessages
-                    .forEach(async (message) => {
-                        if (message.deleted) return;
+                uniqueMessages.forEach(async (message) => {
+                    if (message.deleted) return;
 
+                    try {
                         await message.delete({
                             timeout: 2000,
-                            reason: "deleting repeated messages",
+                            reason: "deleting repeat messages",
                         });
                         console.log(
                             `Mensajes repetidos borrados en el canal: ${channelID}`
                         );
-                    })
-                    .catch(console.error);
+                    } catch (err) {
+                        console.error(`Error deleting message: ${err}`);
+                    }
+                });
             })
             .catch(console.error);
     });
