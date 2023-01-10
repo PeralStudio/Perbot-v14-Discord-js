@@ -1,15 +1,19 @@
 // import { EmbedBuilder } from "discord.js";
 import ytch from "yt-channel-info";
 import youtube from "../Schemas/youtubeSchema.js";
+import checkRepeatMsgs from "./checkRepeatMsgs.js";
 
 const setIntervalYoutube = async (client, userId) => {
+    const channelID = "1009141517044166757"; // Twitch
     const payload = {
         channelId: userId,
     };
-
     const { getChannelVideos /* , getChannelInfo */ } = ytch;
 
     setInterval(async () => {
+        //Check messages for chanel and filter the repeated
+        checkRepeatMsgs(client, channelID);
+
         const ultimoVideo = await getChannelVideos(payload, 0)
             .then((response) => {
                 return response.items[0];
