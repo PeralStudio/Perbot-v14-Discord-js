@@ -1,7 +1,7 @@
 const checkRepeatMsgs = async (client, channelID) => {
     client.channels.fetch(channelID).then((channel) => {
         channel.messages
-            .fetch({ limit: 99 })
+            .fetch({ limit: 24 })
             .then((messages) => {
                 const uniqueMessageSet = new Set();
                 const uniqueMessages = messages.filter((message) => {
@@ -20,11 +20,8 @@ const checkRepeatMsgs = async (client, channelID) => {
                             timeout: 2000,
                             reason: "deleting repeat messages",
                         });
-                        console.log(
-                            `Mensajes repetidos borrados en el canal: ${channelID}`
-                        );
                     } catch (err) {
-                        console.error(`Error deleting message: ${err}`);
+                        null;
                     }
                 });
             })
