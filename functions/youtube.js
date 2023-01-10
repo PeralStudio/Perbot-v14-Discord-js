@@ -12,7 +12,7 @@ const setIntervalYoutube = async (client, userId) => {
 
     setInterval(async () => {
         //Check messages for chanel and filter the repeated
-        checkRepeatMsgs(client, channelID);
+        await checkRepeatMsgs(client, channelID);
 
         const ultimoVideo = await getChannelVideos(payload, 0)
             .then((response) => {

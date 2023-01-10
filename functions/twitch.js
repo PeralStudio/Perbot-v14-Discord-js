@@ -14,7 +14,7 @@ const setIntervalTwitch = async (client, user) => {
 
     setInterval(async () => {
         //Check messages for chanel and filter the repeated
-        checkRepeatMsgs(client, channelID);
+        await checkRepeatMsgs(client, channelID);
 
         console.log(
             `Comprobando Twitch ${capitalizedUser} - (${new Date().toLocaleTimeString(
