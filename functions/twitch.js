@@ -2,9 +2,11 @@ import { EmbedBuilder } from "discord.js";
 import nodeSuperFetch from "node-superfetch";
 import twitch from "../Schemas/twitchSchema.js";
 import checkRepeatMsgs from "./checkRepeatMsgs.js";
+import * as dotenv from "dotenv";
+dotenv.config();
 
 const setIntervalTwitch = async (client, user) => {
-    const { twitchChannelID } = process.env;
+    const { TWITCH_CHANNEL_ID } = process.env;
     const versionbot = "AlfanjorBot v2.0 Peralstudio.com";
 
     const firstLetter = user.charAt(0);
@@ -14,7 +16,7 @@ const setIntervalTwitch = async (client, user) => {
 
     setInterval(async () => {
         //Check messages for chanel and filter the repeated
-        await checkRepeatMsgs(client, channelID);
+        await checkRepeatMsgs(client, TWITCH_CHANNEL_ID);
 
         console.log(
             `Comprobando Twitch ${capitalizedUser} - (${new Date().toLocaleTimeString(
