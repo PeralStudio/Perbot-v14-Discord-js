@@ -1,8 +1,10 @@
 import { EmbedBuilder } from "discord.js";
 import ytch from "yt-channel-info";
 import playListYoutubeSchema from "../Schemas/playListYoutubeSchema.js";
+import * as dotenv from "dotenv";
+dotenv.config();
 
-const { nameBot } = process.env;
+const { NAME_BOT } = process.env;
 
 const youtubePlayList = async (client, idChannel, interaction) => {
     const idChannelLower = idChannel.toLowerCase();
@@ -72,7 +74,7 @@ const youtubePlayList = async (client, idChannel, interaction) => {
             .setImage(playList.playlistThumbnail)
             .setTimestamp()
             .setFooter({
-                text: nameBot,
+                text: NAME_BOT,
                 iconURL: client.user.displayAvatarURL(),
             })
             .setColor("#AA70F8");
@@ -108,7 +110,7 @@ const youtubePlayList = async (client, idChannel, interaction) => {
             .setImage(playList.playlistThumbnail)
             .setTimestamp()
             .setFooter({
-                text: nameBot,
+                text: NAME_BOT,
                 iconURL: client.user.displayAvatarURL(),
             })
             .setColor("#AA70F8");
