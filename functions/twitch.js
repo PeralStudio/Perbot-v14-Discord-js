@@ -2,6 +2,7 @@ import { EmbedBuilder } from "discord.js";
 import nodeSuperFetch from "node-superfetch";
 import twitch from "../Schemas/twitchSchema.js";
 import checkRepeatMsgs from "./checkRepeatMsgs.js";
+import { deleteOldMsgTwitch } from "./deleteOldMsgTwitch.js";
 import * as dotenv from "dotenv";
 dotenv.config();
 
@@ -15,6 +16,7 @@ const setIntervalTwitch = async (client, user) => {
     const capitalizedUser = firstLetterCap + remainingLetters;
 
     setInterval(async () => {
+        deleteOldMsgTwitch(client, TWITCH_CHANNEL_ID);
         //Check messages for chanel and filter the repeated
         await checkRepeatMsgs(client, TWITCH_CHANNEL_ID);
 
