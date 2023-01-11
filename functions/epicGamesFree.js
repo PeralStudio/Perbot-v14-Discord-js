@@ -5,7 +5,7 @@ import dayjs from "dayjs";
 // Descomment for test in local
 // import config from "../config.js";
 // const { nameBot } = config;
-const { nameBot } = process.env;
+const { NAME_BOT } = process.env;
 
 const epicGamesFree = async (client) => {
     console.log(
@@ -50,7 +50,7 @@ const epicGamesFree = async (client) => {
                         .setTitle(`Ha ocurrido un error.`)
                         .setTimestamp()
                         .setFooter({
-                            text: nameBot,
+                            text: NAME_BOT,
                             iconURL: client?.user.displayAvatarURL(),
                         })
                         .setColor("#ff0000");
@@ -107,7 +107,7 @@ const epicGamesFree = async (client) => {
                     )
                     .setTimestamp()
                     .setFooter({
-                        text: nameBot,
+                        text: NAME_BOT,
                         iconURL: client?.user.displayAvatarURL(),
                     })
                     .setColor("#27963f");
@@ -145,7 +145,7 @@ const epicGamesFree = async (client) => {
                     )
                     .setTimestamp()
                     .setFooter({
-                        text: nameBot,
+                        text: NAME_BOT,
                         iconURL: client?.user.displayAvatarURL(),
                     })
                     .setColor("#27963f");
@@ -196,7 +196,7 @@ const epicGamesFree = async (client) => {
                     )
                     .setTimestamp()
                     .setFooter({
-                        text: nameBot,
+                        text: NAME_BOT,
                         iconURL: client?.user.displayAvatarURL(),
                     })
                     .setColor("#ba3f3f");
@@ -233,7 +233,7 @@ const epicGamesFree = async (client) => {
                     )
                     .setTimestamp()
                     .setFooter({
-                        text: nameBot,
+                        text: NAME_BOT,
                         iconURL: client?.user.displayAvatarURL(),
                     })
                     .setColor("#ba3f3f");
