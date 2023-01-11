@@ -133,6 +133,8 @@ const {
     EMAIL,
     GMAIL_KEY,
     NAME_BOT,
+    GENERAL_CHANNEL_ID,
+    ID_OWNER,
 } = process.env;
 
 mongoose
@@ -302,7 +304,7 @@ client.on("guildMemberAdd", async (member) => {
             iconURL: client.user.displayAvatarURL(),
         });
 
-    client.channels.cache.get("1008006156712677433").send({ embeds: [embed] });
+    client.channels.cache.get(GENERAL_CHANNEL_ID).send({ embeds: [embed] });
 
     // AÑADIR USUARIO A LA BASE DE DATOS CUANDO INGRESA AL SERVIDOR
     let dataUserDB = await usersDiscordSchema.findOne({
@@ -338,7 +340,7 @@ client.on("guildMemberRemove", async (member) => {
             iconURL: client.user.displayAvatarURL(),
         });
 
-    client.channels.cache.get("1008006156712677433").send({ embeds: [embed] });
+    client.channels.cache.get(GENERAL_CHANNEL_ID).send({ embeds: [embed] });
 
     // ELIMINAR USUARIO DE LA BASE DE DATOS CUANDO ABANDONA EL SERVIDOR
 
@@ -393,7 +395,7 @@ client.on("interactionCreate", async (interaction) => {
 
     //COMANDO EMAIL
     if (interaction.commandName === "email") {
-        if (interaction.user.id !== "209338137346834433") {
+        if (interaction.user.id !== ID_OWNER) {
             interaction.reply({
                 ephemeral: true,
                 embeds: [
@@ -1944,7 +1946,7 @@ client.on("interactionCreate", async (interaction) => {
     //BORRAR MENSAJES
     if (interaction.commandName === "borrar") {
         if (
-            interaction.user.id !== "209338137346834433" &&
+            interaction.user.id !== ID_OWNER &&
             interaction.user.id !== "254135921144758273" &&
             interaction.user.id !== "298585122519908364" &&
             interaction.user.id !== "179686774895935489"
@@ -2012,7 +2014,7 @@ client.on("interactionCreate", async (interaction) => {
     //ENVIAR MD A UN USUARIO
     if (interaction.commandName === "enviarmd") {
         if (
-            interaction.user.id !== "209338137346834433" &&
+            interaction.user.id !== ID_OWNER &&
             interaction.user.id !== "254135921144758273" &&
             interaction.user.id !== "298585122519908364" &&
             interaction.user.id !== "179686774895935489"

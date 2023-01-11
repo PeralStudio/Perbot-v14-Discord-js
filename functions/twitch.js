@@ -7,7 +7,7 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 const setIntervalTwitch = async (client, user) => {
-    const { TWITCH_CHANNEL_ID } = process.env;
+    const { TWITCH_CHANNEL_ID, ID_OWNER } = process.env;
     const versionbot = "AlfanjorBot v2.0 Peralstudio.com";
 
     const firstLetter = user.charAt(0);
@@ -119,35 +119,31 @@ const setIntervalTwitch = async (client, user) => {
                         }),
                     });
 
-                    await client.channels.cache
-                        .get("1009104666849726625")
-                        .send({
-                            content:
-                                "<@209338137346834433> \n ¡ **`" +
-                                capitalizedUser +
-                                "`** esta en directo jugando a **`" +
-                                game.body +
-                                "`** ! \n https://twitch.tv/" +
-                                user,
-                            // content: `<@209338137346834433> \n ¡ **${capitalizedUser}** esta en directo jugando a **${game.body}** ! \n https://twitch.tv/${user}`,
-                            embeds: [embed],
-                        });
+                    await client.channels.cache.get(TWITCH_CHANNEL_ID).send({
+                        content:
+                            `<@${ID_OWNER}> ` +
+                            "\n ¡ **`" +
+                            capitalizedUser +
+                            "`** esta en directo jugando a **`" +
+                            game.body +
+                            "`** ! \n https://twitch.tv/" +
+                            user,
+                        embeds: [embed],
+                    });
 
                     return await newData.save();
                 } else {
-                    await client.channels.cache
-                        .get("1009104666849726625")
-                        .send({
-                            content:
-                                "<@209338137346834433> \n ¡ **`" +
-                                capitalizedUser +
-                                "`** esta en directo jugando a **`" +
-                                game.body +
-                                "`** ! \n https://twitch.tv/" +
-                                user,
-                            // content: `<@209338137346834433> \n ¡ **${capitalizedUser}** esta en directo jugando a **${game.body}** ! \n https://twitch.tv/${user}`,
-                            embeds: [embed],
-                        });
+                    await client.channels.cache.get(TWITCH_CHANNEL_ID).send({
+                        content:
+                            `<@${ID_OWNER}> ` +
+                            " \n ¡ **`" +
+                            capitalizedUser +
+                            "`** esta en directo jugando a **`" +
+                            game.body +
+                            "`** ! \n https://twitch.tv/" +
+                            user,
+                        embeds: [embed],
+                    });
 
                     return await dataDB.updateOne({
                         user: user,
@@ -166,8 +162,8 @@ const setIntervalTwitch = async (client, user) => {
                 return;
             }
 
-            await client.channels.cache.get("1009104666849726625").send({
-                content: `<@209338137346834433> \n ¡ **${capitalizedUser}** esta en directo jugando a **${game.body}** ! \n https://twitch.tv/${user}`,
+            await client.channels.cache.get(TWITCH_CHANNEL_ID).send({
+                content: `<@${ID_OWNER}> \n ¡ **${capitalizedUser}** esta en directo jugando a **${game.body}** ! \n https://twitch.tv/${user}`,
                 embeds: [embed],
             });
 

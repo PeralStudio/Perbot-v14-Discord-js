@@ -79,9 +79,6 @@ const youtubePlayList = async (client, idChannel, interaction) => {
             })
             .setColor("#AA70F8");
 
-        // await client.channels.cache.get("1009141517044166757").send({
-        //     embeds: [embed],
-        // });
         interaction.reply({ embeds: [embed], ephemeral: true });
         return;
     } else {
@@ -115,9 +112,6 @@ const youtubePlayList = async (client, idChannel, interaction) => {
             })
             .setColor("#AA70F8");
 
-        // await client.channels.cache.get("1009141517044166757").send({
-        //     embeds: [embed],
-        // });
         interaction.reply({ embeds: [embed], ephemeral: true });
 
         await playListYoutubeSchema.findOneAndUpdate(

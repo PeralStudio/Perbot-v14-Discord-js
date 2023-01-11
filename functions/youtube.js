@@ -6,7 +6,7 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 const setIntervalYoutube = async (client, userId) => {
-    const { YOUTUBE_CHANNEL_ID } = process.env;
+    const { YOUTUBE_CHANNEL_ID, ID_OWNER } = process.env;
     const payload = {
         channelId: userId,
     };
@@ -51,14 +51,13 @@ const setIntervalYoutube = async (client, userId) => {
             });
 
             if (ultimoVideo.liveNow === true) {
-                await client.channels.cache.get("1009141517044166757").send({
+                await client.channels.cache.get(YOUTUBE_CHANNEL_ID).send({
                     content:
-                        "<@209338137346834433> \n ¡ **`" +
+                        `<@${ID_OWNER}> ` +
+                        " \n ¡ **`" +
                         ultimoVideo.author +
                         "`** esta en 🔴 `DIRECTO` ! \n https://www.youtube.com/watch?v=" +
                         ultimoVideo.videoId,
-                    // content: `<@209338137346834433> \n ¡ **${ultimoVideo.author}** esta en **directo** ! \n https://www.youtube.com/watch?v=${ultimoVideo.videoId} `,
-                    // embeds: [embed],
                 });
 
                 await newData.save();
@@ -70,16 +69,15 @@ const setIntervalYoutube = async (client, userId) => {
                 ) {
                     return;
                 }
-                await client.channels.cache.get("1009141517044166757").send({
+                await client.channels.cache.get(YOUTUBE_CHANNEL_ID).send({
                     content:
-                        "<@209338137346834433> \n ¡ **`" +
+                        `<@${ID_OWNER}> ` +
+                        " \n ¡ **`" +
                         ultimoVideo.author +
                         "`** ha subido un `NUEVO VÍDEO` ! \n Duración: `(" +
                         ultimoVideo.durationText +
                         ")` \n https://www.youtube.com/watch?v=" +
                         ultimoVideo.videoId,
-                    // content: `<@209338137346834433> \n ¡ **${ultimoVideo.author}** ha subido un **nuevo video** ! \n https://www.youtube.com/watch?v=${ultimoVideo.videoId}`,
-                    // embeds: [embed],
                 });
 
                 await newData.save();
@@ -98,17 +96,14 @@ const setIntervalYoutube = async (client, userId) => {
                 }
 
                 if (ultimoVideo.liveNow === true) {
-                    await client.channels.cache
-                        .get("1009141517044166757")
-                        .send({
-                            content:
-                                "<@209338137346834433> \n ¡ **`" +
-                                ultimoVideo.author +
-                                "`** esta en 🔴 `DIRECTO` ! \n https://www.youtube.com/watch?v=" +
-                                ultimoVideo.videoId,
-                            // content: `<@209338137346834433> \n ¡ **${ultimoVideo.author}** esta en **directo** ! \n https://www.youtube.com/watch?v=${ultimoVideo.videoId} `,
-                            // embeds: [embed],
-                        });
+                    await client.channels.cache.get(YOUTUBE_CHANNEL_ID).send({
+                        content:
+                            `<@${ID_OWNER}> ` +
+                            " \n ¡ **`" +
+                            ultimoVideo.author +
+                            "`** esta en 🔴 `DIRECTO` ! \n https://www.youtube.com/watch?v=" +
+                            ultimoVideo.videoId,
+                    });
 
                     await youtube.findOneAndUpdate(
                         {
@@ -130,19 +125,16 @@ const setIntervalYoutube = async (client, userId) => {
                     ) {
                         return;
                     }
-                    await client.channels.cache
-                        .get("1009141517044166757")
-                        .send({
-                            content:
-                                "<@209338137346834433> \n ¡ **`" +
-                                ultimoVideo.author +
-                                "`** ha subido un `NUEVO VÍDEO` ! \n Duración: `(" +
-                                ultimoVideo.durationText +
-                                ")` \n https://www.youtube.com/watch?v=" +
-                                ultimoVideo.videoId,
-                            // content: `<@209338137346834433> \n ¡ **${ultimoVideo.author}** ha subido un **nuevo video** ! \n https://www.youtube.com/watch?v=${ultimoVideo.videoId}`,
-                            // embeds: [embed],
-                        });
+                    await client.channels.cache.get(YOUTUBE_CHANNEL_ID).send({
+                        content:
+                            `<@${ID_OWNER}> ` +
+                            " \n ¡ **`" +
+                            ultimoVideo.author +
+                            "`** ha subido un `NUEVO VÍDEO` ! \n Duración: `(" +
+                            ultimoVideo.durationText +
+                            ")` \n https://www.youtube.com/watch?v=" +
+                            ultimoVideo.videoId,
+                    });
 
                     await youtube.findOneAndUpdate(
                         {

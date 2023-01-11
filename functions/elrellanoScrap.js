@@ -84,20 +84,18 @@ const elrellanoScrap = async (client) => {
                         }),
                     });
 
-                    await client.channels.cache
-                        .get("1061440737843105803")
-                        .send({
-                            content:
-                                "`Título:` " +
-                                video.title +
-                                (video.summary &&
-                                    "\n" + "`Descripción:`" + video.summary) +
-                                "\n" +
-                                "`Fecha:`" +
-                                video.date +
-                                "\n" +
-                                video.url,
-                        });
+                    await client.channels.cache.get(ELRELLANO_CHANNEL_ID).send({
+                        content:
+                            "`Título:` " +
+                            video.title +
+                            (video.summary &&
+                                "\n" + "`Descripción:`" + video.summary) +
+                            "\n" +
+                            "`Fecha:`" +
+                            video.date +
+                            "\n" +
+                            video.url,
+                    });
 
                     await newData.save();
 

@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 import * as dotenv from "dotenv";
 dotenv.config();
 
-const { NAME_BOT } = process.env;
+const { NAME_BOT, EPICGAMES_CHANNEL_ID } = process.env;
 
 const epicGamesFree = async (client) => {
     console.log(
@@ -54,7 +54,7 @@ const epicGamesFree = async (client) => {
                         })
                         .setColor("#ff0000");
 
-                    client?.channels.cache.get("1018578696627568701").send({
+                    client?.channels.cache.get(EPICGAMES_CHANNEL_ID).send({
                         embeds: [embedError],
                     });
                 }
@@ -243,7 +243,7 @@ const epicGamesFree = async (client) => {
                 res.nextGames[0] && (await embeds.push(embedFree2, embed3));
                 res.nextGames[2] && (await embeds.push(embed4));
 
-                await client?.channels.cache.get("1018578696627568701").send({
+                await client?.channels.cache.get(EPICGAMES_CHANNEL_ID).send({
                     embeds,
                 });
             })
