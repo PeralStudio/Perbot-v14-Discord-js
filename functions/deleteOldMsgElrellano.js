@@ -15,6 +15,31 @@ export const deleteOldMsgElrellano = (client, channelID, elrellano) => {
                         //Delete messages channel Discord
                         await channel.bulkDelete(oldMessages);
 
+                        let text1;
+                        let text2;
+                        let text3;
+
+                        if (oldMessages.size >= 2) {
+                            text1 = "Mensajes";
+                            text2 = "antiguos";
+                            text3 = "borrados";
+                        } else {
+                            text1 = "Mensaje";
+                            text2 = "antiguo";
+                            text3 = "borrado";
+                        }
+
+                        console.log(
+                            `${
+                                oldMessages.size
+                            } ${text1} ${text2} ${text3} de el canal: 🎦-elrellano (${new Date().toLocaleTimeString(
+                                "es-ES",
+                                {
+                                    timeZone: "Europe/Madrid",
+                                }
+                            )})`
+                        );
+
                         //Delete document MongoDB
                         const oldestDocuments = await elrellano
                             .find({})
@@ -24,17 +49,6 @@ export const deleteOldMsgElrellano = (client, channelID, elrellano) => {
                         for (let oldest of oldestDocuments) {
                             await elrellano.deleteOne({ _id: oldest._id });
                         }
-
-                        console.log(
-                            `${
-                                oldMessages.size
-                            } Mensajes antiguos borrados de el canal: 🎦-elrellano (${new Date().toLocaleTimeString(
-                                "es-ES",
-                                {
-                                    timeZone: "Europe/Madrid",
-                                }
-                            )})`
-                        );
                     }
                 })
                 .catch(console.error);
