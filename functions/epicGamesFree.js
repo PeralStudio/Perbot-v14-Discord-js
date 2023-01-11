@@ -1,6 +1,8 @@
 import { getGames } from "epic-free-games";
 import { EmbedBuilder } from "discord.js";
 import dayjs from "dayjs";
+import * as dotenv from "dotenv";
+dotenv.config();
 
 // Descomment for test in local
 // import config from "../config.js";
