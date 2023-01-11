@@ -23,7 +23,6 @@ const elrellanoScrap = async (client) => {
             const response = await axios.get("https://elrellano.com/videos/");
             const $ = cheerio.load(response.data);
             const videos = [];
-            let data;
 
             // Push to videos(array) the videos non Youtube
             $(".inside-article").each(async (i, element) => {
@@ -32,12 +31,15 @@ const elrellanoScrap = async (client) => {
                 const videoUrl = $(element)
                     .find(".wp-block-video video")
                     .attr("src");
+                // const date = $(element)
+                //     .find(".entry-meta .posted-on > a")
+                //     .attr("title");
 
                 if (!videoUrl) {
                     return;
                 } else {
                     videos.push({
-                        title,
+                        title: title ? title : "",
                         summary: summary ? summary : "",
                         url: videoUrl,
                         date: new Date().toLocaleString("es-ES", {
@@ -59,7 +61,7 @@ const elrellanoScrap = async (client) => {
                     return;
                 } else {
                     videos.push({
-                        title,
+                        title: title ? title : "",
                         summary: summary ? summary : "",
                         url: videoUrlYT,
                         date: new Date().toLocaleString("es-ES", {
@@ -70,8 +72,9 @@ const elrellanoScrap = async (client) => {
             });
 
             videos.forEach(async (video, i) => {
-                data = await elrellano.findOne({
+                const data = await elrellano.findOne({
                     title: video?.title,
+                    videoUrl: video?.url,
                 });
 
                 if (!data) {
