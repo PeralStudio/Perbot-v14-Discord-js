@@ -4,10 +4,10 @@ import elrellano from "../Schemas/elrellanoSchema.js";
 import { deleteOldMessages } from "./deleteOldMessages.js";
 
 const elrellanoScrap = async (client) => {
-    const channelID = "1061440737843105803";
+    const { elrellanoChannelID } = process.env;
 
     setInterval(async () => {
-        deleteOldMessages(client, channelID, elrellano);
+        deleteOldMessages(client, elrellanoChannelID, elrellano);
 
         console.log(
             `Comprobando si hay videos nuevos de 🎦 Elrellano.com ${new Date().toLocaleTimeString(

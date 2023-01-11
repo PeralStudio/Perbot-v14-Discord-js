@@ -4,7 +4,7 @@ import twitch from "../Schemas/twitchSchema.js";
 import checkRepeatMsgs from "./checkRepeatMsgs.js";
 
 const setIntervalTwitch = async (client, user) => {
-    const channelID = "1009104666849726625"; // Twitch
+    const { twitchChannelID } = process.env;
     const versionbot = "AlfanjorBot v2.0 Peralstudio.com";
 
     const firstLetter = user.charAt(0);

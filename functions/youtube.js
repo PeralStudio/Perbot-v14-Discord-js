@@ -4,7 +4,7 @@ import youtube from "../Schemas/youtubeSchema.js";
 import checkRepeatMsgs from "./checkRepeatMsgs.js";
 
 const setIntervalYoutube = async (client, userId) => {
-    const channelID = "1009141517044166757"; // Twitch
+    const { youtubeChannelID } = process.env;
     const payload = {
         channelId: userId,
     };
@@ -12,7 +12,7 @@ const setIntervalYoutube = async (client, userId) => {
 
     setInterval(async () => {
         //Check messages for chanel and filter the repeated
-        await checkRepeatMsgs(client, channelID);
+        await checkRepeatMsgs(client, youtubeChannelID);
 
         const ultimoVideo = await getChannelVideos(payload, 0)
             .then((response) => {

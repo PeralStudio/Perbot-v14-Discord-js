@@ -11,6 +11,9 @@
 //     email,
 //     gmailToken,
 //     nameBot,
+//     elrellanoChannelID,
+//     twitchChannelID,
+//     youtubeChannelID,
 // } = config;
 
 import {
@@ -145,6 +148,9 @@ const {
     email,
     gmailToken,
     nameBot,
+    elrellanoChannelID,
+    twitchChannelID,
+    youtubeChannelID,
 } = process.env;
 
 mongoose
