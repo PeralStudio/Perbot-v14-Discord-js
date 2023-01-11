@@ -2,12 +2,14 @@ import axios from "axios";
 import cheerio from "cherio";
 import elrellano from "../Schemas/elrellanoSchema.js";
 import { deleteOldMessages } from "./deleteOldMessages.js";
+import * as dotenv from "dotenv";
+dotenv.config();
 
 const elrellanoScrap = async (client) => {
-    const { elrellanoChannelID } = process.env;
+    const { ELRELLANO_CHANNEL_ID } = process.env;
 
     setInterval(async () => {
-        deleteOldMessages(client, elrellanoChannelID, elrellano);
+        deleteOldMessages(client, ELRELLANO_CHANNEL_ID, elrellano);
 
         console.log(
             `Comprobando si hay videos nuevos de 🎦 Elrellano.com ${new Date().toLocaleTimeString(
