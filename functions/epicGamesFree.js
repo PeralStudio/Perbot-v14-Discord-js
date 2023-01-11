@@ -253,7 +253,7 @@ const epicGamesFree = async (client) => {
             });
     }
 
-    setTimeout(epicGamesFree, 43200000); //43200000 12Hours
+    setTimeout(epicGamesFree, 21600000); //43200000 12Hours //21600000 6Hours
 };
 
 export default epicGamesFree;
