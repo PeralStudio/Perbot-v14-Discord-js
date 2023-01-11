@@ -7,7 +7,7 @@ export const deleteOldMsgElrellano = (client, channelID, elrellano) => {
                 .then(async (messages) => {
                     const oldMessages = messages.filter((m) => {
                         return (
-                            m.createdTimestamp < Date.now() - 1440 * 60 * 1000 //24Horas - 1440 * 60 * 1000 //48Horas - 2 * 1440 * 60 * 1000
+                            m.createdTimestamp < Date.now() - 1440 * 60 * 1000 //24Hours - 1440 * 60 * 1000 //48Hours - 2 * 1440 * 60 * 1000
                         );
                     });
 
