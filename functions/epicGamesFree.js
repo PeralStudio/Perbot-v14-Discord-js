@@ -4,9 +4,6 @@ import dayjs from "dayjs";
 import * as dotenv from "dotenv";
 dotenv.config();
 
-// Descomment for test in local
-// import config from "../config.js";
-// const { nameBot } = config;
 const { NAME_BOT } = process.env;
 
 const epicGamesFree = async (client) => {
