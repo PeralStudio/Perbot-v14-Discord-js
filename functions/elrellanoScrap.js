@@ -25,50 +25,83 @@ const elrellanoScrap = async (client) => {
             const videos = [];
 
             // Push to videos(array) the videos non Youtube
+            // $(".inside-article").each(async (i, element) => {
+            //     const title = $(element).find(".entry-header h2 > a").text();
+            //     const summary = $(element).find(".entry-content p").text();
+            //     const videoUrl = $(element)
+            //         .find(".wp-block-video video")
+            //         .attr("src");
+            //     // const date = $(element)
+            //     //     .find(".entry-meta .posted-on > a")
+            //     //     .attr("title");
+
+            //     if (!videoUrl) {
+            //         return;
+            //     } else {
+            //         videos.push({
+            //             title: title ? title : "",
+            //             summary: summary ? summary : "",
+            //             url: videoUrl,
+            //             date: new Date().toLocaleString("es-ES", {
+            //                 timeZone: "Europe/Madrid",
+            //             }),
+            //         });
+            //     }
+            // });
+
+            // Push to videos(array) the videos of Youtube
             $(".inside-article").each(async (i, element) => {
                 const title = $(element).find(".entry-header h2 > a").text();
                 const summary = $(element).find(".entry-content p").text();
                 const videoUrl = $(element)
                     .find(".wp-block-video video")
                     .attr("src");
-                // const date = $(element)
-                //     .find(".entry-meta .posted-on > a")
-                //     .attr("title");
-
-                if (!videoUrl) {
-                    return;
-                } else {
-                    videos.push({
-                        title: title ? title : "",
-                        summary: summary ? summary : "",
-                        url: videoUrl,
-                        date: new Date().toLocaleString("es-ES", {
-                            timeZone: "Europe/Madrid",
-                        }),
-                    });
-                }
-            });
-
-            // Push to videos(array) the videos of Youtube
-            $(".inside-article").each(async (i, element) => {
-                const title = $(element).find(".entry-header h2 > a").text();
-                const summary = $(element).find(".entry-content p").text();
                 const videoUrlYT = $(element)
                     .find(".entry-content .wp-block-embed iframe")
                     .attr("src");
 
-                if (!videoUrlYT) {
-                    return;
-                } else {
-                    videos.push({
-                        title: title ? title : "",
-                        summary: summary ? summary : "",
-                        url: videoUrlYT,
-                        date: new Date().toLocaleString("es-ES", {
-                            timeZone: "Europe/Madrid",
-                        }),
-                    });
-                }
+                videos.push({
+                    title: title ? title : "",
+                    summary: summary ? summary : "",
+                    url: !videoUrlYT
+                        ? videoUrl
+                        : videoUrl && videoUrlYT
+                        ? videoUrl
+                        : videoUrlYT,
+                    date: new Date().toLocaleString("es-ES", {
+                        timeZone: "Europe/Madrid",
+                    }),
+                });
+
+                // if (!videoUrlYT) {
+                //     videos.push({
+                //         title: title ? title : "",
+                //         summary: summary ? summary : "",
+                //         url: videoUrl,
+                //         date: new Date().toLocaleString("es-ES", {
+                //             timeZone: "Europe/Madrid",
+                //         }),
+                //     });
+                //     return;
+                // } else if (videoUrl && videoUrlYT) {
+                //     videos.push({
+                //         title: title ? title : "",
+                //         summary: summary ? summary : "",
+                //         url: videoUrl,
+                //         date: new Date().toLocaleString("es-ES", {
+                //             timeZone: "Europe/Madrid",
+                //         }),
+                //     });
+                // } else {
+                //     videos.push({
+                //         title: title ? title : "",
+                //         summary: summary ? summary : "",
+                //         url: videoUrlYT,
+                //         date: new Date().toLocaleString("es-ES", {
+                //             timeZone: "Europe/Madrid",
+                //         }),
+                //     });
+                // }
             });
 
             videos.forEach(async (video, i) => {
