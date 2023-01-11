@@ -96,6 +96,9 @@ import elrellanoScrap from "./functions/elrellanoScrap.js";
 import epicGamesFree from "./functions/epicGamesFree.js";
 import usersDiscordSchema from "./Schemas/usersDiscordSchema.js";
 
+import * as dotenv from "dotenv";
+dotenv.config();
+
 const commands = [
     playCommand,
     pauseCommand,
@@ -135,33 +138,31 @@ const commands = [
 ];
 
 let currentVersion;
+console.log(process.env);
 
 const {
-    prefix,
-    lolApi,
-    youtubeKey,
-    mongoUrl,
+    PREFIX,
+    LOL_KEY,
+    YOUTUBE_KEY,
+    MONGO_URL,
     CLIENT_ID,
     GUILD_ID,
-    token,
-    tmdbApi,
-    email,
-    gmailToken,
-    nameBot,
-    elrellanoChannelID,
-    twitchChannelID,
-    youtubeChannelID,
+    TOKEN_DISCORD,
+    TMDB_KEY,
+    EMAIL,
+    GMAIL_KEY,
+    NAME_BOT,
 } = process.env;
 
 mongoose
-    .connect(mongoUrl, {
+    .connect(MONGO_URL, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     })
     .then(() => console.log("Conectado a MongoDB"))
     .catch((err) => console.log(err));
 
-const rest = new REST({ version: "10" }).setToken(token);
+const rest = new REST({ version: "10" }).setToken(TOKEN_DISCORD);
 
 (async () => {
     try {
@@ -316,7 +317,7 @@ client.on("guildMemberAdd", async (member) => {
         .setColor("#008f39")
         .setTimestamp()
         .setFooter({
-            text: nameBot,
+            text: NAME_BOT,
             iconURL: client.user.displayAvatarURL(),
         });
 
@@ -352,7 +353,7 @@ client.on("guildMemberRemove", async (member) => {
         .setColor("#f10029")
         .setTimestamp()
         .setFooter({
-            text: nameBot,
+            text: NAME_BOT,
             iconURL: client.user.displayAvatarURL(),
         });
 
@@ -395,7 +396,7 @@ player.on("trackStart", async (queue, track) => {
                 .setColor("#EA3939")
                 .setTimestamp()
                 .setFooter({
-                    text: nameBot,
+                    text: NAME_BOT,
                     iconURL: client.user.displayAvatarURL(),
                 }),
         ],
@@ -435,13 +436,13 @@ client.on("interactionCreate", async (interaction) => {
             var transporter = nodemailer.createTransport({
                 service: "gmail",
                 auth: {
-                    user: email,
-                    pass: gmailToken,
+                    user: EMAIL,
+                    pass: GMAIL_KEY,
                 },
             });
 
             var mailOptions = {
-                from: email,
+                from: EMAIL,
                 to: destinatario,
                 subject: asunto,
                 text: contenido,
@@ -475,7 +476,7 @@ client.on("interactionCreate", async (interaction) => {
                                 .setColor("#EA3939")
                                 .setTimestamp()
                                 .setFooter({
-                                    text: nameBot,
+                                    text: NAME_BOT,
                                     iconURL: client.user.displayAvatarURL(),
                                 }),
                         ],
@@ -506,7 +507,7 @@ client.on("interactionCreate", async (interaction) => {
                         .setColor("#EA3939")
                         .setTimestamp()
                         .setFooter({
-                            text: nameBot,
+                            text: NAME_BOT,
                             iconURL: client.user.displayAvatarURL(),
                         }),
                 ],
@@ -524,7 +525,7 @@ client.on("interactionCreate", async (interaction) => {
                         .setColor("#EA3939")
                         .setTimestamp()
                         .setFooter({
-                            text: nameBot,
+                            text: NAME_BOT,
                             iconURL: client.user.displayAvatarURL(),
                         }),
                 ],
@@ -553,7 +554,7 @@ client.on("interactionCreate", async (interaction) => {
                         .setColor("#EA3939")
                         .setTimestamp()
                         .setFooter({
-                            text: nameBot,
+                            text: NAME_BOT,
                             iconURL: client.user.displayAvatarURL(),
                         }),
                 ],
@@ -575,7 +576,7 @@ client.on("interactionCreate", async (interaction) => {
                         .setColor("#EA3939")
                         .setTimestamp()
                         .setFooter({
-                            text: nameBot,
+                            text: NAME_BOT,
                             iconURL: client.user.displayAvatarURL(),
                         }),
                 ],
@@ -603,7 +604,7 @@ client.on("interactionCreate", async (interaction) => {
                         .setColor("#EA3939")
                         .setTimestamp()
                         .setFooter({
-                            text: nameBot,
+                            text: NAME_BOT,
                             iconURL: client.user.displayAvatarURL(),
                         }),
                 ],
@@ -644,7 +645,7 @@ client.on("interactionCreate", async (interaction) => {
                         .setColor("#EA3939")
                         .setTimestamp()
                         .setFooter({
-                            text: nameBot,
+                            text: NAME_BOT,
                             iconURL: client.user.displayAvatarURL(),
                         }),
                 ],
@@ -663,7 +664,7 @@ client.on("interactionCreate", async (interaction) => {
                         .setColor("#EA3939")
                         .setTimestamp()
                         .setFooter({
-                            text: nameBot,
+                            text: NAME_BOT,
                             iconURL: client.user.displayAvatarURL(),
                         }),
                 ],
@@ -677,7 +678,7 @@ client.on("interactionCreate", async (interaction) => {
                     .setColor("#EA3939")
                     .setTimestamp()
                     .setFooter({
-                        text: nameBot,
+                        text: NAME_BOT,
                         iconURL: client.user.displayAvatarURL(),
                     }),
             ],
@@ -695,7 +696,7 @@ client.on("interactionCreate", async (interaction) => {
                         .setColor("#EA3939")
                         .setTimestamp()
                         .setFooter({
-                            text: nameBot,
+                            text: NAME_BOT,
                             iconURL: client.user.displayAvatarURL(),
                         }),
                 ],
@@ -709,7 +710,7 @@ client.on("interactionCreate", async (interaction) => {
                     .setColor("#EA3939")
                     .setTimestamp()
                     .setFooter({
-                        text: nameBot,
+                        text: NAME_BOT,
                         iconURL: client.user.displayAvatarURL(),
                     }),
             ],
@@ -727,7 +728,7 @@ client.on("interactionCreate", async (interaction) => {
                         .setColor("#EA3939")
                         .setTimestamp()
                         .setFooter({
-                            text: nameBot,
+                            text: NAME_BOT,
                             iconURL: client.user.displayAvatarURL(),
                         }),
                 ],
@@ -742,7 +743,7 @@ client.on("interactionCreate", async (interaction) => {
                         .setColor("#EA3939")
                         .setTimestamp()
                         .setFooter({
-                            text: nameBot,
+                            text: NAME_BOT,
                             iconURL: client.user.displayAvatarURL(),
                         }),
                 ],
@@ -755,7 +756,7 @@ client.on("interactionCreate", async (interaction) => {
                         .setColor("#EA3939")
                         .setTimestamp()
                         .setFooter({
-                            text: nameBot,
+                            text: NAME_BOT,
                             iconURL: client.user.displayAvatarURL(),
                         }),
                 ],
@@ -775,7 +776,7 @@ client.on("interactionCreate", async (interaction) => {
                         .setColor("#EA3939")
                         .setTimestamp()
                         .setFooter({
-                            text: nameBot,
+                            text: NAME_BOT,
                             iconURL: client.user.displayAvatarURL(),
                         }),
                 ],
@@ -790,7 +791,7 @@ client.on("interactionCreate", async (interaction) => {
                         .setColor("#EA3939")
                         .setTimestamp()
                         .setFooter({
-                            text: nameBot,
+                            text: NAME_BOT,
                             iconURL: client.user.displayAvatarURL(),
                         }),
                 ],
@@ -803,7 +804,7 @@ client.on("interactionCreate", async (interaction) => {
                         .setColor("#EA3939")
                         .setTimestamp()
                         .setFooter({
-                            text: nameBot,
+                            text: NAME_BOT,
                             iconURL: client.user.displayAvatarURL(),
                         }),
                 ],
@@ -823,7 +824,7 @@ client.on("interactionCreate", async (interaction) => {
                         .setColor("#EA3939")
                         .setTimestamp()
                         .setFooter({
-                            text: nameBot,
+                            text: NAME_BOT,
                             iconURL: client.user.displayAvatarURL(),
                         }),
                 ],
@@ -839,7 +840,7 @@ client.on("interactionCreate", async (interaction) => {
             .setColor("#0099ff")
             .setTimestamp()
             .setFooter({
-                text: nameBot,
+                text: NAME_BOT,
                 iconURL: client.user.displayAvatarURL(),
             });
         return await interaction.reply({ embeds: [embed] });
@@ -857,7 +858,7 @@ client.on("interactionCreate", async (interaction) => {
                         .setColor("#EA3939")
                         .setTimestamp()
                         .setFooter({
-                            text: nameBot,
+                            text: NAME_BOT,
                             iconURL: client.user.displayAvatarURL(),
                         }),
                 ],
@@ -873,7 +874,7 @@ client.on("interactionCreate", async (interaction) => {
                     .setColor("#EA3939")
                     .setTimestamp()
                     .setFooter({
-                        text: nameBot,
+                        text: NAME_BOT,
                         iconURL: client.user.displayAvatarURL(),
                     }),
             ],
@@ -891,7 +892,7 @@ client.on("interactionCreate", async (interaction) => {
                         .setColor("#EA3939")
                         .setTimestamp()
                         .setFooter({
-                            text: nameBot,
+                            text: NAME_BOT,
                             iconURL: client.user.displayAvatarURL(),
                         }),
                 ],
@@ -906,7 +907,7 @@ client.on("interactionCreate", async (interaction) => {
                     .setColor("#EA3939")
                     .setTimestamp()
                     .setFooter({
-                        text: nameBot,
+                        text: NAME_BOT,
                         iconURL: client.user.displayAvatarURL(),
                     }),
             ],
@@ -941,7 +942,7 @@ client.on("interactionCreate", async (interaction) => {
         fetch(
             `https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${
                 interaction.options.get("invocador").value
-            }?api_key=${lolApi}`
+            }?api_key=${LOL_KEY}`
         )
             .then((res) => res.json())
             .then((datasumm) => {
@@ -962,7 +963,7 @@ client.on("interactionCreate", async (interaction) => {
                     return;
                 }
                 fetch(
-                    `https://euw1.api.riotgames.com/lol/league/v4/entries/by-summoner/${datasumm.id}?api_key=${lolApi}`
+                    `https://euw1.api.riotgames.com/lol/league/v4/entries/by-summoner/${datasumm.id}?api_key=${LOL_KEY}`
                 )
                     .then((response) => response.json())
                     .then((data) => {
@@ -1051,7 +1052,7 @@ client.on("interactionCreate", async (interaction) => {
                                 .setTimestamp()
                                 .setColor("#0099ff")
                                 .setFooter({
-                                    text: nameBot,
+                                    text: NAME_BOT,
                                     iconURL: client.user.displayAvatarURL(),
                                 });
 
@@ -1119,7 +1120,7 @@ client.on("interactionCreate", async (interaction) => {
                                 .setTimestamp()
                                 .setColor("#0099ff")
                                 .setFooter({
-                                    text: nameBot,
+                                    text: NAME_BOT,
                                     iconURL: client.user.displayAvatarURL(),
                                 });
 
@@ -1186,7 +1187,7 @@ client.on("interactionCreate", async (interaction) => {
 
                                 .setColor("#0099ff")
                                 .setFooter({
-                                    text: nameBot,
+                                    text: NAME_BOT,
                                     iconURL: client.user.displayAvatarURL(),
                                 });
 
@@ -1254,7 +1255,7 @@ client.on("interactionCreate", async (interaction) => {
                                 .setImage(imgPathForEmbed)
                                 .setTimestamp()
                                 .setFooter({
-                                    text: nameBot,
+                                    text: NAME_BOT,
                                     iconURL: client.user.displayAvatarURL(),
                                 }),
                         ],
@@ -1270,7 +1271,7 @@ client.on("interactionCreate", async (interaction) => {
                                 )
                                 .setTimestamp()
                                 .setFooter({
-                                    text: nameBot,
+                                    text: NAME_BOT,
                                     iconURL: client.user.displayAvatarURL(),
                                 }),
                         ],
@@ -1297,7 +1298,7 @@ client.on("interactionCreate", async (interaction) => {
                     .setTitle(post.title)
                     .setImage(post.url)
                     .setFooter({
-                        text: nameBot,
+                        text: NAME_BOT,
                         iconURL: client.user.displayAvatarURL(),
                     });
                 if (!post.url) {
@@ -1311,7 +1312,7 @@ client.on("interactionCreate", async (interaction) => {
                                 )
                                 .setTimestamp()
                                 .setFooter({
-                                    text: nameBot,
+                                    text: NAME_BOT,
                                     iconURL: client.user.displayAvatarURL(),
                                 }),
                         ],
@@ -1371,7 +1372,7 @@ client.on("interactionCreate", async (interaction) => {
         const url = `https://www.youtube.com/results?search_query=${search}`;
         let youTube = new YouTube();
 
-        youTube.setKey(youtubeKey);
+        youTube.setKey(YOUTUBE_KEY);
 
         youTube.search(search, 2, function (err, result) {
             console.log("RESULT: ", typeof result.items[1]);
@@ -1414,7 +1415,7 @@ client.on("interactionCreate", async (interaction) => {
         figlet(
             interaction.options
                 .get("texto")
-                .value.slice(prefix.length - 1)
+                .value.slice(PREFIX.length - 1)
                 .split(" ")
                 .join(" "),
             (err, data) => interaction.reply("```" + data + "```")
@@ -1437,7 +1438,7 @@ client.on("interactionCreate", async (interaction) => {
             .setImage(userAvatar)
             .setTimestamp()
             .setFooter({
-                text: nameBot,
+                text: NAME_BOT,
                 iconURL: client.user.displayAvatarURL(),
             });
         await interaction.reply({ embeds: [embed] });
@@ -1457,7 +1458,7 @@ client.on("interactionCreate", async (interaction) => {
             )
             .setTimestamp()
             .setFooter({
-                text: nameBot,
+                text: NAME_BOT,
                 iconURL: client.user.displayAvatarURL(),
             });
         await interaction.reply({ embeds: [arderEmbed] });
@@ -1515,7 +1516,7 @@ client.on("interactionCreate", async (interaction) => {
             .setColor("#C28F2C")
             .setTimestamp()
             .setFooter({
-                text: nameBot,
+                text: NAME_BOT,
                 iconURL: client.user.displayAvatarURL(),
             });
         await interaction.reply({ embeds: [userInfoEmbed] });
@@ -1582,7 +1583,7 @@ client.on("interactionCreate", async (interaction) => {
                     )
                     .setTimestamp()
                     .setFooter({
-                        text: nameBot,
+                        text: NAME_BOT,
                         iconURL: client.user.displayAvatarURL(),
                     });
 
@@ -1823,7 +1824,7 @@ client.on("interactionCreate", async (interaction) => {
             .setColor("#AA70F8")
             .setTimestamp()
             .setFooter({
-                text: nameBot,
+                text: NAME_BOT,
                 iconURL: client.user.displayAvatarURL(),
             });
         await interaction.reply({ embeds: [serverInfoEmbed] });
@@ -1919,7 +1920,7 @@ client.on("interactionCreate", async (interaction) => {
                     )
                     .setTimestamp()
                     .setFooter({
-                        text: nameBot,
+                        text: NAME_BOT,
                         iconURL: client.user.displayAvatarURL(),
                     });
 
@@ -1952,7 +1953,7 @@ client.on("interactionCreate", async (interaction) => {
             .setDescription(`Ping AlfanjorBot: ${client.ws.ping}ms`)
             .setTimestamp()
             .setFooter({
-                text: nameBot,
+                text: NAME_BOT,
                 iconURL: client.user.displayAvatarURL(),
             });
 
@@ -2091,7 +2092,7 @@ client.on("interactionCreate", async (interaction) => {
         const author = interaction.user.id;
 
         await fetch(
-            `https://api.themoviedb.org/3/movie/now_playing?api_key=${tmdbApi}&language=es-ES&page=1`
+            `https://api.themoviedb.org/3/movie/now_playing?api_key=${TMDB_KEY}&language=es-ES&page=1`
         )
             .then((res) => res.json())
             .then(async (data) => {
@@ -2127,7 +2128,7 @@ client.on("interactionCreate", async (interaction) => {
                     )
                     .setTimestamp()
                     .setFooter({
-                        text: nameBot,
+                        text: NAME_BOT,
                         iconURL: client.user.displayAvatarURL(),
                     });
 
@@ -2161,7 +2162,7 @@ client.on("interactionCreate", async (interaction) => {
                     )
                     .setTimestamp()
                     .setFooter({
-                        text: nameBot,
+                        text: NAME_BOT,
                         iconURL: client.user.displayAvatarURL(),
                     });
 
@@ -2195,7 +2196,7 @@ client.on("interactionCreate", async (interaction) => {
                     )
                     .setTimestamp()
                     .setFooter({
-                        text: nameBot,
+                        text: NAME_BOT,
                         iconURL: client.user.displayAvatarURL(),
                     });
 
@@ -2229,7 +2230,7 @@ client.on("interactionCreate", async (interaction) => {
                     )
                     .setTimestamp()
                     .setFooter({
-                        text: nameBot,
+                        text: NAME_BOT,
                         iconURL: client.user.displayAvatarURL(),
                     });
 
@@ -2263,7 +2264,7 @@ client.on("interactionCreate", async (interaction) => {
                     )
                     .setTimestamp()
                     .setFooter({
-                        text: nameBot,
+                        text: NAME_BOT,
                         iconURL: client.user.displayAvatarURL(),
                     });
 
@@ -2297,7 +2298,7 @@ client.on("interactionCreate", async (interaction) => {
                     )
                     .setTimestamp()
                     .setFooter({
-                        text: nameBot,
+                        text: NAME_BOT,
                         iconURL: client.user.displayAvatarURL(),
                     });
 
@@ -2331,7 +2332,7 @@ client.on("interactionCreate", async (interaction) => {
                     )
                     .setTimestamp()
                     .setFooter({
-                        text: nameBot,
+                        text: NAME_BOT,
                         iconURL: client.user.displayAvatarURL(),
                     });
 
@@ -2365,7 +2366,7 @@ client.on("interactionCreate", async (interaction) => {
                     )
                     .setTimestamp()
                     .setFooter({
-                        text: nameBot,
+                        text: NAME_BOT,
                         iconURL: client.user.displayAvatarURL(),
                     });
 
@@ -2399,7 +2400,7 @@ client.on("interactionCreate", async (interaction) => {
                     )
                     .setTimestamp()
                     .setFooter({
-                        text: nameBot,
+                        text: NAME_BOT,
                         iconURL: client.user.displayAvatarURL(),
                     });
 
@@ -2433,7 +2434,7 @@ client.on("interactionCreate", async (interaction) => {
                     )
                     .setTimestamp()
                     .setFooter({
-                        text: nameBot,
+                        text: NAME_BOT,
                         iconURL: client.user.displayAvatarURL(),
                     });
 
@@ -2601,7 +2602,7 @@ client.on("interactionCreate", async (interaction) => {
     if (interaction.commandName === "google") {
         const searchTerm = interaction.options
             .get("búsqueda")
-            .value.slice(prefix.length - 1)
+            .value.slice(PREFIX.length - 1)
             .split(" ")
             .join(" ");
 
@@ -2640,144 +2641,144 @@ client.on("interactionCreate", async (interaction) => {
             )
             .addFields(
                 {
-                    name: `*${prefix}play + canción*`,
+                    name: `*${PREFIX}play + canción*`,
                     value: "`Reproduce una canción.`",
                     inline: true,
                 },
                 {
-                    name: `*${prefix}lol + Invocador*`,
+                    name: `*${PREFIX}lol + Invocador*`,
                     value: "`Información Invocador.`",
                     inline: true,
                 },
                 {
-                    name: `*${prefix}lolparche*`,
+                    name: `*${PREFIX}lolparche*`,
                     value: "`Notas parche Lol`",
                     inline: true,
                 },
                 {
-                    name: `*${prefix}akinator*`,
+                    name: `*${PREFIX}akinator*`,
                     value: "`Jugar a Akinator.`",
                     inline: true,
                 },
                 {
-                    name: `*${prefix}meme*`,
+                    name: `*${PREFIX}meme*`,
                     value: "`Meme random reddit.`",
                     inline: true,
                 },
                 {
-                    name: `*${prefix}elrellano + página*`,
+                    name: `*${PREFIX}elrellano + página*`,
                     value: "`Vídeos elrellano.`",
                     inline: true,
                 },
                 {
-                    name: `*${prefix}carteleracine*`,
+                    name: `*${PREFIX}carteleracine*`,
                     value: "`Cartelera de cine.`",
                     inline: true,
                 },
                 // {
-                //     name: `*${prefix}encuesta*`
+                //     name: `*${PREFIX}encuesta*`
                 //     value: "`Crear una encuesta.`",
                 //     inline: true,
                 // },
                 {
-                    name: `*${prefix}google*`,
+                    name: `*${PREFIX}google*`,
                     value: "`Búsqueda google`",
                     inline: true,
                 },
                 {
-                    name: `*${prefix}yt + texto*`,
+                    name: `*${PREFIX}yt + texto*`,
                     value: "`Buscar video youtube.`",
                     inline: true,
                 },
                 {
-                    name: `*${prefix}playlistyt + ID Canal*`,
+                    name: `*${PREFIX}playlistyt + ID Canal*`,
                     value: "`Playlist de youtube.`",
                     inline: true,
                 },
                 {
-                    name: `*${prefix}asci + texto*`,
+                    name: `*${PREFIX}asci + texto*`,
                     value: "`Texto a ASCII.`",
                     inline: true,
                 },
                 {
-                    name: `*${prefix}avatar + @usuario*`,
+                    name: `*${PREFIX}avatar + @usuario*`,
                     value: "`Avatar de un usuario.`",
                     inline: true,
                 },
                 {
-                    name: `*${prefix}arder + @usuario*`,
+                    name: `*${PREFIX}arder + @usuario*`,
                     value: "`Ardiendo en pasión.`",
                     inline: true,
                 },
                 {
-                    name: `*${prefix}usuario + @usuario*`,
+                    name: `*${PREFIX}usuario + @usuario*`,
                     value: "`Información sobre un usuario.`",
                     inline: true,
                 },
                 {
-                    name: `*${prefix}tiempo + ciudad*`,
+                    name: `*${PREFIX}tiempo + ciudad*`,
                     value: "`Información del tiempo.`",
                     inline: true,
                 },
                 {
-                    name: `*${prefix}bigtext + texto*`,
+                    name: `*${PREFIX}bigtext + texto*`,
                     value: "`Texto grande con numeros y letras.`",
                     inline: true,
                 },
                 {
-                    name: `*${prefix}morse + texto*`,
+                    name: `*${PREFIX}morse + texto*`,
                     value: "`Convertir texto a morse.`",
                     inline: true,
                 },
                 {
-                    name: `*${prefix}tts + texto*`,
+                    name: `*${PREFIX}tts + texto*`,
                     value: "`Texto a voz.`",
                     inline: true,
                 },
                 {
-                    name: `*${prefix}minas*`,
+                    name: `*${PREFIX}minas*`,
                     value: "`Jugar al buscaminas.`",
                     inline: true,
                 },
                 {
-                    name: `*${prefix}serverinfo*`,
+                    name: `*${PREFIX}serverinfo*`,
                     value: "`Información del servidor.`",
                     inline: true,
                 },
                 {
-                    name: `*${prefix}traducir + texto*`,
+                    name: `*${PREFIX}traducir + texto*`,
                     value: "`Traducir texto a Ingles.`",
                     inline: true,
                 },
                 // {
-                //     name: `*${prefix}corona + país*`,
+                //     name: `*${PREFIX}corona + país*`,
                 //     value: "`Información sobre el coronavirus.`",
                 //     inline: true,
                 // },
                 {
-                    name: `*${prefix}ping*`,
+                    name: `*${PREFIX}ping*`,
                     value: "`Ping del bot.`",
                     inline: true,
                 },
                 {
-                    name: `*${prefix}enviarmd + usuario*`,
+                    name: `*${PREFIX}enviarmd + usuario*`,
                     value: "`Enviar mensajes privados. (Admin/Mods)`",
                     inline: true,
                 },
                 {
-                    name: `*${prefix}borrar + nº*`,
+                    name: `*${PREFIX}borrar + nº*`,
                     value: "`Borrar mensajes. (Admin/Mods)`",
                     inline: true,
                 },
                 {
-                    name: `*${prefix}email*`,
+                    name: `*${PREFIX}email*`,
                     value: "`Enviar email. (Admin)`",
                     inline: true,
                 }
             )
             .setTimestamp()
             .setFooter({
-                text: nameBot,
+                text: NAME_BOT,
                 iconURL: client.user.displayAvatarURL(),
             });
 
@@ -2785,4 +2786,4 @@ client.on("interactionCreate", async (interaction) => {
     }
 });
 
-client.login(token);
+client.login(TOKEN_DISCORD);
