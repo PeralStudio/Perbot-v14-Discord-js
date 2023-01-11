@@ -22,9 +22,9 @@ const epicGamesFree = async (client) => {
     // console.log("minutos: ", now.getMinutes());
 
     if (
-        now.getDay() == 4
+        now.getDay() == 4 &&
+        hour[0] + hour[1] >= "17"
         // &&
-        // hour[0] + hour[1] == "14" &&
         // hour[3] + hour[4] == "02"
     ) {
         console.log(
@@ -252,7 +252,7 @@ const epicGamesFree = async (client) => {
             });
     }
 
-    setTimeout(epicGamesFree, 21600000); //43200000 12Hours //21600000 6Hours
+    setTimeout(epicGamesFree, 14400000); //43200000 12Hours //21600000 6Hours //14400000 4Hours
 };
 
 export default epicGamesFree;
