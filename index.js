@@ -138,7 +138,6 @@ const commands = [
 ];
 
 let currentVersion;
-console.log(process.env);
 
 const {
     PREFIX,
