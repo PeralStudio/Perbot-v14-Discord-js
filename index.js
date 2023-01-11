@@ -1,21 +1,3 @@
-// import config from "./config.js";
-// const {
-//     prefix,
-//     lolApi,
-//     youtubeKey,
-//     mongoUrl,
-//     CLIENT_ID,
-//     GUILD_ID,
-//     token,
-//     tmdbApi,
-//     email,
-//     gmailToken,
-//     nameBot,
-//     elrellanoChannelID,
-//     twitchChannelID,
-//     youtubeChannelID,
-// } = config;
-
 import {
     REST,
     Routes,
