@@ -1,18 +1,21 @@
-// import { EmbedBuilder } from "discord.js";
 import ytch from "yt-channel-info";
 import youtube from "../Schemas/youtubeSchema.js";
 import checkRepeatMsgs from "./checkRepeatMsgs.js";
+import { deleteOldMsgYT } from "./deleteOldMsgYT.js";
+import * as dotenv from "dotenv";
+dotenv.config();
 
 const setIntervalYoutube = async (client, userId) => {
-    const { youtubeChannelID } = process.env;
+    const { YOUTUBE_CHANNEL_ID } = process.env;
     const payload = {
         channelId: userId,
     };
     const { getChannelVideos /* , getChannelInfo */ } = ytch;
 
     setInterval(async () => {
+        deleteOldMsgYT(client, YOUTUBE_CHANNEL_ID);
         //Check messages for chanel and filter the repeated
-        await checkRepeatMsgs(client, youtubeChannelID);
+        await checkRepeatMsgs(client, YOUTUBE_CHANNEL_ID);
 
         const ultimoVideo = await getChannelVideos(payload, 0)
             .then((response) => {
