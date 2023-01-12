@@ -16,9 +16,8 @@ const setIntervalTwitch = async (client, user) => {
     const capitalizedUser = firstLetterCap + remainingLetters;
 
     setInterval(async () => {
-        //Delete messages older than ${time}
-        const time = 2 * 1440 * 60 * 1000;
-        deleteOldMsg(client, TWITCH_CHANNEL_ID, time);
+        //Delete old messages
+        deleteOldMsg(client, TWITCH_CHANNEL_ID);
 
         //Check messages for chanel and filter the repeated
         await checkRepeatMsgs(client, TWITCH_CHANNEL_ID);

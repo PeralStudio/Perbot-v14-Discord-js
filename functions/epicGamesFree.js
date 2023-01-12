@@ -8,9 +8,8 @@ dotenv.config();
 const { NAME_BOT, EPICGAMES_CHANNEL_ID } = process.env;
 
 const epicGamesFree = async (client) => {
-    //Delete messages older than ${time}
-    const time = 7 * 1440 * 60 * 1000;
-    deleteOldMsg(client, EPICGAMES_CHANNEL_ID, time);
+    //Delete old messages
+    deleteOldMsg(client, EPICGAMES_CHANNEL_ID);
 
     const date = new Date();
     const hour = date.getHours();

@@ -13,9 +13,8 @@ const setIntervalYoutube = async (client, userId) => {
     const { getChannelVideos /* , getChannelInfo */ } = ytch;
 
     setInterval(async () => {
-        //Delete messages older than ${time}
-        const time = 3 * 1440 * 60 * 1000;
-        deleteOldMsg(client, YOUTUBE_CHANNEL_ID, time);
+        //Delete old messages
+        deleteOldMsg(client, YOUTUBE_CHANNEL_ID);
 
         //Check messages for chanel and filter the repeated
         await checkRepeatMsgs(client, YOUTUBE_CHANNEL_ID);

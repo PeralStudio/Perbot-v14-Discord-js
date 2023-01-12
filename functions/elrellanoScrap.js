@@ -9,9 +9,8 @@ const elrellanoScrap = async (client) => {
     const { ELRELLANO_CHANNEL_ID } = process.env;
 
     setInterval(async () => {
-        //Delete messages older than ${time}
-        const time = 1440 * 60 * 1000;
-        deleteOldMsg(client, ELRELLANO_CHANNEL_ID, time, elrellano);
+        //Delete old messages
+        deleteOldMsg(client, ELRELLANO_CHANNEL_ID, elrellano);
 
         console.log(
             `Comprobando si hay videos nuevos de 🎦 Elrellano.com ${new Date().toLocaleTimeString(
