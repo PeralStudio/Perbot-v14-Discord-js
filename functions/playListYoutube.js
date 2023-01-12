@@ -28,8 +28,7 @@ const youtubePlayList = async (client, idChannel, interaction) => {
 
     if (error) {
         interaction.reply({
-            content:
-                "❌ No se encuentra este usuario o no tiene ninguna playlist pública.",
+            content: "❌ No se encuentra este usuario o no tiene ninguna playlist pública.",
             ephemeral: true,
         });
         return;

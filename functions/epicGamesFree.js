@@ -16,7 +16,7 @@ const epicGamesFree = async (client) => {
     const day = date.getDay();
 
     console.log(
-        `Comprobando si hay nuevos juegos Epic Games - 🎮-free-epic-games (${date.toLocaleTimeString(
+        `Comprobando si hay nuevos juegos gratuitos Epic Games - 🎮-free-epic-games (${date.toLocaleTimeString(
             "es-ES",
             {
                 timeZone: "Europe/Madrid",
@@ -26,7 +26,7 @@ const epicGamesFree = async (client) => {
 
     if (day === 4 && hour >= 17 && hour < 23) {
         console.log(
-            `entra a la condicion y envia embeds al canal: 🎮-free-epic-games (${date.toLocaleTimeString(
+            `(Es miercoles entre las 17:00 y 23:00) Envia embeds al canal: 🎮-free-epic-games (${date.toLocaleTimeString(
                 "es-ES",
                 {
                     timeZone: "Europe/Madrid",
@@ -63,9 +63,7 @@ const epicGamesFree = async (client) => {
                     .setTitle(
                         `Gratis hasta el **${dayjs()
                             .add(7, "day")
-                            .format("DD/MM")} a las 17:00**\n\n${
-                            res?.currentGames[0]?.title
-                        }`
+                            .format("DD/MM")} a las 17:00**\n\n${res?.currentGames[0]?.title}`
                     )
                     .setDescription(
                         `${
@@ -73,20 +71,16 @@ const epicGamesFree = async (client) => {
                         }\n\nhttps://store.epicgames.com/es-ES/p/${
                             res.currentGames[0].urlSlug.includes("-")
                                 ? res?.currentGames[0]?.urlSlug
-                                : res?.currentGames[0]?.offerMappings[0]
-                                      ?.pageSlug
+                                : res?.currentGames[0]?.offerMappings[0]?.pageSlug
                         }`
                     )
-                    .setThumbnail(
-                        "https://peralstudio.com/images/epic-games.png"
-                    )
+                    .setThumbnail("https://peralstudio.com/images/epic-games.png")
                     .setImage(res?.currentGames[0]?.keyImages[0]?.url)
                     .addFields(
                         {
                             name: "Precio Normal",
                             value: `${formatPrice(
-                                res?.currentGames[0]?.price?.totalPrice
-                                    ?.originalPrice
+                                res?.currentGames[0]?.price?.totalPrice?.originalPrice
                             )}€`,
                             inline: true,
                         },
@@ -107,9 +101,7 @@ const epicGamesFree = async (client) => {
                     .setTitle(
                         `Gratis hasta el **${dayjs()
                             .add(7, "day")
-                            .format("DD/MM")} a las 17:00**\n\n${
-                            res?.currentGames[1]?.title
-                        }`
+                            .format("DD/MM")} a las 17:00**\n\n${res?.currentGames[1]?.title}`
                     )
                     .setDescription(
                         `${
@@ -117,20 +109,16 @@ const epicGamesFree = async (client) => {
                         }\n\nhttps://store.epicgames.com/es-ES/p/${
                             res.currentGames[1]?.urlSlug.includes("-")
                                 ? res?.currentGames[1]?.urlSlug
-                                : res?.currentGames[1]?.offerMappings[0]
-                                      ?.pageSlug
+                                : res?.currentGames[1]?.offerMappings[0]?.pageSlug
                         }`
                     )
-                    .setThumbnail(
-                        "https://peralstudio.com/images/epic-games.png"
-                    )
+                    .setThumbnail("https://peralstudio.com/images/epic-games.png")
                     .setImage(res?.currentGames[1]?.keyImages[0]?.url)
                     .addFields(
                         {
                             name: "Precio Normal",
                             value: `${formatPrice(
-                                res?.currentGames[1]?.price?.totalPrice
-                                    ?.originalPrice
+                                res?.currentGames[1]?.price?.totalPrice?.originalPrice
                             )}€`,
                             inline: true,
                         },
@@ -150,31 +138,24 @@ const epicGamesFree = async (client) => {
                 //JUEGOS GRATIS ¡SEMANA QUE VIENE!
                 const embed3 = new EmbedBuilder()
                     .setTitle(
-                        `Gratis desde el **${dayjs()
-                            .add(7, "day")
-                            .format("DD/MM")}** al **${dayjs()
+                        `Gratis desde el **${dayjs().add(7, "day").format("DD/MM")}** al **${dayjs()
                             .add(14, "day")
                             .format("DD/MM")}**\n\n${res?.nextGames[0]?.title}`
                     )
                     .setDescription(
-                        `${
-                            res.nextGames[0].description
-                        }\n\nhttps://store.epicgames.com/es-ES/p/${
+                        `${res.nextGames[0].description}\n\nhttps://store.epicgames.com/es-ES/p/${
                             res?.nextGames[0]?.urlSlug.includes("-")
                                 ? res?.nextGames[0]?.urlSlug
                                 : res?.nextGames[0]?.offerMappings[0]?.pageSlug
                         }`
                     )
-                    .setThumbnail(
-                        "https://peralstudio.com/images/epic-games.png"
-                    )
+                    .setThumbnail("https://peralstudio.com/images/epic-games.png")
                     .setImage(res?.nextGames[0]?.keyImages[0]?.url)
                     .addFields(
                         {
                             name: "Precio Normal",
                             value: `${formatPrice(
-                                res?.nextGames[0].price?.totalPrice
-                                    ?.originalPrice
+                                res?.nextGames[0].price?.totalPrice?.originalPrice
                             )}€`,
                             inline: true,
                         },
@@ -193,31 +174,24 @@ const epicGamesFree = async (client) => {
 
                 const embed4 = new EmbedBuilder()
                     .setTitle(
-                        `Gratis desde el **${dayjs()
-                            .add(7, "day")
-                            .format("DD/MM")}** al **${dayjs()
+                        `Gratis desde el **${dayjs().add(7, "day").format("DD/MM")}** al **${dayjs()
                             .add(14, "day")
                             .format("DD/MM")}**\n\n${res?.nextGames[1]?.title}`
                     )
                     .setDescription(
-                        `${
-                            res?.nextGames[1]?.description
-                        }\n\nhttps://store.epicgames.com/es-ES/p/${
+                        `${res?.nextGames[1]?.description}\n\nhttps://store.epicgames.com/es-ES/p/${
                             res?.nextGames[1]?.urlSlug.includes("-")
                                 ? res?.nextGames[1]?.urlSlug
                                 : res?.nextGames[1]?.offerMappings[0]?.pageSlug
                         }`
                     )
-                    .setThumbnail(
-                        "https://peralstudio.com/images/epic-games.png"
-                    )
+                    .setThumbnail("https://peralstudio.com/images/epic-games.png")
                     .setImage(res?.nextGames[1]?.keyImages[0]?.url)
                     .addFields(
                         {
                             name: "Precio Normal",
                             value: `${formatPrice(
-                                res?.nextGames[1]?.price?.totalPrice
-                                    ?.originalPrice
+                                res?.nextGames[1]?.price?.totalPrice?.originalPrice
                             )}€`,
                             inline: true,
                         },

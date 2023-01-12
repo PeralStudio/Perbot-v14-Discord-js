@@ -29,9 +29,7 @@ const elrellanoScrap = async (client) => {
             $(".inside-article").each(async (i, element) => {
                 const title = $(element).find(".entry-header h2 > a").text();
                 const summary = $(element).find(".entry-content p").text();
-                const videoUrl = $(element)
-                    .find(".wp-block-video video")
-                    .attr("src");
+                const videoUrl = $(element).find(".wp-block-video video").attr("src");
                 const videoUrlYT = $(element)
                     .find(".entry-content .wp-block-embed iframe")
                     .attr("src");
@@ -39,11 +37,7 @@ const elrellanoScrap = async (client) => {
                 videos.push({
                     title: title ? title : "",
                     summary: summary ? summary : "",
-                    url: !videoUrlYT
-                        ? videoUrl
-                        : videoUrl && videoUrlYT
-                        ? videoUrl
-                        : videoUrlYT,
+                    url: !videoUrlYT ? videoUrl : videoUrl && videoUrlYT ? videoUrl : videoUrlYT,
                     date: new Date().toLocaleString("es-ES", {
                         timeZone: "Europe/Madrid",
                     }),
@@ -67,22 +61,17 @@ const elrellanoScrap = async (client) => {
                             }),
                         });
 
-                        await client.channels.cache
-                            .get(ELRELLANO_CHANNEL_ID)
-                            .send({
-                                content:
-                                    "`Título:` " +
-                                    video.title +
-                                    (video.summary &&
-                                        "\n" +
-                                            "`Descripción:`" +
-                                            video.summary) +
-                                    "\n" +
-                                    "`Fecha:`" +
-                                    video.date +
-                                    "\n" +
-                                    video.url,
-                            });
+                        await client.channels.cache.get(ELRELLANO_CHANNEL_ID).send({
+                            content:
+                                "`Título:` " +
+                                video.title +
+                                (video.summary && "\n" + "`Descripción:`" + video.summary) +
+                                "\n" +
+                                "`Fecha:`" +
+                                video.date +
+                                "\n" +
+                                video.url,
+                        });
 
                         await newData.save();
 

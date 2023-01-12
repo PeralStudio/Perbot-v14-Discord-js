@@ -28,12 +28,9 @@ const setIntervalYoutube = async (client, userId) => {
             });
 
         console.log(
-            `Comprobando youtube ${userId} - (${new Date().toLocaleTimeString(
-                "es-ES",
-                {
-                    timeZone: "Europe/Madrid",
-                }
-            )})`
+            `Comprobando youtube ${userId} - (${new Date().toLocaleTimeString("es-ES", {
+                timeZone: "Europe/Madrid",
+            })})`
         );
 
         if (ultimoVideo === undefined) return;
@@ -65,10 +62,7 @@ const setIntervalYoutube = async (client, userId) => {
                 await newData.save();
             } else {
                 // FILTRO SI ES MENOR A 60 SEGUNDOS NO NOTIFICAR
-                if (
-                    ultimoVideo?.lengthSeconds < 120 &&
-                    ultimoVideo.liveNow === false
-                ) {
+                if (ultimoVideo?.lengthSeconds < 120 && ultimoVideo.liveNow === false) {
                     return;
                 }
                 await client.channels.cache.get(YOUTUBE_CHANNEL_ID).send({
@@ -89,10 +83,7 @@ const setIntervalYoutube = async (client, userId) => {
                 return;
             } else {
                 // FILTRO SI ES MENOR A 60 SEGUNDOS Y NO ES ¡DIRECTO! NO NOTIFICAR
-                if (
-                    ultimoVideo?.lengthSeconds < 120 &&
-                    ultimoVideo.liveNow === false
-                ) {
+                if (ultimoVideo?.lengthSeconds < 120 && ultimoVideo.liveNow === false) {
                     console.log("Video menor a 60 segundos = short");
                     return;
                 }
@@ -121,10 +112,7 @@ const setIntervalYoutube = async (client, userId) => {
                     );
                 } else {
                     // FILTRO SI ES MENOR A 60 SEGUNDOS NO NOTIFICAR
-                    if (
-                        ultimoVideo?.lengthSeconds < 120 &&
-                        ultimoVideo.liveNow === false
-                    ) {
+                    if (ultimoVideo?.lengthSeconds < 120 && ultimoVideo.liveNow === false) {
                         return;
                     }
                     await client.channels.cache.get(YOUTUBE_CHANNEL_ID).send({

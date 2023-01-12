@@ -23,38 +23,30 @@ const setIntervalTwitch = async (client, user) => {
         await checkRepeatMsgs(client, TWITCH_CHANNEL_ID);
 
         console.log(
-            `Comprobando Twitch ${capitalizedUser} - (${new Date().toLocaleTimeString(
-                "es-ES",
-                {
-                    timeZone: "Europe/Madrid",
-                }
-            )})`
+            `Comprobando Twitch ${capitalizedUser} - (${new Date().toLocaleTimeString("es-ES", {
+                timeZone: "Europe/Madrid",
+            })})`
         );
 
         const httpHeaders = {
             "User-Agent": "PerBot",
         };
 
-        const uptime = await nodeSuperFetch.get(
-            `https://decapi.me/twitch/uptime/${user}`,
-            { headers: httpHeaders }
-        );
-        const avatar = await nodeSuperFetch.get(
-            `https://decapi.me/twitch/avatar/${user}`,
-            { headers: httpHeaders }
-        );
-        const viewers = await nodeSuperFetch.get(
-            `https://decapi.me/twitch/viewercount/${user}`,
-            { headers: httpHeaders }
-        );
-        const title = await nodeSuperFetch.get(
-            `https://decapi.me/twitch/title/${user}`,
-            { headers: httpHeaders }
-        );
-        const game = await nodeSuperFetch.get(
-            `https://decapi.me/twitch/game/${user}`,
-            { headers: httpHeaders }
-        );
+        const uptime = await nodeSuperFetch.get(`https://decapi.me/twitch/uptime/${user}`, {
+            headers: httpHeaders,
+        });
+        const avatar = await nodeSuperFetch.get(`https://decapi.me/twitch/avatar/${user}`, {
+            headers: httpHeaders,
+        });
+        const viewers = await nodeSuperFetch.get(`https://decapi.me/twitch/viewercount/${user}`, {
+            headers: httpHeaders,
+        });
+        const title = await nodeSuperFetch.get(`https://decapi.me/twitch/title/${user}`, {
+            headers: httpHeaders,
+        });
+        const game = await nodeSuperFetch.get(`https://decapi.me/twitch/game/${user}`, {
+            headers: httpHeaders,
+        });
         // const accountCreation = await nodeSuperFetch.get(
         //     `https://decapi.me/twitch/creation/${user}`,
         //     { headers: httpHeaders }
@@ -157,10 +149,7 @@ const setIntervalTwitch = async (client, user) => {
                 }
             }
 
-            if (
-                data.titulo === `${title.body}` &&
-                parseInt(uptime.text[0]) > 0
-            ) {
+            if (data.titulo === `${title.body}` && parseInt(uptime.text[0]) > 0) {
                 return;
             }
 
@@ -169,10 +158,7 @@ const setIntervalTwitch = async (client, user) => {
                 embeds: [embed],
             });
 
-            await twitch.findOneAndUpdate(
-                { user: user },
-                { titulo: title.body }
-            );
+            await twitch.findOneAndUpdate({ user: user }, { titulo: title.body });
         }
     }, 240000);
 };

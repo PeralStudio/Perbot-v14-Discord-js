@@ -1,12 +1,8 @@
 import * as dotenv from "dotenv";
 dotenv.config();
 
-const {
-    ELRELLANO_CHANNEL_ID,
-    YOUTUBE_CHANNEL_ID,
-    TWITCH_CHANNEL_ID,
-    EPICGAMES_CHANNEL_ID,
-} = process.env;
+const { ELRELLANO_CHANNEL_ID, YOUTUBE_CHANNEL_ID, TWITCH_CHANNEL_ID, EPICGAMES_CHANNEL_ID } =
+    process.env;
 
 export const deleteOldMsg = (client, channelID, elrellano) => {
     let channelName;
