@@ -2462,21 +2462,24 @@ client.on("interactionCreate", async (interaction) => {
             );
         };
 
-        interaction.reply({ content: item.question, fetchReply: true }).then(() => {
-            interaction.channel
+        await interaction.reply({ content: item.question, fetchReply: true }).then(async () => {
+            await interaction.channel
                 .awaitMessages({
                     filter,
                     max: 1,
                     time: 30000,
                     errors: ["time"],
                 })
-                .then((collected) => {
-                    interaction.followUp(
-                        `${collected.first().author} obtuvo la respuesta correcta!`
+                .then(async (collected) => {
+                    console.log(collected);
+                    await interaction.followUp(
+                        `${collected.first().author} obtuvo la respuesta correcta! !${
+                            item.answers
+                        }!`
                     );
                 })
-                .catch((collected) => {
-                    interaction.followUp(
+                .catch(async (collected) => {
+                    await interaction.followUp(
                         `Parece que nadie obtuvo la respuesta correcta.\nLa respuesta correcta era: ${item.answers}`
                     );
                 });
