@@ -2464,7 +2464,12 @@ client.on("interactionCreate", async (interaction) => {
 
         interaction.reply({ content: item.question, fetchReply: true }).then(() => {
             interaction.channel
-                .awaitMessages({ filter, max: 1, time: 30000, errors: ["time"] })
+                .awaitMessages({
+                    filter,
+                    max: 1,
+                    time: 30000,
+                    errors: ["time"],
+                })
                 .then((collected) => {
                     interaction.followUp(
                         `${collected.first().author} obtuvo la respuesta correcta!`
