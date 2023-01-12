@@ -77,7 +77,7 @@ import youtubePlayList from "./functions/playListYoutube.js";
 import elrellanoScrap from "./functions/elrellanoScrap.js";
 import epicGamesFree from "./functions/epicGamesFree.js";
 import usersDiscordSchema from "./Schemas/usersDiscordSchema.js";
-import trivialQuestions from "./utils/trivialQuestions.js";
+import triviaQuestions from "./utils/trivialQuestions.js";
 
 import * as dotenv from "dotenv";
 dotenv.config();
@@ -2455,7 +2455,7 @@ client.on("interactionCreate", async (interaction) => {
 
     //COMANDO TRIVIA
     if (interaction.commandName === "trivial") {
-        const item = trivialQuestions[Math.floor(Math.random() * triviaQuestions.length)];
+        const item = triviaQuestions[Math.floor(Math.random() * triviaQuestions.length)];
         const filter = (response) => {
             return item.answers.some(
                 (answer) => answer.toLowerCase() === response.content.toLowerCase()
