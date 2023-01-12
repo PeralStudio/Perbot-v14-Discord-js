@@ -2476,7 +2476,9 @@ client.on("interactionCreate", async (interaction) => {
                     );
                 })
                 .catch((collected) => {
-                    interaction.followUp("Parece que nadie obtuvo la respuesta correcta.");
+                    interaction.followUp(
+                        `Parece que nadie obtuvo la respuesta correcta.\nLa respuesta correcta era ${item.answers}`
+                    );
                 });
         });
     }
