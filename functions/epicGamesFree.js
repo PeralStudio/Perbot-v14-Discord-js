@@ -1,12 +1,17 @@
 import { getGames } from "epic-free-games";
 import { EmbedBuilder } from "discord.js";
 import dayjs from "dayjs";
+import { deleteOldMsg } from "./deleteOldMsg.js";
 import * as dotenv from "dotenv";
 dotenv.config();
 
 const { NAME_BOT, EPICGAMES_CHANNEL_ID } = process.env;
 
 const epicGamesFree = async (client) => {
+    //Delete messages older than ${time}
+    const time = 7 * 1440 * 60 * 1000;
+    deleteOldMsg(client, EPICGAMES_CHANNEL_ID, time);
+
     const date = new Date();
     const hour = date.getHours();
     const day = date.getDay();

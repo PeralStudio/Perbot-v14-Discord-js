@@ -1,7 +1,7 @@
 import ytch from "yt-channel-info";
 import youtube from "../Schemas/youtubeSchema.js";
 import checkRepeatMsgs from "./checkRepeatMsgs.js";
-import { deleteOldMsgYT } from "./deleteOldMsgYT.js";
+import { deleteOldMsg } from "./deleteOldMsg.js";
 import * as dotenv from "dotenv";
 dotenv.config();
 
@@ -13,7 +13,10 @@ const setIntervalYoutube = async (client, userId) => {
     const { getChannelVideos /* , getChannelInfo */ } = ytch;
 
     setInterval(async () => {
-        deleteOldMsgYT(client, YOUTUBE_CHANNEL_ID);
+        //Delete messages older than ${time}
+        const time = 3 * 1440 * 60 * 1000;
+        deleteOldMsg(client, YOUTUBE_CHANNEL_ID, time);
+
         //Check messages for chanel and filter the repeated
         await checkRepeatMsgs(client, YOUTUBE_CHANNEL_ID);
 
