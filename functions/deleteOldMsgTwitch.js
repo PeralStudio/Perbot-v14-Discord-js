@@ -7,7 +7,8 @@ export const deleteOldMsgTwitch = (client, channelID) => {
                 .then(async (messages) => {
                     const oldMessages = messages.filter((m) => {
                         return (
-                            m.createdTimestamp < Date.now() - 1440 * 60 * 1000 //24Hours - 1440 * 60 * 1000 //48Hours - 2 * 1440 * 60 * 1000
+                            m.createdTimestamp <
+                            Date.now() - 2 * 1440 * 60 * 1000 //24Hours - 1440 * 60 * 1000 //48Hours - 2 * 1440 * 60 * 1000
                         );
                     });
 
