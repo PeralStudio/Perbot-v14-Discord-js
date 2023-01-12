@@ -79,9 +79,13 @@ const epicGamesFree = async (client) => {
                     .addFields(
                         {
                             name: "Precio Normal",
-                            value: `${formatPrice(
-                                res?.currentGames[0]?.price?.totalPrice?.originalPrice
-                            )}€`,
+                            value: `${
+                                res?.currentGames[0]?.price?.totalPrice?.originalPrice === 0
+                                    ? "Gratis"
+                                    : `${formatPrice(
+                                          res?.currentGames[0]?.price?.totalPrice?.originalPrice
+                                      )}€`
+                            }`,
                             inline: true,
                         },
                         {
@@ -117,9 +121,13 @@ const epicGamesFree = async (client) => {
                     .addFields(
                         {
                             name: "Precio Normal",
-                            value: `${formatPrice(
-                                res?.currentGames[1]?.price?.totalPrice?.originalPrice
-                            )}€`,
+                            value: `${
+                                res?.currentGames[1]?.price?.totalPrice?.originalPrice === 0
+                                    ? "Gratis"
+                                    : `${formatPrice(
+                                          res?.currentGames[1]?.price?.totalPrice?.originalPrice
+                                      )}€`
+                            }`,
                             inline: true,
                         },
                         {
@@ -135,10 +143,52 @@ const epicGamesFree = async (client) => {
                     })
                     .setColor("#27963f");
 
-                //JUEGOS GRATIS ¡SEMANA QUE VIENE!
                 const embed3 = new EmbedBuilder()
                     .setTitle(
-                        `Gratis desde el **${dayjs().add(7, "day").format("DD/MM")}** al **${dayjs()
+                        `Gratis hasta el **${dayjs()
+                            .add(7, "day")
+                            .format("DD/MM")} a las 17:00**\n\n${res?.currentGames[2]?.title}`
+                    )
+                    .setDescription(
+                        `${
+                            res?.currentGames[2]?.description
+                        }\n\nhttps://store.epicgames.com/es-ES/p/${
+                            res.currentGames[2].urlSlug.includes("-")
+                                ? res?.currentGames[2]?.urlSlug
+                                : res?.currentGames[2]?.offerMappings[2]?.pageSlug
+                        }`
+                    )
+                    .setThumbnail("https://peralstudio.com/images/epic-games.png")
+                    .setImage(res?.currentGames[2]?.keyImages[2]?.url)
+                    .addFields(
+                        {
+                            name: "Precio Normal",
+                            value: `${
+                                res?.currentGames[2]?.price?.totalPrice?.originalPrice === 0
+                                    ? "Gratis"
+                                    : `${formatPrice(
+                                          res?.currentGames[2]?.price?.totalPrice?.originalPrice
+                                      )}€`
+                            }`,
+                            inline: true,
+                        },
+                        {
+                            name: "Desarroladora",
+                            value: `${res?.currentGames[2]?.seller?.name}`,
+                            inline: true,
+                        }
+                    )
+                    .setTimestamp()
+                    .setFooter({
+                        text: NAME_BOT,
+                        iconURL: client?.user.displayAvatarURL(),
+                    })
+                    .setColor("#27963f");
+
+                //JUEGOS GRATIS ¡SEMANA QUE VIENE!
+                const embed4 = new EmbedBuilder()
+                    .setTitle(
+                        `Gratis del **${dayjs().add(7, "day").format("DD/MM")}** al **${dayjs()
                             .add(14, "day")
                             .format("DD/MM")}**\n\n${res?.nextGames[0]?.title}`
                     )
@@ -154,9 +204,13 @@ const epicGamesFree = async (client) => {
                     .addFields(
                         {
                             name: "Precio Normal",
-                            value: `${formatPrice(
-                                res?.nextGames[0].price?.totalPrice?.originalPrice
-                            )}€`,
+                            value: `${
+                                res?.nextGames[0]?.price?.totalPrice?.originalPrice === 0
+                                    ? "Gratis"
+                                    : `${formatPrice(
+                                          res?.nextGames[0]?.price?.totalPrice?.originalPrice
+                                      )}€`
+                            }`,
                             inline: true,
                         },
                         {
@@ -172,9 +226,9 @@ const epicGamesFree = async (client) => {
                     })
                     .setColor("#ba3f3f");
 
-                const embed4 = new EmbedBuilder()
+                const embed5 = new EmbedBuilder()
                     .setTitle(
-                        `Gratis desde el **${dayjs().add(7, "day").format("DD/MM")}** al **${dayjs()
+                        `Gratis del **${dayjs().add(7, "day").format("DD/MM")}** al **${dayjs()
                             .add(14, "day")
                             .format("DD/MM")}**\n\n${res?.nextGames[1]?.title}`
                     )
@@ -190,9 +244,13 @@ const epicGamesFree = async (client) => {
                     .addFields(
                         {
                             name: "Precio Normal",
-                            value: `${formatPrice(
-                                res?.nextGames[1]?.price?.totalPrice?.originalPrice
-                            )}€`,
+                            value: `${
+                                res?.nextGames[1]?.price?.totalPrice?.originalPrice === 0
+                                    ? "Gratis"
+                                    : `${formatPrice(
+                                          res?.nextGames[1]?.price?.totalPrice?.originalPrice
+                                      )}€`
+                            }`,
                             inline: true,
                         },
                         {
@@ -208,11 +266,53 @@ const epicGamesFree = async (client) => {
                     })
                     .setColor("#ba3f3f");
 
+                const embed6 = new EmbedBuilder()
+                    .setTitle(
+                        `Gratis del **${dayjs().add(7, "day").format("DD/MM")}** al **${dayjs()
+                            .add(14, "day")
+                            .format("DD/MM")}**\n\n${res?.nextGames[2]?.title}`
+                    )
+                    .setDescription(
+                        `${res?.nextGames[2]?.description}\n\nhttps://store.epicgames.com/es-ES/p/${
+                            res?.nextGames[2]?.urlSlug.includes("-")
+                                ? res?.nextGames[2]?.urlSlug
+                                : res?.nextGames[2]?.offerMappings[0]?.pageSlug
+                        }`
+                    )
+                    .setThumbnail("https://peralstudio.com/images/epic-games.png")
+                    .setImage(res?.nextGames[2]?.keyImages[0]?.url)
+                    .addFields(
+                        {
+                            name: "Precio Normal",
+                            value: `${
+                                res?.nextGames[2]?.price?.totalPrice?.originalPrice === 0
+                                    ? "Gratis"
+                                    : `${formatPrice(
+                                          res?.nextGames[2]?.price?.totalPrice?.originalPrice
+                                      )}€`
+                            }`,
+                            inline: true,
+                        },
+                        {
+                            name: "Desarroladora",
+                            value: `${res?.nextGames[2]?.seller?.name}`,
+                            inline: true,
+                        }
+                    )
+                    .setTimestamp()
+                    .setFooter({
+                        text: NAME_BOT,
+                        iconURL: client?.user.displayAvatarURL(),
+                    })
+                    .setColor("#ba3f3f");
+
                 const embeds = [];
                 res.currentGames[0] && (await embeds.push(embed));
                 res.currentGames[1] && (await embeds.push(embed2));
-                res.nextGames[0] && (await embeds.push(embed3));
-                res.nextGames[2] && (await embeds.push(embed4));
+                res.currentGames[2] && (await embeds.push(embed3));
+                res.nextGames[0] && (await embeds.push(embed4));
+                res.nextGames[1] && (await embeds.push(embed5));
+                res.nextGames[2] && (await embeds.push(embed6));
 
                 await client?.channels.cache.get(EPICGAMES_CHANNEL_ID).send({
                     embeds,
