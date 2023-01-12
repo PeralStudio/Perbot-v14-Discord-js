@@ -1,4 +1,4 @@
-export default triviaQuestions = [
+const triviaQuestions = [
     {
         question: "¿Cuál es el capital de Francia?",
         answers: ["Paris"],
@@ -104,3 +104,5 @@ export default triviaQuestions = [
         answers: ["Sí"],
     },
 ];
+
+export default triviaQuestions;
