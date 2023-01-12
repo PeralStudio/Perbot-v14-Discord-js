@@ -1,15 +1,17 @@
 import axios from "axios";
 import cheerio from "cherio";
 import elrellano from "../Schemas/elrellanoSchema.js";
-import { deleteOldMsgElrellano } from "./deleteOldMsgElrellano.js";
 import * as dotenv from "dotenv";
+import { deleteOldMsg } from "./deleteOldMsg.js";
 dotenv.config();
 
 const elrellanoScrap = async (client) => {
     const { ELRELLANO_CHANNEL_ID } = process.env;
 
     setInterval(async () => {
-        deleteOldMsgElrellano(client, ELRELLANO_CHANNEL_ID, elrellano);
+        //Delete messages older than ${time}
+        const time = 1440 * 60 * 1000;
+        deleteOldMsg(client, ELRELLANO_CHANNEL_ID, time, elrellano);
 
         console.log(
             `Comprobando si hay videos nuevos de 🎦 Elrellano.com ${new Date().toLocaleTimeString(
@@ -50,44 +52,50 @@ const elrellanoScrap = async (client) => {
             });
 
             videos.forEach(async (video, i) => {
-                const data = await elrellano.findOne({
-                    title: video?.title,
-                    videoUrl: video?.url,
-                });
-
-                if (!data) {
-                    const newData = new elrellano({
-                        title: video.title,
-                        summary: video.summary,
-                        videoUrl: video.url,
-                        date: new Date().toLocaleString("es-ES", {
-                            timeZone: "Europe/Madrid",
-                        }),
+                if (video.url) {
+                    const data = await elrellano.findOne({
+                        title: video?.title,
+                        videoUrl: video?.url,
                     });
 
-                    await client.channels.cache.get(ELRELLANO_CHANNEL_ID).send({
-                        content:
-                            "`Título:` " +
-                            video.title +
-                            (video.summary &&
-                                "\n" + "`Descripción:`" + video.summary) +
-                            "\n" +
-                            "`Fecha:`" +
-                            video.date +
-                            "\n" +
-                            video.url,
-                    });
-
-                    await newData.save();
-
-                    console.log(
-                        `¡Nuevos videos encontrados! 🎦-elrellano ${new Date().toLocaleTimeString(
-                            "es-ES",
-                            {
+                    if (!data) {
+                        const newData = new elrellano({
+                            title: video.title,
+                            summary: video.summary,
+                            videoUrl: video.url,
+                            date: new Date().toLocaleString("es-ES", {
                                 timeZone: "Europe/Madrid",
-                            }
-                        )}`
-                    );
+                            }),
+                        });
+
+                        await client.channels.cache
+                            .get(ELRELLANO_CHANNEL_ID)
+                            .send({
+                                content:
+                                    "`Título:` " +
+                                    video.title +
+                                    (video.summary &&
+                                        "\n" +
+                                            "`Descripción:`" +
+                                            video.summary) +
+                                    "\n" +
+                                    "`Fecha:`" +
+                                    video.date +
+                                    "\n" +
+                                    video.url,
+                            });
+
+                        await newData.save();
+
+                        console.log(
+                            `¡Nuevos videos encontrados! 🎦-elrellano ${new Date().toLocaleTimeString(
+                                "es-ES",
+                                {
+                                    timeZone: "Europe/Madrid",
+                                }
+                            )}`
+                        );
+                    }
                 }
             });
         } catch (error) {
