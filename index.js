@@ -74,7 +74,6 @@ import setIntervalTwitch from "./functions/twitch.js";
 import setIntervalYoutube from "./functions/youtube.js";
 import youtubePlayList from "./functions/playListYoutube.js";
 import elrellanoScrap from "./functions/elrellanoScrap.js";
-// import setIntervalYoutubePlayList from "./functions/playListYoutube.js";
 import epicGamesFree from "./functions/epicGamesFree.js";
 import usersDiscordSchema from "./Schemas/usersDiscordSchema.js";
 
@@ -282,9 +281,6 @@ client.on("ready", async () => {
 
     //function Scrap Elrellano to show latest videos
     elrellanoScrap(client);
-
-    //FunctionYoutube push notifications when add or remove videos on playlist
-    // setIntervalYoutubePlayList(client);
 
     //FunctionepicGamesFree push notifications when new free games
     epicGamesFree(client);
