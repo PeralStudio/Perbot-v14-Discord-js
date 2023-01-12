@@ -7,34 +7,26 @@ dotenv.config();
 const { NAME_BOT, EPICGAMES_CHANNEL_ID } = process.env;
 
 const epicGamesFree = async (client) => {
+    const date = new Date();
+    const hour = date.getHours();
+    const day = date.getDay();
+
     console.log(
-        `epicGamesFree() se ejecuta (${new Date().toLocaleTimeString("es-ES", {
+        `epicGamesFree() se ejecuta (${date.toLocaleTimeString("es-ES", {
             timeZone: "Europe/Madrid",
         })})`
     );
-    const now = new Date();
-    const hour = new Date().toLocaleTimeString("es-ES", {
-        timeZone: "Europe/Madrid",
-    });
-    // console.log(hour[0] + hour[1] == "21" && hour[3] + hour[4] == "40");
-    // console.log("dia:", now.getDay());
-    // console.log("hora:", now.getHours());
-    // console.log("minutos: ", now.getMinutes());
 
-    if (
-        now.getDay() == 4 &&
-        hour[0] + hour[1] >= "17"
-        // &&
-        // hour[3] + hour[4] == "02"
-    ) {
+    if (day === 4 && hour >= 17) {
         console.log(
-            `entra a la condicion y envia embeds (${new Date().toLocaleTimeString(
+            `entra a la condicion y envia embeds al canal: 🎮-free-epic-games (${date.toLocaleTimeString(
                 "es-ES",
                 {
                     timeZone: "Europe/Madrid",
                 }
             )})`
         );
+
         getGames("ES", true)
             .then(async (res) => {
                 const formatPrice = (num) => {
@@ -60,21 +52,14 @@ const epicGamesFree = async (client) => {
                 }
 
                 //JUEGOS GRATIS ESTA SEMANA
-                const embedFree = new EmbedBuilder()
-                    .setTitle(
-                        `¡ Juegos Gratis La Semana del (**${dayjs().format(
-                            "DD/MM/YY"
-                        )}**) a (**${dayjs()
-                            .add(7, "day")
-                            .format("DD/MM/YY")}**) !`
-                    )
-                    .setDescription(
-                        `\n ⠀⠀⠀⠀⠀ ⬇️ ⠀⠀⠀⠀ ⬇️ ⠀⠀⠀⠀ ⬇️  ⠀⠀⠀⠀ ⬇️ ⠀⠀⠀⠀ ⬇️ ⠀⠀⠀⠀ `
-                    )
-                    .setColor("#C28F2C");
-
                 const embed = new EmbedBuilder()
-                    .setTitle(`${res?.currentGames[0]?.title}`)
+                    .setTitle(
+                        `Gratis hasta el **${dayjs()
+                            .add(7, "day")
+                            .format("DD/MM")} a las 17:00**\n\n${
+                            res?.currentGames[0]?.title
+                        }`
+                    )
                     .setDescription(
                         `${
                             res?.currentGames[0]?.description
@@ -112,7 +97,13 @@ const epicGamesFree = async (client) => {
                     .setColor("#27963f");
 
                 const embed2 = new EmbedBuilder()
-                    .setTitle(`${res?.currentGames[1]?.title}`)
+                    .setTitle(
+                        `Gratis hasta el **${dayjs()
+                            .add(7, "day")
+                            .format("DD/MM")} a las 17:00**\n\n${
+                            res?.currentGames[1]?.title
+                        }`
+                    )
                     .setDescription(
                         `${
                             res?.currentGames[1]?.description
@@ -150,21 +141,14 @@ const epicGamesFree = async (client) => {
                     .setColor("#27963f");
 
                 //JUEGOS GRATIS ¡SEMANA QUE VIENE!
-                const embedFree2 = new EmbedBuilder()
-                    .setTitle(
-                        `¡ Juegos Gratis La Semana del (**${dayjs()
-                            .add(7, "day")
-                            .format("DD/MM/YY")}**) a (**${dayjs()
-                            .add(14, "day")
-                            .format("DD/MM/YY")}**) !`
-                    )
-                    .setDescription(
-                        `\n ⠀⠀⠀⠀⠀ ⬇️ ⠀⠀⠀⠀ ⬇️ ⠀⠀⠀⠀ ⬇️  ⠀⠀⠀⠀ ⬇️ ⠀⠀⠀⠀ ⬇️ ⠀⠀⠀⠀`
-                    )
-                    .setColor("#C28F2C");
-
                 const embed3 = new EmbedBuilder()
-                    .setTitle(`${res?.nextGames[0]?.title}`)
+                    .setTitle(
+                        `Gratis desde el **${dayjs()
+                            .add(7, "day")
+                            .format("DD/MM")}** al **${dayjs()
+                            .add(14, "day")
+                            .format("DD/MM")}**\n\n${res?.nextGames[0]?.title}`
+                    )
                     .setDescription(
                         `${
                             res.nextGames[0].description
@@ -201,7 +185,13 @@ const epicGamesFree = async (client) => {
                     .setColor("#ba3f3f");
 
                 const embed4 = new EmbedBuilder()
-                    .setTitle(`${res?.nextGames[1]?.title}`)
+                    .setTitle(
+                        `Gratis desde el **${dayjs()
+                            .add(7, "day")
+                            .format("DD/MM")}** al **${dayjs()
+                            .add(14, "day")
+                            .format("DD/MM")}**\n\n${res?.nextGames[1]?.title}`
+                    )
                     .setDescription(
                         `${
                             res?.nextGames[1]?.description
@@ -238,9 +228,9 @@ const epicGamesFree = async (client) => {
                     .setColor("#ba3f3f");
 
                 const embeds = [];
-                res.currentGames[0] && (await embeds.push(embedFree, embed));
+                res.currentGames[0] && (await embeds.push(embed));
                 res.currentGames[1] && (await embeds.push(embed2));
-                res.nextGames[0] && (await embeds.push(embedFree2, embed3));
+                res.nextGames[0] && (await embeds.push(embed3));
                 res.nextGames[2] && (await embeds.push(embed4));
 
                 await client?.channels.cache.get(EPICGAMES_CHANNEL_ID).send({
@@ -252,7 +242,7 @@ const epicGamesFree = async (client) => {
             });
     }
 
-    setTimeout(epicGamesFree, 14400000); //43200000 12Hours //21600000 6Hours //14400000 4Hours
+    setTimeout(epicGamesFree, 21600000); //43200000 12Hours //21600000 6Hours //14400000 4Hours
 };
 
 export default epicGamesFree;
