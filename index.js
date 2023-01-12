@@ -151,13 +151,13 @@ const rest = new REST({ version: "10" }).setToken(TOKEN_DISCORD);
 
 (async () => {
     try {
-        console.log(chalk.blue("Started refreshing application (.) commands."));
+        console.log(chalk.blue("Started refreshing application (.) commands"));
 
         await rest.put(Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID), {
             body: commands,
         });
 
-        console.log(chalk.blue("Successfully reloaded application (.) commands."));
+        console.log(chalk.blue("Successfully reloaded application (.) commands"));
     } catch (error) {
         console.error(error);
     }
