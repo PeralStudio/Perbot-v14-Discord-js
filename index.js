@@ -69,6 +69,7 @@ import borrarCommand from "./commands/adminCommands/borrar.js";
 import emailCommand from "./commands/adminCommands/email.js";
 import playListYTCommand from "./commands/playListYT.js";
 import buscarGoogleCommand from "./commands/buscarGoogle.js";
+import triviaCommand from "./commands/trivia.js";
 
 import setIntervalTwitch from "./functions/twitch.js";
 import setIntervalYoutube from "./functions/youtube.js";
@@ -76,6 +77,7 @@ import youtubePlayList from "./functions/playListYoutube.js";
 import elrellanoScrap from "./functions/elrellanoScrap.js";
 import epicGamesFree from "./functions/epicGamesFree.js";
 import usersDiscordSchema from "./Schemas/usersDiscordSchema.js";
+import trivialQuestions from "./utils/trivialQuestions.js";
 
 import * as dotenv from "dotenv";
 dotenv.config();
@@ -116,6 +118,7 @@ const commands = [
     elrellanoCommand,
     playListYTCommand,
     buscarGoogleCommand,
+    triviaCommand,
 ];
 
 let currentVersion;
@@ -154,9 +157,7 @@ const rest = new REST({ version: "10" }).setToken(TOKEN_DISCORD);
             body: commands,
         });
 
-        console.log(
-            chalk.blue("Successfully reloaded application (.) commands.")
-        );
+        console.log(chalk.blue("Successfully reloaded application (.) commands."));
     } catch (error) {
         console.error(error);
     }
@@ -211,9 +212,7 @@ const usersToAlertYoutube = [
 client.on("ready", async () => {
     console.log(
         chalk.green(
-            `Bot conectado como ${
-                client.user.tag
-            }! (${new Date().toLocaleTimeString("es-ES", {
+            `Bot conectado como ${client.user.tag}! (${new Date().toLocaleTimeString("es-ES", {
                 timeZone: "Europe/Madrid",
             })})`
         )
@@ -326,9 +325,7 @@ client.on("guildMemberRemove", async (member) => {
     const embed = new EmbedBuilder()
         .setDescription(`¡ Adios <@${member.id}> !`)
         .setThumbnail(member.user.displayAvatarURL())
-        .setImage(
-            "https://media1.tenor.com/images/59af6d17fa7477ae2379697aa8df134c/tenor.gif"
-        )
+        .setImage("https://media1.tenor.com/images/59af6d17fa7477ae2379697aa8df134c/tenor.gif")
         .setColor("#f10029")
         .setTimestamp()
         .setFooter({
@@ -356,8 +353,7 @@ const player = new Player(client);
 let queueToList = [];
 // add the trackStart event so when a song will be played this message will be sent
 player.on("trackStart", async (queue, track) => {
-    const cancionesSingOrPlur =
-        queueToList.length <= 1 ? "canción" : "canciones";
+    const cancionesSingOrPlur = queueToList.length <= 1 ? "canción" : "canciones";
     queue.metadata.channel.send({
         embeds: [
             new EmbedBuilder()
@@ -396,9 +392,7 @@ client.on("interactionCreate", async (interaction) => {
                 ephemeral: true,
                 embeds: [
                     new EmbedBuilder()
-                        .setDescription(
-                            "⛔ No tienes permisos para enviar emails."
-                        )
+                        .setDescription("⛔ No tienes permisos para enviar emails.")
                         .setColor("#EA3939"),
                 ],
             });
@@ -494,8 +488,7 @@ client.on("interactionCreate", async (interaction) => {
             });
         if (
             interaction.guild.members.me.voice.channelId &&
-            interaction.member.voice.channelId !==
-                interaction.guild.members.me.voice.channelId
+            interaction.member.voice.channelId !== interaction.guild.members.me.voice.channelId
         )
             return await interaction.reply({
                 embeds: [
@@ -522,8 +515,7 @@ client.on("interactionCreate", async (interaction) => {
 
         // verify vc connection
         try {
-            if (!queue.connection)
-                await queue.connect(interaction.member.voice.channel);
+            if (!queue.connection) await queue.connect(interaction.member.voice.channel);
         } catch {
             queue.destroy();
             return await interaction.reply({
@@ -564,8 +556,7 @@ client.on("interactionCreate", async (interaction) => {
         queueToList.push(track.title);
 
         if (queueToList.length > 1) {
-            const cancionesSingOrPlur =
-                queueToList.length <= 1 ? "canción" : "canciones";
+            const cancionesSingOrPlur = queueToList.length <= 1 ? "canción" : "canciones";
             return await interaction.followUp({
                 embeds: [
                     new EmbedBuilder()
@@ -813,9 +804,7 @@ client.on("interactionCreate", async (interaction) => {
         const embed = new EmbedBuilder()
             .setTitle(`Cola de canciones [${queueToList.length}]`)
             .setThumbnail(client.user.displayAvatarURL())
-            .setDescription(
-                queueToList.map((x, i) => `[${i + 1}] - ${x}`).join("\n\n")
-            )
+            .setDescription(queueToList.map((x, i) => `[${i + 1}] - ${x}`).join("\n\n"))
             .setColor("#0099ff")
             .setTimestamp()
             .setFooter({
@@ -932,8 +921,7 @@ client.on("interactionCreate", async (interaction) => {
                             new EmbedBuilder()
                                 .setDescription(
                                     `⚠️ No se ha encontrado a **${
-                                        interaction.options.get("invocador")
-                                            .value
+                                        interaction.options.get("invocador").value
                                     }** , comprueba que has escrito correctamente el nombre.`
                                 )
                                 .setColor("#EA3939"),
@@ -953,9 +941,7 @@ client.on("interactionCreate", async (interaction) => {
                                     new EmbedBuilder()
                                         .setDescription(
                                             `ℹ️  El invocador **${
-                                                interaction.options.get(
-                                                    "invocador"
-                                                ).value
+                                                interaction.options.get("invocador").value
                                             }** es UNRANKED, no hay datos.`
                                         )
                                         .setColor("#EA3939"),
@@ -1016,10 +1002,7 @@ client.on("interactionCreate", async (interaction) => {
                                         name: "🏆 Winrate:",
                                         value:
                                             `⠀⠀⠀` +
-                                            (
-                                                (wins / (wins + losses)) *
-                                                100
-                                            ).toFixed(0) +
+                                            ((wins / (wins + losses)) * 100).toFixed(0) +
                                             "%",
                                         inline: true,
                                     },
@@ -1083,9 +1066,7 @@ client.on("interactionCreate", async (interaction) => {
                                         value:
                                             `⠀⠀⠀` +
                                             (
-                                                (data[0].wins /
-                                                    (data[0].wins +
-                                                        data[0].losses)) *
+                                                (data[0].wins / (data[0].wins + data[0].losses)) *
                                                 100
                                             ).toFixed(0) +
                                             "%",
@@ -1149,9 +1130,7 @@ client.on("interactionCreate", async (interaction) => {
                                         value:
                                             `⠀⠀⠀` +
                                             (
-                                                (data[1].wins /
-                                                    (data[1].wins +
-                                                        data[1].losses)) *
+                                                (data[1].wins / (data[1].wins + data[1].losses)) *
                                                 100
                                             ).toFixed(0) +
                                             "%",
@@ -1206,9 +1185,7 @@ client.on("interactionCreate", async (interaction) => {
                 console.log(err);
             });
 
-        const currentVersionWithDash = currentVersion
-            .slice(0, -2)
-            .replace(".", "-");
+        const currentVersionWithDash = currentVersion.slice(0, -2).replace(".", "-");
 
         await request(
             `https://www.leagueoflegends.com/es-es/news/game-updates/patch-${patchVersionWithDash}-notes/`,
@@ -1222,15 +1199,11 @@ client.on("interactionCreate", async (interaction) => {
                         embeds: [
                             new EmbedBuilder()
                                 .setColor("#C28F2C")
-                                .setTitle(
-                                    `🗒️ NOTAS DE LA VERSIÓN **${patchVersionWithDot}**`
-                                )
+                                .setTitle(`🗒️ NOTAS DE LA VERSIÓN **${patchVersionWithDot}**`)
                                 .setDescription(
                                     `https://www.leagueoflegends.com/es-es/news/game-updates/patch-${patchVersionWithDash}-notes/`
                                 )
-                                .setThumbnail(
-                                    "https://peralstudio.com/images/lol2-logo.png"
-                                )
+                                .setThumbnail("https://peralstudio.com/images/lol2-logo.png")
                                 .setImage(imgPathForEmbed)
                                 .setTimestamp()
                                 .setFooter({
@@ -1245,9 +1218,7 @@ client.on("interactionCreate", async (interaction) => {
                             new EmbedBuilder()
                                 .setColor("#C28F2C ")
                                 .setTitle("Algo a salido mal")
-                                .setDescription(
-                                    "Por favor, intentalo de nuevo mas tarde."
-                                )
+                                .setDescription("Por favor, intentalo de nuevo mas tarde.")
                                 .setTimestamp()
                                 .setFooter({
                                     text: NAME_BOT,
@@ -1286,9 +1257,7 @@ client.on("interactionCreate", async (interaction) => {
                             new EmbedBuilder()
                                 .setColor("#C28F2C ")
                                 .setTitle("No hay memes disponibles")
-                                .setDescription(
-                                    "Por favor, intentalo de nuevo mas tarde."
-                                )
+                                .setDescription("Por favor, intentalo de nuevo mas tarde.")
                                 .setTimestamp()
                                 .setFooter({
                                     text: NAME_BOT,
@@ -1362,9 +1331,7 @@ client.on("interactionCreate", async (interaction) => {
                     ephemeral: true,
                     embeds: [
                         new EmbedBuilder()
-                            .setDescription(
-                                "⚠️ No se han encontrado resultados."
-                            )
+                            .setDescription("⚠️ No se han encontrado resultados.")
                             .setColor("#EA3939"),
                     ],
                 });
@@ -1382,9 +1349,7 @@ client.on("interactionCreate", async (interaction) => {
                 ephemeral: true,
                 embeds: [
                     new EmbedBuilder()
-                        .setDescription(
-                            "⚠️ El texto no puede superar los **15** caracteres."
-                        )
+                        .setDescription("⚠️ El texto no puede superar los **15** caracteres.")
                         .setColor("#EA3939"),
                 ],
             });
@@ -1402,13 +1367,11 @@ client.on("interactionCreate", async (interaction) => {
 
     //AVATAR DE USUARIO Y/O @MENCIONADO
     if (interaction.commandName === "avatar") {
-        const userAvatar = interaction.options
-            .get("usuario")
-            .user.displayAvatarURL({
-                format: "png",
-                dynamic: true,
-                size: 1024,
-            });
+        const userAvatar = interaction.options.get("usuario").user.displayAvatarURL({
+            format: "png",
+            dynamic: true,
+            size: 1024,
+        });
 
         const embed = new EmbedBuilder()
             .setColor("#C28F2C")
@@ -1431,9 +1394,7 @@ client.on("interactionCreate", async (interaction) => {
                 }> esta ardiendo en pasión ! :hot_face: :fire::flame:`
             )
             .setColor("#AA70F8")
-            .setImage(
-                "https://pa1.narvii.com/6175/9cc89d4baca1ce2779798b5930ab3ddf832a0eee_00.gif"
-            )
+            .setImage("https://pa1.narvii.com/6175/9cc89d4baca1ce2779798b5930ab3ddf832a0eee_00.gif")
             .setTimestamp()
             .setFooter({
                 text: NAME_BOT,
@@ -1444,13 +1405,11 @@ client.on("interactionCreate", async (interaction) => {
 
     //USUARIO INFO
     if (interaction.commandName === "usuario") {
-        const userAvatar = interaction.options
-            .get("usuario")
-            .user.displayAvatarURL({
-                format: "png",
-                dynamic: true,
-                size: 1024,
-            });
+        const userAvatar = interaction.options.get("usuario").user.displayAvatarURL({
+            format: "png",
+            dynamic: true,
+            size: 1024,
+        });
 
         const userInfoEmbed = new EmbedBuilder()
             .setThumbnail(userAvatar)
@@ -1465,27 +1424,24 @@ client.on("interactionCreate", async (interaction) => {
                 {
                     name: "Jugando a",
                     value:
-                        interaction.options.get("usuario").member?.presence
-                            ?.activities[0]?.name || "Nada",
+                        interaction.options.get("usuario").member?.presence?.activities[0]?.name ||
+                        "Nada",
                 },
                 {
                     name: "Creado",
-                    value: dayjs(
-                        interaction.options.get("usuario").user.createdAt
-                    ).format("DD/MM/YYYY"),
+                    value: dayjs(interaction.options.get("usuario").user.createdAt).format(
+                        "DD/MM/YYYY"
+                    ),
                     inline: true,
                 },
                 {
                     name: "Estado",
                     value:
-                        interaction.options.get("usuario").member.presence
-                            ?.status == "online"
+                        interaction.options.get("usuario").member.presence?.status == "online"
                             ? "En linea"
-                            : interaction.options.get("usuario").member.presence
-                                  ?.status == "idle"
+                            : interaction.options.get("usuario").member.presence?.status == "idle"
                             ? "Ausente"
-                            : interaction.options.get("usuario").member.presence
-                                  ?.status == "dnd"
+                            : interaction.options.get("usuario").member.presence?.status == "dnd"
                             ? "No molestar"
                             : "Desconectado",
                     inline: true,
@@ -1520,9 +1476,9 @@ client.on("interactionCreate", async (interaction) => {
                     //     iconURL: userAvatar,
                     // })
                     .setTitle(
-                        ` **${data.main.temp.toFixed(1)}\u00B0C** en ${
-                            data.name
-                        }, ${data.sys.country}`
+                        ` **${data.main.temp.toFixed(1)}\u00B0C** en ${data.name}, ${
+                            data.sys.country
+                        }`
                     )
                     .addFields(
                         {
@@ -1556,9 +1512,7 @@ client.on("interactionCreate", async (interaction) => {
                             inline: true,
                         }
                     )
-                    .setThumbnail(
-                        `http://openweathermap.org/img/w/${data.weather[0].icon}.png`
-                    )
+                    .setThumbnail(`http://openweathermap.org/img/w/${data.weather[0].icon}.png`)
                     .setTimestamp()
                     .setFooter({
                         text: NAME_BOT,
@@ -1652,9 +1606,7 @@ client.on("interactionCreate", async (interaction) => {
                 ","
             );
 
-        let textToConvert = interaction.options
-            .get("texto")
-            .value.toUpperCase();
+        let textToConvert = interaction.options.get("texto").value.toUpperCase();
 
         if (textToConvert.startsWith(".") || textToConvert.startsWith("-")) {
             //Separar el texto morse en array
@@ -1741,9 +1693,7 @@ client.on("interactionCreate", async (interaction) => {
                 { name: "\u200B", value: "\u200B" },
                 {
                     name: "©️ Creado",
-                    value: dayjs(interaction.member.guild.createdAt).format(
-                        "DD/MM/YYYY"
-                    ),
+                    value: dayjs(interaction.member.guild.createdAt).format("DD/MM/YYYY"),
                     inline: true,
                 },
                 {
@@ -1821,9 +1771,7 @@ client.on("interactionCreate", async (interaction) => {
                 const embedTraductor = new EmbedBuilder() //Creamos el embed con el nombre encuesta
 
                     // .setTitle(`${question} \n`)
-                    .setThumbnail(
-                        "https://cdn-icons-png.flaticon.com/512/281/281776.png"
-                    )
+                    .setThumbnail("https://cdn-icons-png.flaticon.com/512/281/281776.png")
                     .addFields(
                         {
                             name: "Original",
@@ -1844,11 +1792,7 @@ client.on("interactionCreate", async (interaction) => {
 
     //CORONAVIRUS INFO
     if (interaction.commandName === "corona") {
-        fetch(
-            `https://covid19.mathdro.id/api/countries/${
-                interaction.options.get("país").value
-            }`
-        )
+        fetch(`https://covid19.mathdro.id/api/countries/${interaction.options.get("país").value}`)
             .then((response) => response.json())
             .then((data) => {
                 let confirmed = data.confirmed.value.toString();
@@ -1860,35 +1804,25 @@ client.on("interactionCreate", async (interaction) => {
 
                 const coronaEmbed = new EmbedBuilder()
                     .setColor("#FF0000")
-                    .setTitle(
-                        `País: ${interaction.options
-                            .get("país")
-                            .value.toUpperCase()}`
-                    )
+                    .setTitle(`País: ${interaction.options.get("país").value.toUpperCase()}`)
                     .setThumbnail(
                         "https://aso-apia.org/wp-content/uploads/2022/02/coronavirus-4947717_1280_2.png"
                     )
                     .addFields(
                         {
                             name: "Casos confirmados",
-                            value: new Intl.NumberFormat("es-ES").format(
-                                confirmed
-                            ),
+                            value: new Intl.NumberFormat("es-ES").format(confirmed),
 
                             inline: true,
                         },
                         {
                             name: "Recuperados",
-                            value: new Intl.NumberFormat("es-ES").format(
-                                recovered
-                            ),
+                            value: new Intl.NumberFormat("es-ES").format(recovered),
                             inline: true,
                         },
                         {
                             name: "Fallecidos",
-                            value: new Intl.NumberFormat("es-ES").format(
-                                deaths
-                            ),
+                            value: new Intl.NumberFormat("es-ES").format(deaths),
                             inline: true,
                         },
                         {
@@ -1909,9 +1843,7 @@ client.on("interactionCreate", async (interaction) => {
                     ephemeral: true,
                     embeds: [
                         new EmbedBuilder()
-                            .setDescription(
-                                "⚠️ Escribe un País(Ingles) valido."
-                            )
+                            .setDescription("⚠️ Escribe un País(Ingles) valido.")
                             .setColor("#EA3939"),
                     ],
                 });
@@ -1925,9 +1857,7 @@ client.on("interactionCreate", async (interaction) => {
             .setTitle(
                 ":regional_indicator_p: :regional_indicator_i: :regional_indicator_n: :regional_indicator_g:"
             )
-            .setThumbnail(
-                "https://cdn-icons-png.flaticon.com/512/3883/3883802.png"
-            )
+            .setThumbnail("https://cdn-icons-png.flaticon.com/512/3883/3883802.png")
             .setDescription(`Ping AlfanjorBot: ${client.ws.ping}ms`)
             .setTimestamp()
             .setFooter({
@@ -1950,9 +1880,7 @@ client.on("interactionCreate", async (interaction) => {
                 ephemeral: true,
                 embeds: [
                     new EmbedBuilder()
-                        .setDescription(
-                            "⛔ No tienes permisos para borrar mensajes."
-                        )
+                        .setDescription("⛔ No tienes permisos para borrar mensajes.")
                         .setColor("#EA3939"),
                 ],
             });
@@ -1960,8 +1888,7 @@ client.on("interactionCreate", async (interaction) => {
         }
 
         const amountToDelete = interaction.options.get("nº-mensajes").value;
-        const textMsgSingularOrPlural =
-            amountToDelete === 1 ? "mensaje" : "mensajes";
+        const textMsgSingularOrPlural = amountToDelete === 1 ? "mensaje" : "mensajes";
         const textMsg2SingularOrPlural = amountToDelete === 1 ? "ha" : "han";
 
         if (amountToDelete > 100) {
@@ -1969,9 +1896,7 @@ client.on("interactionCreate", async (interaction) => {
                 ephemeral: true,
                 embeds: [
                     new EmbedBuilder()
-                        .setDescription(
-                            "⚠️  No puedes borrar más de 100 mensajes."
-                        )
+                        .setDescription("⚠️  No puedes borrar más de 100 mensajes.")
                         .setColor("#EA3939"),
                 ],
             });
@@ -1989,9 +1914,7 @@ client.on("interactionCreate", async (interaction) => {
                         ephemeral: true,
                         embeds: [
                             new EmbedBuilder()
-                                .setDescription(
-                                    `⚠️  No se pudo borrar mensajes. error: ${err}`
-                                )
+                                .setDescription(`⚠️  No se pudo borrar mensajes. error: ${err}`)
                                 .setColor("#EA3939"),
                         ],
                     });
@@ -2018,9 +1941,7 @@ client.on("interactionCreate", async (interaction) => {
                 ephemeral: true,
                 embeds: [
                     new EmbedBuilder()
-                        .setDescription(
-                            "⛔ No tienes permisos para enviar mensajes privados."
-                        )
+                        .setDescription("⛔ No tienes permisos para enviar mensajes privados.")
                         .setColor("#EA3939"),
                 ],
             });
@@ -2040,9 +1961,7 @@ client.on("interactionCreate", async (interaction) => {
                     ephemeral: true,
                     embeds: [
                         new EmbedBuilder()
-                            .setDescription(
-                                `⚠️  No se pudo enviar el mensaje. Error: ${err}`
-                            )
+                            .setDescription(`⚠️  No se pudo enviar el mensaje. Error: ${err}`)
                             .setColor("#EA3939"),
                     ],
                 });
@@ -2055,9 +1974,7 @@ client.on("interactionCreate", async (interaction) => {
                     .setDescription(
                         `✅  Mensaje enviado correctamente a **${
                             client.users.cache.get(userToSend).username
-                        }#${
-                            client.users.cache.get(userToSend).discriminator
-                        }** .`
+                        }#${client.users.cache.get(userToSend).discriminator}** .`
                     )
                     .setColor("#EA3939"),
             ],
@@ -2082,17 +1999,14 @@ client.on("interactionCreate", async (interaction) => {
                     .setDescription(
                         `${
                             data.results[0].overview.length > 1000
-                                ? data.results[0].overview.substring(0, 1000) +
-                                  "..."
+                                ? data.results[0].overview.substring(0, 1000) + "..."
                                 : data.results[0].overview
                         }`
                     )
                     .addFields(
                         {
                             name: "Fecha Estreno",
-                            value: moment(data.results[0].release_date).format(
-                                "DD-MM-YYYY"
-                            ),
+                            value: moment(data.results[0].release_date).format("DD-MM-YYYY"),
                             inline: true,
                         },
                         {
@@ -2101,9 +2015,7 @@ client.on("interactionCreate", async (interaction) => {
                             inline: true,
                         }
                     )
-                    .setThumbnail(
-                        `https://image.tmdb.org/t/p/w500/${data.results[0].poster_path}`
-                    )
+                    .setThumbnail(`https://image.tmdb.org/t/p/w500/${data.results[0].poster_path}`)
                     .setTimestamp()
                     .setFooter({
                         text: NAME_BOT,
@@ -2116,17 +2028,14 @@ client.on("interactionCreate", async (interaction) => {
                     .setDescription(
                         `${
                             data.results[1].overview.length > 1000
-                                ? data.results[1].overview.substring(0, 1000) +
-                                  "..."
+                                ? data.results[1].overview.substring(0, 1000) + "..."
                                 : data.results[1].overview
                         }`
                     )
                     .addFields(
                         {
                             name: "Fecha Estreno",
-                            value: moment(data.results[1].release_date).format(
-                                "DD-MM-YYYY"
-                            ),
+                            value: moment(data.results[1].release_date).format("DD-MM-YYYY"),
                             inline: true,
                         },
                         {
@@ -2135,9 +2044,7 @@ client.on("interactionCreate", async (interaction) => {
                             inline: true,
                         }
                     )
-                    .setThumbnail(
-                        `https://image.tmdb.org/t/p/w500/${data.results[1].poster_path}`
-                    )
+                    .setThumbnail(`https://image.tmdb.org/t/p/w500/${data.results[1].poster_path}`)
                     .setTimestamp()
                     .setFooter({
                         text: NAME_BOT,
@@ -2150,17 +2057,14 @@ client.on("interactionCreate", async (interaction) => {
                     .setDescription(
                         `${
                             data.results[2].overview.length > 1000
-                                ? data.results[2].overview.substring(0, 1000) +
-                                  "..."
+                                ? data.results[2].overview.substring(0, 1000) + "..."
                                 : data.results[2].overview
                         }`
                     )
                     .addFields(
                         {
                             name: "Fecha Estreno",
-                            value: moment(data.results[2].release_date).format(
-                                "DD-MM-YYYY"
-                            ),
+                            value: moment(data.results[2].release_date).format("DD-MM-YYYY"),
                             inline: true,
                         },
                         {
@@ -2169,9 +2073,7 @@ client.on("interactionCreate", async (interaction) => {
                             inline: true,
                         }
                     )
-                    .setThumbnail(
-                        `https://image.tmdb.org/t/p/w500/${data.results[2].poster_path}`
-                    )
+                    .setThumbnail(`https://image.tmdb.org/t/p/w500/${data.results[2].poster_path}`)
                     .setTimestamp()
                     .setFooter({
                         text: NAME_BOT,
@@ -2184,17 +2086,14 @@ client.on("interactionCreate", async (interaction) => {
                     .setDescription(
                         `${
                             data.results[3].overview.length > 1000
-                                ? data.results[3].overview.substring(0, 1000) +
-                                  "..."
+                                ? data.results[3].overview.substring(0, 1000) + "..."
                                 : data.results[3].overview
                         }`
                     )
                     .addFields(
                         {
                             name: "Fecha Estreno",
-                            value: moment(data.results[3].release_date).format(
-                                "DD-MM-YYYY"
-                            ),
+                            value: moment(data.results[3].release_date).format("DD-MM-YYYY"),
                             inline: true,
                         },
                         {
@@ -2203,9 +2102,7 @@ client.on("interactionCreate", async (interaction) => {
                             inline: true,
                         }
                     )
-                    .setThumbnail(
-                        `https://image.tmdb.org/t/p/w500/${data.results[3].poster_path}`
-                    )
+                    .setThumbnail(`https://image.tmdb.org/t/p/w500/${data.results[3].poster_path}`)
                     .setTimestamp()
                     .setFooter({
                         text: NAME_BOT,
@@ -2218,17 +2115,14 @@ client.on("interactionCreate", async (interaction) => {
                     .setDescription(
                         `${
                             data.results[4].overview.length > 1000
-                                ? data.results[4].overview.substring(0, 1000) +
-                                  "..."
+                                ? data.results[4].overview.substring(0, 1000) + "..."
                                 : data.results[4].overview
                         }`
                     )
                     .addFields(
                         {
                             name: "Fecha Estreno",
-                            value: moment(data.results[4].release_date).format(
-                                "DD-MM-YYYY"
-                            ),
+                            value: moment(data.results[4].release_date).format("DD-MM-YYYY"),
                             inline: true,
                         },
                         {
@@ -2237,9 +2131,7 @@ client.on("interactionCreate", async (interaction) => {
                             inline: true,
                         }
                     )
-                    .setThumbnail(
-                        `https://image.tmdb.org/t/p/w500/${data.results[4].poster_path}`
-                    )
+                    .setThumbnail(`https://image.tmdb.org/t/p/w500/${data.results[4].poster_path}`)
                     .setTimestamp()
                     .setFooter({
                         text: NAME_BOT,
@@ -2252,17 +2144,14 @@ client.on("interactionCreate", async (interaction) => {
                     .setDescription(
                         `${
                             data.results[5].overview.length > 1000
-                                ? data.results[5].overview.substring(0, 1000) +
-                                  "..."
+                                ? data.results[5].overview.substring(0, 1000) + "..."
                                 : data.results[5].overview
                         }`
                     )
                     .addFields(
                         {
                             name: "Fecha Estreno",
-                            value: moment(data.results[5].release_date).format(
-                                "DD-MM-YYYY"
-                            ),
+                            value: moment(data.results[5].release_date).format("DD-MM-YYYY"),
                             inline: true,
                         },
                         {
@@ -2271,9 +2160,7 @@ client.on("interactionCreate", async (interaction) => {
                             inline: true,
                         }
                     )
-                    .setThumbnail(
-                        `https://image.tmdb.org/t/p/w500/${data.results[5].poster_path}`
-                    )
+                    .setThumbnail(`https://image.tmdb.org/t/p/w500/${data.results[5].poster_path}`)
                     .setTimestamp()
                     .setFooter({
                         text: NAME_BOT,
@@ -2286,17 +2173,14 @@ client.on("interactionCreate", async (interaction) => {
                     .setDescription(
                         `${
                             data.results[6].overview.length > 1000
-                                ? data.results[6].overview.substring(0, 1000) +
-                                  "..."
+                                ? data.results[6].overview.substring(0, 1000) + "..."
                                 : data.results[6].overview
                         }`
                     )
                     .addFields(
                         {
                             name: "Fecha Estreno",
-                            value: moment(data.results[6].release_date).format(
-                                "DD-MM-YYYY"
-                            ),
+                            value: moment(data.results[6].release_date).format("DD-MM-YYYY"),
                             inline: true,
                         },
                         {
@@ -2305,9 +2189,7 @@ client.on("interactionCreate", async (interaction) => {
                             inline: true,
                         }
                     )
-                    .setThumbnail(
-                        `https://image.tmdb.org/t/p/w500/${data.results[6].poster_path}`
-                    )
+                    .setThumbnail(`https://image.tmdb.org/t/p/w500/${data.results[6].poster_path}`)
                     .setTimestamp()
                     .setFooter({
                         text: NAME_BOT,
@@ -2320,17 +2202,14 @@ client.on("interactionCreate", async (interaction) => {
                     .setDescription(
                         `${
                             data.results[7].overview.length > 1000
-                                ? data.results[7].overview.substring(0, 1000) +
-                                  "..."
+                                ? data.results[7].overview.substring(0, 1000) + "..."
                                 : data.results[7].overview
                         }`
                     )
                     .addFields(
                         {
                             name: "Fecha Estreno",
-                            value: moment(data.results[7].release_date).format(
-                                "DD-MM-YYYY"
-                            ),
+                            value: moment(data.results[7].release_date).format("DD-MM-YYYY"),
                             inline: true,
                         },
                         {
@@ -2339,9 +2218,7 @@ client.on("interactionCreate", async (interaction) => {
                             inline: true,
                         }
                     )
-                    .setThumbnail(
-                        `https://image.tmdb.org/t/p/w500/${data.results[7].poster_path}`
-                    )
+                    .setThumbnail(`https://image.tmdb.org/t/p/w500/${data.results[7].poster_path}`)
                     .setTimestamp()
                     .setFooter({
                         text: NAME_BOT,
@@ -2354,17 +2231,14 @@ client.on("interactionCreate", async (interaction) => {
                     .setDescription(
                         `${
                             data.results[8].overview.length > 1000
-                                ? data.results[8].overview.substring(0, 1000) +
-                                  "..."
+                                ? data.results[8].overview.substring(0, 1000) + "..."
                                 : data.results[8].overview
                         }`
                     )
                     .addFields(
                         {
                             name: "Fecha Estreno",
-                            value: moment(data.results[8].release_date).format(
-                                "DD-MM-YYYY"
-                            ),
+                            value: moment(data.results[8].release_date).format("DD-MM-YYYY"),
                             inline: true,
                         },
                         {
@@ -2373,9 +2247,7 @@ client.on("interactionCreate", async (interaction) => {
                             inline: true,
                         }
                     )
-                    .setThumbnail(
-                        `https://image.tmdb.org/t/p/w500/${data.results[8].poster_path}`
-                    )
+                    .setThumbnail(`https://image.tmdb.org/t/p/w500/${data.results[8].poster_path}`)
                     .setTimestamp()
                     .setFooter({
                         text: NAME_BOT,
@@ -2388,17 +2260,14 @@ client.on("interactionCreate", async (interaction) => {
                     .setDescription(
                         `${
                             data.results[9].overview.length > 1000
-                                ? data.results[9].overview.substring(0, 1000) +
-                                  "..."
+                                ? data.results[9].overview.substring(0, 1000) + "..."
                                 : data.results[9].overview
                         }`
                     )
                     .addFields(
                         {
                             name: "Fecha Estreno",
-                            value: moment(data.results[9].release_date).format(
-                                "DD-MM-YYYY"
-                            ),
+                            value: moment(data.results[9].release_date).format("DD-MM-YYYY"),
                             inline: true,
                         },
                         {
@@ -2407,9 +2276,7 @@ client.on("interactionCreate", async (interaction) => {
                             inline: true,
                         }
                     )
-                    .setThumbnail(
-                        `https://image.tmdb.org/t/p/w500/${data.results[9].poster_path}`
-                    )
+                    .setThumbnail(`https://image.tmdb.org/t/p/w500/${data.results[9].poster_path}`)
                     .setTimestamp()
                     .setFooter({
                         text: NAME_BOT,
@@ -2438,8 +2305,7 @@ client.on("interactionCreate", async (interaction) => {
             })
             .finally(() => {
                 interaction.reply({
-                    content:
-                        ":white_check_mark: ¡ Se ha enviado la cartelera a tu DM !",
+                    content: ":white_check_mark: ¡ Se ha enviado la cartelera a tu DM !",
                     ephemeral: true,
                 });
             });
@@ -2453,121 +2319,99 @@ client.on("interactionCreate", async (interaction) => {
         const author = interaction.user.id;
         const page = interaction.options.get("página").value;
 
-        await request(
-            `https://elrellano.com/videos/page/${page}/`,
-            async (err, res, html) => {
-                if (page <= 0) {
+        await request(`https://elrellano.com/videos/page/${page}/`, async (err, res, html) => {
+            if (page <= 0) {
+                interaction.reply({
+                    content: "❌ La primera página suele ser la `1` bobo.",
+                    ephemeral: true,
+                });
+                return;
+            }
+            if (page > 1950) {
+                interaction.reply({
+                    content: `❌ No hay tantas páginas.`,
+                    ephemeral: true,
+                });
+                return;
+            }
+
+            if (!err && res.statusCode == 200) {
+                const $ = cherio.load(html);
+
+                $("video").map(function () {
+                    // console.log($(this).attr("src"));
+                    arrayVideos.push($(this).attr("src"));
+                });
+
+                // // $("iframe").map(function () {
+                // //     // console.log($(this).attr("src"));
+                // //     arrayVideos.push($(this).attr("src"));
+                // // });
+
+                // $("video").map(function () {
+                //     // console.log($(this).attr("src"));
+                //     arrayVideos.push($(this).attr("src"));
+                // });
+
+                // $(".entry-title").map(function () {
+                //     // console.log($(this).text());
+                //     arrayTitles.push($(this).text());
+                // });
+
+                // // console.log(arrayVideos);
+
+                if (arrayVideos.length <= 0) {
                     interaction.reply({
-                        content: "❌ La primera página suele ser la `1` bobo.",
+                        content: "❌ No se han encontrado videos. Intentalo mas tarde!",
                         ephemeral: true,
                     });
                     return;
                 }
-                if (page > 1950) {
-                    interaction.reply({
-                        content: `❌ No hay tantas páginas.`,
-                        ephemeral: true,
-                    });
-                    return;
-                }
 
-                if (!err && res.statusCode == 200) {
-                    const $ = cherio.load(html);
+                // await interaction.reply({
+                //     // content: `${arrayVideos[numberVideo]}\n\n**${arrayTitles[numberVideo]}**`,
+                //     content: `${arrayVideos[numberVideo]}`,
+                // });
 
-                    $("video").map(function () {
-                        // console.log($(this).attr("src"));
-                        arrayVideos.push($(this).attr("src"));
-                    });
+                // await interaction.reply({
+                //     content: `${
+                //         arrayVideos[0] !== undefined ? arrayVideos[0] : ""
+                //     }\n${
+                //         arrayVideos[1] !== undefined ? arrayVideos[1] : ""
+                //     }\n${
+                //         arrayVideos[2] !== undefined ? arrayVideos[2] : ""
+                //     }\n${
+                //         arrayVideos[3] !== undefined ? arrayVideos[3] : ""
+                //     }\n${
+                //         arrayVideos[4] !== undefined ? arrayVideos[4] : ""
+                //     }\n`,
+                //     // ephemeral: true,
+                // });
 
-                    // // $("iframe").map(function () {
-                    // //     // console.log($(this).attr("src"));
-                    // //     arrayVideos.push($(this).attr("src"));
-                    // // });
-
-                    // $("video").map(function () {
-                    //     // console.log($(this).attr("src"));
-                    //     arrayVideos.push($(this).attr("src"));
-                    // });
-
-                    // $(".entry-title").map(function () {
-                    //     // console.log($(this).text());
-                    //     arrayTitles.push($(this).text());
-                    // });
-
-                    // // console.log(arrayVideos);
-
-                    if (arrayVideos.length <= 0) {
+                await client.users
+                    .fetch(author)
+                    .then((user) => {
+                        user.send({
+                            content: `${arrayVideos[0] !== undefined ? arrayVideos[0] : ""}\n${
+                                arrayVideos[1] !== undefined ? arrayVideos[1] : ""
+                            }\n${arrayVideos[2] !== undefined ? arrayVideos[2] : ""}\n${
+                                arrayVideos[3] !== undefined ? arrayVideos[3] : ""
+                            }\n${arrayVideos[4] !== undefined ? arrayVideos[4] : ""}\n`,
+                        });
+                    })
+                    .finally(() => {
                         interaction.reply({
-                            content:
-                                "❌ No se han encontrado videos. Intentalo mas tarde!",
+                            content: ":white_check_mark: ¡ Se han enviado los vídeos a tu DM !",
                             ephemeral: true,
                         });
-                        return;
-                    }
-
-                    // await interaction.reply({
-                    //     // content: `${arrayVideos[numberVideo]}\n\n**${arrayTitles[numberVideo]}**`,
-                    //     content: `${arrayVideos[numberVideo]}`,
-                    // });
-
-                    // await interaction.reply({
-                    //     content: `${
-                    //         arrayVideos[0] !== undefined ? arrayVideos[0] : ""
-                    //     }\n${
-                    //         arrayVideos[1] !== undefined ? arrayVideos[1] : ""
-                    //     }\n${
-                    //         arrayVideos[2] !== undefined ? arrayVideos[2] : ""
-                    //     }\n${
-                    //         arrayVideos[3] !== undefined ? arrayVideos[3] : ""
-                    //     }\n${
-                    //         arrayVideos[4] !== undefined ? arrayVideos[4] : ""
-                    //     }\n`,
-                    //     // ephemeral: true,
-                    // });
-
-                    await client.users
-                        .fetch(author)
-                        .then((user) => {
-                            user.send({
-                                content: `${
-                                    arrayVideos[0] !== undefined
-                                        ? arrayVideos[0]
-                                        : ""
-                                }\n${
-                                    arrayVideos[1] !== undefined
-                                        ? arrayVideos[1]
-                                        : ""
-                                }\n${
-                                    arrayVideos[2] !== undefined
-                                        ? arrayVideos[2]
-                                        : ""
-                                }\n${
-                                    arrayVideos[3] !== undefined
-                                        ? arrayVideos[3]
-                                        : ""
-                                }\n${
-                                    arrayVideos[4] !== undefined
-                                        ? arrayVideos[4]
-                                        : ""
-                                }\n`,
-                            });
-                        })
-                        .finally(() => {
-                            interaction.reply({
-                                content:
-                                    ":white_check_mark: ¡ Se han enviado los vídeos a tu DM !",
-                                ephemeral: true,
-                            });
-                        });
-                } else {
-                    interaction.reply({
-                        content:
-                            "❌ Error en la petición. Intentalo mas tarde!",
-                        ephemeral: true,
                     });
-                }
+            } else {
+                interaction.reply({
+                    content: "❌ Error en la petición. Intentalo mas tarde!",
+                    ephemeral: true,
+                });
             }
-        );
+        });
     }
 
     //PLAYLIST YOUTUBE
@@ -2609,14 +2453,35 @@ client.on("interactionCreate", async (interaction) => {
         });
     }
 
+    //COMANDO TRIVIA
+    if (interaction.commandName === "trivial") {
+        const item = trivialQuestions[Math.floor(Math.random() * triviaQuestions.length)];
+        const filter = (response) => {
+            return item.answers.some(
+                (answer) => answer.toLowerCase() === response.content.toLowerCase()
+            );
+        };
+
+        interaction.reply({ content: item.question, fetchReply: true }).then(() => {
+            interaction.channel
+                .awaitMessages({ filter, max: 1, time: 30000, errors: ["time"] })
+                .then((collected) => {
+                    interaction.followUp(
+                        `${collected.first().author} obtuvo la respuesta correcta!`
+                    );
+                })
+                .catch((collected) => {
+                    interaction.followUp("Parece que nadie obtuvo la respuesta correcta.");
+                });
+        });
+    }
+
     //COMANDO HELP
     if (interaction.commandName === "help") {
         const embed = new EmbedBuilder()
             .setColor("#C28F2C")
             // .setThumbnail(client.user.displayAvatarURL())
-            .setTitle(
-                `COMANDOS DISPONIBLES *${client.user.username.toUpperCase()}* \n`
-            )
+            .setTitle(`COMANDOS DISPONIBLES *${client.user.username.toUpperCase()}* \n`)
             .addFields(
                 {
                     name: `*${PREFIX}play + canción*`,
