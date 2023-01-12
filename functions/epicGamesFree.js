@@ -17,12 +17,15 @@ const epicGamesFree = async (client) => {
     const day = date.getDay();
 
     console.log(
-        `epicGamesFree() se ejecuta (${date.toLocaleTimeString("es-ES", {
-            timeZone: "Europe/Madrid",
-        })})`
+        `Comprobando si hay nuevos juegos Epic Games - 🎮-free-epic-games (${date.toLocaleTimeString(
+            "es-ES",
+            {
+                timeZone: "Europe/Madrid",
+            }
+        )})`
     );
 
-    if (day === 4 && hour >= 17) {
+    if (day === 4 && hour >= 17 && hour < 23) {
         console.log(
             `entra a la condicion y envia embeds al canal: 🎮-free-epic-games (${date.toLocaleTimeString(
                 "es-ES",
@@ -247,7 +250,7 @@ const epicGamesFree = async (client) => {
             });
     }
 
-    setTimeout(epicGamesFree, 21600000); //43200000 12Hours //21600000 6Hours //14400000 4Hours
+    setTimeout(epicGamesFree, 14400000); //43200000 12Hours //21600000 6Hours //14400000 4Hours
 };
 
 export default epicGamesFree;
